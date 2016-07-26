@@ -1,4 +1,4 @@
-const INCREMENT = 'redux-example/counter/INCREMENT';
+import { INCREMENT, DECREMENT} from '../actions';
 
 const initialState = {
   count: 0
@@ -7,9 +7,12 @@ const initialState = {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case INCREMENT:
-      const {count} = state;
       return {
-        count: count + 1
+        count: state.count + 1
+      };
+    case DECREMENT:
+      return {
+        count: state.count - 1
       };
     default:
       return state;
@@ -21,3 +24,10 @@ export function increment() {
     type: INCREMENT
   };
 }
+
+export function decrement() {
+  return {
+    type: DECREMENT
+  };
+}
+
