@@ -6,6 +6,7 @@
  */
 
 export CounterButton from './CounterButton/CounterButton';
+export Filters from './Filters/Filters';
 export GithubButton from './GithubButton/GithubButton';
 export InfoBar from './InfoBar/InfoBar';
 export MiniInfoBar from './MiniInfoBar/MiniInfoBar';

@@ -5,6 +5,7 @@ import {reducer as reduxAsyncConnect} from 'redux-async-connect';
 
 import auth from './auth';
 import counter from './counter';
+import filters from './filters';
 import {reducer as form} from 'redux-form';
 import info from './info';
 import widgets from './widgets';
@@ -14,6 +15,7 @@ export default combineReducers({
   reduxAsyncConnect,
   auth,
   form,
+  filters,
   multireducer: multireducer({
     counter1: counter,
     counter2: counter,
