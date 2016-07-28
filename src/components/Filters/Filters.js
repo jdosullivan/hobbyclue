@@ -29,6 +29,3 @@ export default class Filters extends Component {
     );
   }
 }
-
-
-

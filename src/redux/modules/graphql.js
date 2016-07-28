@@ -38,9 +38,9 @@ export function isLoaded(globalState) {
   return globalState.graphql && globalState.graphql.loaded;
 }
 
-export function load() {
+export function load(query) {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    graphQL: (graphQLClient) => graphQLClient.get(`{groups{id,name,coverImage,created}}`) // params not used, just shown as demonstration
+    graphQL: (graphQLClient) => graphQLClient.get(query) // params not used, just shown as demonstration
   };
 }

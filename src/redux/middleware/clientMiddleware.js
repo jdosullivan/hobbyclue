@@ -9,17 +9,14 @@ export default function clientMiddleware(apiClient, graphQLClient) {
       let actionPromise;
       if (promise) {
         actionPromise = promise(apiClient);
-      }
-      else if (graphQL) {
+      } else if (graphQL) {
         actionPromise = graphQL(graphQLClient);
-      }
-      else {
+      } else {
         return next(action);
       }
 
       const [REQUEST, SUCCESS, FAILURE] = types;
       next({...rest, type: REQUEST});
-
 
       actionPromise.then(
         (result) => next({...rest, result, type: SUCCESS}),

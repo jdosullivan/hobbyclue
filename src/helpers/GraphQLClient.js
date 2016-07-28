@@ -1,8 +1,7 @@
 import fetch from '../data/fetch';
 
 function getJson(query) {
-  console.log( `getJSon called`);
-  return  new Promise((resolve, reject) => {
+  return new Promise((resolve, reject) => {
     fetch('/graphql', {
       method: 'post',
       headers: {
@@ -16,10 +15,9 @@ function getJson(query) {
     })
       .then((response) => {
         if (response.status !== 200) {
-          throw new Error(response.statusText);
+          return reject(response.statusText);
         }
-        var result = response.json();
-        return result;
+        return response.json();
       })
       .then(json => {
         resolve(json.data);
