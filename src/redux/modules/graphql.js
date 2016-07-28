@@ -35,17 +35,10 @@ export default function reducer(state = initialState, action = {}) {
 }
 
 export function isLoaded(globalState) {
-  return globalState.widgets && globalState.widgets.loaded;
+  return globalState.graphql && globalState.graphql.loaded;
 }
 
 export function load() {
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/widget/load/param1/param2') // params not used, just shown as demonstration
-  };
-}
-
-export function loadGraphQL() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     graphQL: (graphQLClient) => graphQLClient.get(`{groups{id,name,coverImage,created}}`) // params not used, just shown as demonstration

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isLoaded, loadGraphQL as loadGraphQL} from 'redux/modules/widgets';
+import {isLoaded, load as loadGraphQL} from 'redux/modules/graphql';
 import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect([{
