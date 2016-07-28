@@ -13,7 +13,7 @@ import {asyncConnect} from 'redux-async-connect';
 }])
 @connect(
   state => ({
-    groups: state.widgets.data.groups
+    groups: state.graphql.data.groups
   }),
   {loadGraphQL})
 

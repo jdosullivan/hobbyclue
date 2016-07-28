@@ -1,6 +1,6 @@
-const LOAD = 'redux-example/widgets/LOAD';
-const LOAD_SUCCESS = 'redux-example/widgets/LOAD_SUCCESS';
-const LOAD_FAIL = 'redux-example/widgets/LOAD_FAIL';
+const LOAD = 'redux-example/graphql/LOAD';
+const LOAD_SUCCESS = 'redux-example/graphql/LOAD_SUCCESS';
+const LOAD_FAIL = 'redux-example/graphql/LOAD_FAIL';
 
 const initialState = {
   loaded: false
