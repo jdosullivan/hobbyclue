@@ -5,7 +5,7 @@ import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect([{
   deferred: true,
-  promise: ({store, helpers}) => {
+  promise: ({store}) => {
     if (!isLoaded(store.getState())) {
       return store.dispatch(loadGraphQL());
     }
@@ -13,24 +13,24 @@ import {asyncConnect} from 'redux-async-connect';
 }])
 @connect(
   state => ({
-    widgets: state.widgets.data
+    groups: state.widgets.data.groups
   }),
   {loadGraphQL})
 
-export default class Widgets2 extends Component {
+export default class Groups extends Component {
   static propTypes = {
-    widgets: PropTypes.array,
+    groups: PropTypes.object,
     loadGraphQL: PropTypes.func.isRequired
   };
 
   render() {
-    const {widgets} = this.props;
+    const {groups} = this.props;
     return (
       <div>
-        {widgets && widgets.groups && widgets.groups.length &&
-          widgets.groups.map((widget) =>
-          <div key={widget.id}>
-            <span>{widget.id}</span>
+        {groups && groups.length &&
+        groups.map((group) =>
+          <div key={group.id}>
+            <span>Id: {group.id}</span>
           </div>)
         }
       </div>
