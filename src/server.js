@@ -11,6 +11,7 @@ import ApiClient from './helpers/ApiClient';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
+import GraphQLClient from './helpers/GraphQLClient';
 
 import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
@@ -76,9 +77,9 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const client = new ApiClient(req);
+  const apiClient = new ApiClient(req);
   const memoryHistory = createHistory(req.originalUrl);
-  const store = createStore(memoryHistory, client);
+  const store = createStore(memoryHistory, apiClient, GraphQLClient);
   const history = syncHistoryWithStore(memoryHistory, store);
 
   function hydrateOnClient() {
@@ -99,7 +100,7 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (renderProps) {
-      loadOnServer({...renderProps, store, helpers: {client}}).then(() => {
+      loadOnServer({...renderProps, store, helpers: {apiClient}}).then(() => {
         const component = (
           <Provider store={store} key="provider">
             <ReduxAsyncConnect {...renderProps} />
