@@ -17,9 +17,10 @@ import { match } from 'react-router';
 import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
+import Sequelize from 'sequelize';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-
+import { databaseUrl } from './config';
 import schema from './data/schema';
 import expressGraphQL from 'express-graphql';
 
@@ -31,6 +32,34 @@ const proxy = httpProxy.createProxyServer({
   target: targetUrl,
   ws: true
 });
+
+
+const sequelize = new Sequelize(databaseUrl, {
+  define: {
+    freezeTableName: true
+  }
+});
+
+sequelize
+  .authenticate()
+  .then(function(err) {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(function (err) {
+    console.log('Unable to connect to the database:', err);
+  });
+
+var User = sequelize.define('user', {
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
+  }
+});
+
+// Or you can simply use a connection uri
+//var sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
@@ -52,6 +81,43 @@ app.use('/graphql', expressGraphQL(req => ({
   rootValue: {request: req},
   pretty: true
 })));
+
+app.use('/saveuser', async (req, res, next) => {
+
+
+// force: true will drop the table if it already exists
+  User.sync({force: true}).then(function () {
+    // Table created
+    return User.create({
+      firstName: 'John',
+      lastName: 'Hancock'
+    });
+  }).then(function () {
+    console.log('time to find all users');
+    User.findAll().then(function(users) {
+      console.log(users);
+      res.send(`Users are ${JSON.stringify(users)}`);
+    });
+  });
+
+
+
+
+
+  /*console.log(`saving user`);
+
+  await SequelizeSync({force: true});
+
+  console.log(`create user`);
+  // Table created
+  await User.create({
+    firstName: 'John',
+    lastName: 'Hancock'
+  });
+
+  console.log(`findAll user`);
+  const users = await User.findAll();*/
+});
 
 server.on('upgrade', (req, socket, head) => {
   proxy.ws(req, socket, head);
@@ -119,6 +185,8 @@ app.use((req, res) => {
     }
   });
 });
+
+
 
 if (config.port) {
   server.listen(config.port, (err) => {
