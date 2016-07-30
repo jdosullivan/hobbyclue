@@ -18,7 +18,7 @@ import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import schema from './data/schema';
+import schema from './graphql/schema';
 import expressGraphQL from 'express-graphql';
 
 

@@ -1,4 +1,4 @@
-import fetch from '../data/fetch';
+import fetch from '../graphql/fetch';
 
 function getJson(query) {
   return new Promise((resolve, reject) => {
