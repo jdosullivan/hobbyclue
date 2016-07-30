@@ -69,7 +69,7 @@ const messageBuffer = new Array(bufferSize);
 let messageIndex = 0;
 
 if (config.apiPort) {
-  sequelizeTables.sync({force: true}).catch(err => console.error(err.stack)).then(() => {
+  sequelizeTables.sync({force: false}).catch(err => console.error(err.stack)).then(() => {
     const runnable = app.listen(config.apiPort, (err) => {
       if (err) {
         console.error(err);
