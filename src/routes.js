@@ -9,6 +9,7 @@ import {
   Groups,
   About,
   Login,
+  Register,
   LoginSuccess,
   Survey,
   NotFound,
@@ -32,6 +33,13 @@ export default (store) => {
     }
   };
 
+  const requireAnonymous = (nextState, replace) => {
+    if (requireLogin) {
+      // oops, logged in, so can't be here!
+      replace('/');
+    }
+  };
+
   /**
    * Please keep routes in alphabetical order
    */
@@ -44,6 +52,10 @@ export default (store) => {
       <Route onEnter={requireLogin}>
         <Route path="chat" component={Chat}/>
         <Route path="loginSuccess" component={LoginSuccess}/>
+      </Route>
+
+      <Route onEnter={requireAnonymous}>
+        <Route path="register" component={Register}/>
       </Route>
 
       { /* Routes */ }
