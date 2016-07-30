@@ -12,7 +12,7 @@ import {
   LoginSuccess,
   Survey,
   NotFound,
-} from 'containers';
+} from './containers';
 
 export default (store) => {
   const requireLogin = (nextState, replace, cb) => {

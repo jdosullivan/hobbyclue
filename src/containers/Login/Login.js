@@ -11,14 +11,16 @@ export default class Login extends Component {
     user: PropTypes.object,
     login: PropTypes.func,
     logout: PropTypes.func
-  }
+  };
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const input = this.refs.username;
-    this.props.login(input.value);
-    input.value = '';
-  }
+    const username = this.refs.username;
+    const password = this.refs.password;
+    this.props.login(username.value, password.value);
+    username.value = '';
+    password.value = '';
+  };
 
   render() {
     const {user, logout} = this.props;
@@ -31,7 +33,8 @@ export default class Login extends Component {
         <div>
           <form className="login-form form-inline" onSubmit={this.handleSubmit}>
             <div className="form-group">
-              <input type="text" ref="username" placeholder="Enter a username" className="form-control"/>
+              <input type="text" ref="username" placeholder="Enter your username" className="form-control"/>
+              <input type="text" ref="password" placeholder="Enter password" className="form-control"/>
             </div>
             <button className="btn btn-success" onClick={this.handleSubmit}><i className="fa fa-sign-in"/>{' '}Log In
             </button>

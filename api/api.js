@@ -10,10 +10,9 @@ import SocketIo from 'socket.io';
 
 const pretty = new PrettyError();
 const app = express();
-
 const server = new http.Server(app);
-
 const io = new SocketIo(server);
+
 io.path('/ws');
 
 app.use(session({
