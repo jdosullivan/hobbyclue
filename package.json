@@ -28,7 +28,7 @@
   },
   "betterScripts": {
     "start-prod": {
-      "command": "node ./bin/server.js",
+      "command": "node ./src/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "production",
@@ -44,7 +44,7 @@
       }
     },
     "start-dev": {
-      "command": "node ./bin/server.js",
+      "command": "node ./src/server.js",
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
