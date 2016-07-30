@@ -12,17 +12,16 @@ import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import GraphQLClient from './helpers/GraphQLClient';
-
-import { match } from 'react-router';
-import { syncHistoryWithStore } from 'react-router-redux';
-import { ReduxAsyncConnect, loadOnServer } from 'redux-async-connect';
+import {match} from 'react-router';
+import {syncHistoryWithStore} from 'react-router-redux';
+import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
-import Sequelize from 'sequelize';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import { databaseUrl } from './config';
+import {User} from './data/models';
 import schema from './data/schema';
 import expressGraphQL from 'express-graphql';
+
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
@@ -32,34 +31,6 @@ const proxy = httpProxy.createProxyServer({
   target: targetUrl,
   ws: true
 });
-
-
-const sequelize = new Sequelize(databaseUrl, {
-  define: {
-    freezeTableName: true
-  }
-});
-
-sequelize
-  .authenticate()
-  .then(function(err) {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(function (err) {
-    console.log('Unable to connect to the database:', err);
-  });
-
-var User = sequelize.define('user', {
-  firstName: {
-    type: Sequelize.STRING
-  },
-  lastName: {
-    type: Sequelize.STRING
-  }
-});
-
-// Or you can simply use a connection uri
-//var sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
@@ -82,41 +53,22 @@ app.use('/graphql', expressGraphQL(req => ({
   pretty: true
 })));
 
-app.use('/saveuser', async (req, res, next) => {
+app.use('/saveuser', async(req, res, next) => {
 
+  // force: true will drop the table if it already exists
+  await User.sync({force: true});
 
-// force: true will drop the table if it already exists
-  User.sync({force: true}).then(function () {
-    // Table created
-    return User.create({
-      firstName: 'John',
-      lastName: 'Hancock'
-    });
-  }).then(function () {
-    console.log('time to find all users');
-    User.findAll().then(function(users) {
-      console.log(users);
-      res.send(`Users are ${JSON.stringify(users)}`);
-    });
-  });
-
-
-
-
-
-  /*console.log(`saving user`);
-
-  await SequelizeSync({force: true});
-
-  console.log(`create user`);
-  // Table created
   await User.create({
     firstName: 'John',
-    lastName: 'Hancock'
+    lastName: 'Hancock',
+    email: 'testuser2@nowhere.com'
   });
 
-  console.log(`findAll user`);
-  const users = await User.findAll();*/
+  console.log('time to find all users');
+  const users = await User.findAll();
+
+  console.log(users);
+  res.send(`Users are ${JSON.stringify(users)}`);
 });
 
 server.on('upgrade', (req, socket, head) => {
@@ -158,7 +110,7 @@ app.use((req, res) => {
     return;
   }
 
-  match({ history, routes: getRoutes(store), location: req.originalUrl }, (error, redirectLocation, renderProps) => {
+  match({history, routes: getRoutes(store), location: req.originalUrl}, (error, redirectLocation, renderProps) => {
     if (redirectLocation) {
       res.redirect(redirectLocation.pathname + redirectLocation.search);
     } else if (error) {
@@ -178,14 +130,14 @@ app.use((req, res) => {
         global.navigator = {userAgent: req.headers['user-agent']};
 
         res.send('<!doctype html>\n' +
-          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component} store={store}/>));
+          ReactDOM.renderToString(<Html assets={webpackIsomorphicTools.assets()} component={component}
+                                        store={store}/>));
       });
     } else {
       res.status(404).send('Not found');
     }
   });
 });
-
 
 
 if (config.port) {

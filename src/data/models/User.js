@@ -1,37 +1,33 @@
-import DataType from 'sequelize';
+import Sequelize from 'sequelize';
 import Model from '../sequelize';
 
 const User = Model.define('user', {
   firstName: {
-    type: DataType.STRING
+    type: Sequelize.STRING
   },
   lastName: {
-    type: DataType.STRING
- }
- });
+    type: Sequelize.STRING
+  },
+  id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV1,
+    primaryKey: true
+  },
 
- /*const User = Model.define('User', {
+  email: {
+    type: Sequelize.STRING(255),
+    validate: { isEmail: true }
+  },
 
- id: {
- type: DataType.UUID,
- defaultValue: DataType.UUIDV1,
- primaryKey: true,
- },
-
- email: {
- type: DataType.STRING(255),
- validate: { isEmail: true }
- },
-
- emailConfirmed: {
- type: DataType.BOOLEAN,
- defaultValue: false
- }
+  emailConfirmed: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  }
 }, {
 
   indexes: [
     { fields: ['email'] }
   ]
-});*/
-
+});
+ 
 export default User;
