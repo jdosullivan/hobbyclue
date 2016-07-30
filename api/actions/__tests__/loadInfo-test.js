@@ -1,5 +1,5 @@
 import {expect} from 'chai';
-import loadInfo from '../loadInfo';
+import loadInfo from '../auth/loadInfo';
 import timekeeper from 'timekeeper';
 
 describe('loadInfo', () => {
