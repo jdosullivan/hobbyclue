@@ -27,9 +27,9 @@ User.hasOne(UserProfile, {
 });
 */
 
-/*function sync(...args) {
+function sync(...args) {
   return sequelize.sync(...args);
-}*/
+}
 
-//export default { sync };
+export default { sync };
 export { User }; //, UserLogin, UserClaim, UserProfile };

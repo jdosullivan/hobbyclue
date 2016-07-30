@@ -18,7 +18,7 @@ import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import {User} from './data/models';
+import sequelizeTables, {User} from './data/models';
 import schema from './data/schema';
 import expressGraphQL from 'express-graphql';
 
@@ -56,8 +56,6 @@ app.use('/graphql', expressGraphQL(req => ({
 app.use('/saveuser', async(req, res, next) => {
 
   // force: true will drop the table if it already exists
-  await User.sync({force: true});
-
   await User.create({
     firstName: 'John',
     lastName: 'Hancock',
@@ -141,12 +139,14 @@ app.use((req, res) => {
 
 
 if (config.port) {
-  server.listen(config.port, (err) => {
-    if (err) {
-      console.error(err);
-    }
-    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
-    console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+  sequelizeTables.sync().catch(err => console.error(err.stack)).then(() => {
+    server.listen(config.port, (err) => {
+      if (err) {
+        console.error(err);
+      }
+      console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
+      console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
+    });
   });
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
