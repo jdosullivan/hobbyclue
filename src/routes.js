@@ -34,7 +34,9 @@ export default (store) => {
   };
 
   const requireAnonymous = (nextState, replace) => {
-    if (requireLogin) {
+    const {auth: {user}} = store.getState();
+    if (user) {
+      console.log(`already logged in: redirect to home page`);
       // oops, logged in, so can't be here!
       replace('/');
     }

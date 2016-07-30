@@ -8,7 +8,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import passport from 'passport';
-import sequelizeTables, {User} from './database/models';
+import sequelizeTables from './database/models';
 
 const pretty = new PrettyError();
 const app = express();
@@ -25,17 +25,6 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
-
-app.use('/api/saveuser', async(req, res) => {
-  await User.create({
-    name: 'Jahmai OSullivan',
-    password: 'Star2017',
-    email: 'jahmai.osullivan_1@nowhere.com'
-  });
-  const users = await User.findAll();
-  res.send(`Users are ${JSON.stringify(users)}`);
-});
-
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
