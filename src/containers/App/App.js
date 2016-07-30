@@ -10,7 +10,7 @@ import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
 import { InfoBar } from 'components';
 import { push } from 'react-router-redux';
-import config from '../../config';
+import config from '../../../config';
 import { asyncConnect } from 'redux-async-connect';
 
 @asyncConnect([{

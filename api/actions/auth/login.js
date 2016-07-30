@@ -1,6 +1,6 @@
-import {User, comparePassword} from '../../../src/data/models';
+import {User, comparePassword} from '../../database/models';
 import jwt from 'jsonwebtoken';
-import config from '../../../src/config';
+import config from '../../../config';
 
 export default function login(req) {
   return new Promise((resolve, reject) => {

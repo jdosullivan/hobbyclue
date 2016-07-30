@@ -1,13 +1,14 @@
 import express from 'express';
 import session from 'express-session';
 import bodyParser from 'body-parser';
-import config from '../src/config';
+import config from '../config';
 import * as actions from './actions/index';
 import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import passport from 'passport';
+import sequelizeTables, {User} from './database/models';
 
 const pretty = new PrettyError();
 const app = express();
@@ -20,10 +21,21 @@ app.use(session({
   secret: config.auth.jwt.secret,
   resave: false,
   saveUninitialized: false,
-  cookie: { maxAge: 60000 }
+  cookie: {maxAge: 60000}
 }));
 app.use(bodyParser.json());
 app.use(passport.initialize());
+
+app.use('/api/saveuser', async(req, res) => {
+  await User.create({
+    name: 'Jahmai OSullivan',
+    password: 'Star2017',
+    email: 'jahmai.osullivan_1@nowhere.com'
+  });
+  const users = await User.findAll();
+  res.send(`Users are ${JSON.stringify(users)}`);
+});
+
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
@@ -57,35 +69,38 @@ const messageBuffer = new Array(bufferSize);
 let messageIndex = 0;
 
 if (config.apiPort) {
-  const runnable = app.listen(config.apiPort, (err) => {
-    if (err) {
-      console.error(err);
-    }
-    console.info('----\n==> 🌎  API is running on port %s', config.apiPort);
-    console.info('==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort);
-  });
-
-  io.on('connection', (socket) => {
-    socket.emit('news', {msg: `'Hello World!' from server`});
-
-    socket.on('history', () => {
-      for (let index = 0; index < bufferSize; index++) {
-        const msgNo = (messageIndex + index) % bufferSize;
-        const msg = messageBuffer[msgNo];
-        if (msg) {
-          socket.emit('msg', msg);
-        }
+  sequelizeTables.sync({force: true}).catch(err => console.error(err.stack)).then(() => {
+    const runnable = app.listen(config.apiPort, (err) => {
+      if (err) {
+        console.error(err);
       }
+      console.info('----\n==> 🌎  API is running on port %s', config.apiPort);
+      console.info('==> 💻  Send requests to http://%s:%s', config.apiHost, config.apiPort);
     });
 
-    socket.on('msg', (data) => {
-      data.id = messageIndex;
-      messageBuffer[messageIndex % bufferSize] = data;
-      messageIndex++;
-      io.emit('msg', data);
+    io.on('connection', (socket) => {
+      socket.emit('news', {msg: `'Hello World!' from server`});
+
+      socket.on('history', () => {
+        for (let index = 0; index < bufferSize; index++) {
+          const msgNo = (messageIndex + index) % bufferSize;
+          const msg = messageBuffer[msgNo];
+          if (msg) {
+            socket.emit('msg', msg);
+          }
+        }
+      });
+
+      socket.on('msg', (data) => {
+        data.id = messageIndex;
+        messageBuffer[messageIndex % bufferSize] = data;
+        messageIndex++;
+        io.emit('msg', data);
+      });
     });
+    io.listen(runnable);
   });
-  io.listen(runnable);
+
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');
 }

@@ -1,7 +1,7 @@
 import Express from 'express';
 import React from 'react';
 import ReactDOM from 'react-dom/server';
-import config from './config';
+import config from '../config';
 import favicon from 'serve-favicon';
 import compression from 'compression';
 import httpProxy from 'http-proxy';
@@ -18,7 +18,6 @@ import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import sequelizeTables, {User} from './data/models';
 import schema from './data/schema';
 import expressGraphQL from 'express-graphql';
 
@@ -52,16 +51,6 @@ app.use('/graphql', expressGraphQL(req => ({
   rootValue: {request: req},
   pretty: true
 })));
-
-app.use('/saveuser', async(req, res) => {
-  await User.create({
-    name: 'Jahmai OSullivan',
-    password: 'Star2017',
-    email: 'jahmai.osullivan_1@nowhere.com'
-  });
-  const users = await User.findAll();
-  res.send(`Users are ${JSON.stringify(users)}`);
-});
 
 server.on('upgrade', (req, socket, head) => {
   proxy.ws(req, socket, head);
@@ -133,14 +122,12 @@ app.use((req, res) => {
 
 
 if (config.port) {
-  sequelizeTables.sync({force: true}).catch(err => console.error(err.stack)).then(() => {
-    server.listen(config.port, (err) => {
-      if (err) {
-        console.error(err);
-      }
-      console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
-      console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
-    });
+  server.listen(config.port, (err) => {
+    if (err) {
+      console.error(err);
+    }
+    console.info('----\n==> ✅  %s is running, talking to API server on %s.', config.app.title, config.apiPort);
+    console.info('==> 💻  Open http://%s:%s in a browser to view the app.', config.host, config.port);
   });
 } else {
   console.error('==>     ERROR: No PORT environment variable has been specified');

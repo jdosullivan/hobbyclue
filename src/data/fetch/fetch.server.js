@@ -1,6 +1,6 @@
 import Promise from 'bluebird';
 import fetch, { Request, Headers, Response } from 'node-fetch';
-import { host, port } from '../../config';
+import { host, port } from '../../../config';
 
 fetch.Promise = Promise;
 Response.Promise = Promise;
