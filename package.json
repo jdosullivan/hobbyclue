@@ -36,7 +36,7 @@
       }
     },
     "start-prod-api": {
-      "command": "node ./bin/api.js",
+      "command": "node ./api/start.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "production",
@@ -53,7 +53,7 @@
       }
     },
     "start-dev-api": {
-      "command": "node ./bin/api.js",
+      "command": "node ./api/start.js",
       "env": {
         "NODE_PATH": "./api",
         "NODE_ENV": "development",
