@@ -8,7 +8,7 @@ export default function register(req) {
       email: req.body.email
     };
     User.create(newUser).then(() => {
-      console.log('user registered');
+      console.log(`user ${newUser.email} registered successfully`);
       resolve(newUser)
     });
   });
