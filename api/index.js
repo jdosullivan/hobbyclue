@@ -7,6 +7,7 @@ import {mapUrl} from 'utils/url.js';
 import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
+import passport from 'passport';
 
 const pretty = new PrettyError();
 const app = express();
@@ -16,12 +17,14 @@ const io = new SocketIo(server);
 io.path('/ws');
 
 app.use(session({
-  secret: 'I am building this app now!!!!',
+  secret: config.auth.jwt.secret,
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 60000 }
 }));
 app.use(bodyParser.json());
+app.use(passport.initialize());
+
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
 

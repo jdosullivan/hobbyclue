@@ -1,5 +1,5 @@
 import sequelize from '../sequelize';
-import User from './User';
+import User, { comparePassword } from './User';
 import UserLogin from './UserLogin';
 import UserClaim from './UserClaim';
 import UserProfile from './UserProfile';
@@ -30,4 +30,4 @@ function sync(...args) {
 }
 
 export default { sync };
-export { User, UserLogin, UserClaim, UserProfile };
+export { User, UserLogin, UserClaim, UserProfile, comparePassword };

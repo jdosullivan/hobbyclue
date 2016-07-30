@@ -53,19 +53,13 @@ app.use('/graphql', expressGraphQL(req => ({
   pretty: true
 })));
 
-app.use('/saveuser', async(req, res, next) => {
-
-  // force: true will drop the table if it already exists
+app.use('/saveuser', async(req, res) => {
   await User.create({
-    firstName: 'John',
-    lastName: 'Hancock',
-    email: 'testuser2@nowhere.com'
+    name: 'Jahmai OSullivan',
+    password: 'Star2017',
+    email: 'jahmai.osullivan_1@nowhere.com'
   });
-
-  console.log('time to find all users');
   const users = await User.findAll();
-
-  console.log(users);
   res.send(`Users are ${JSON.stringify(users)}`);
 });
 
@@ -139,7 +133,7 @@ app.use((req, res) => {
 
 
 if (config.port) {
-  sequelizeTables.sync().catch(err => console.error(err.stack)).then(() => {
+  sequelizeTables.sync({force: true}).catch(err => console.error(err.stack)).then(() => {
     server.listen(config.port, (err) => {
       if (err) {
         console.error(err);

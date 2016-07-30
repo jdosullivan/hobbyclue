@@ -44,7 +44,7 @@ export default class Login extends Component {
         }
         {user &&
         <div>
-          <p>You are currently logged in as {user.name}.</p>
+          <p>You are currently logged in as {user.firstName} {user.lastName}.</p>
 
           <div>
             <button className="btn btn-danger" onClick={logout}><i className="fa fa-sign-out"/>{' '}Log Out</button>
