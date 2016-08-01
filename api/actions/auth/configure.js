@@ -19,13 +19,6 @@ const configure = (app, config) => {
     }
   );
 
-  app.post('/loginlocal',
-    passport.authenticate('local', {failureRedirect: '/login'}),
-    function (req, res) {
-      console.log(`local auth success with user ${JSON.stringify(req.user)}`);
-      res.redirect('http://localhost:3000');
-    });
-
   // Authentication
   passport.use(new FacebookStrategy({
       clientID: config.auth.facebook.id,
