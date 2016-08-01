@@ -1,27 +1,25 @@
-import {User, comparePassword} from '../../database/models';
-import jwt from 'jsonwebtoken';
-import config from '../../../config';
+import {User} from '../../database/models';
+/*import jwt from 'jsonwebtoken';
+import config from '../../../config';*/
+import passport from 'passport';
 
-export default function login(req) {
+export default function login( req, res, next ) {
   return new Promise((resolve, reject) => {
-    User.findOne({
-      where: {
-        email: req.body.email
-      }
-    }).then((user) => {
-      if (!user) return reject({_error: 'Authentication failed. User not found.'});
+    passport.authenticate( 'local', function authenticate(err, user, info){
+      if(err)    return reject(err);
+      if(!user) return reject(info);
 
-      if (comparePassword(req.body.password, user.passwordHash)) {
-        const token = jwt.sign({ email: user.email, password: user.password }, config.auth.jwt.secret, {
-          expiresIn: 60000
-        });
-        const userLogged = Object.assign(user, {token});
-        req.session.user = userLogged;
-        resolve(userLogged);
-      }
-      else {
-        reject({_error: `passwords do not match for user ${req.body.email}.`});
-      }
-    });
+      req.logIn(user, err => {
+        if(err) { reject( err ); }
+        else {
+          /*const token = jwt.sign({ id: user.id }, config.auth.jwt.secret, {
+            expiresIn: 60000
+          });
+          const userWithToken = Object.assign({}, user, {token});*/
+          resolve(user);
+        }
+      })
+
+    })(req, res, next);
   });
 }

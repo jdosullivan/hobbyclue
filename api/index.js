@@ -8,7 +8,7 @@ import PrettyError from 'pretty-error';
 import http from 'http';
 import SocketIo from 'socket.io';
 import sequelizeTables from './database/models';
-import configureAuth from './configureAuth';
+import configureAuth from './actions/auth/configure';
 
 const pretty = new PrettyError();
 const app = express();
