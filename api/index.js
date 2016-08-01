@@ -26,7 +26,7 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({
-  secret: 'react and redux rule!!!!',
+  secret: config.auth.jwt.secret,
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 60000 }
