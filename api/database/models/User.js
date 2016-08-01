@@ -32,6 +32,28 @@ const User = Model.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+
+  picture: {
+    type: Sequelize.STRING(255)
+  },
+
+  gender: {
+    type: Sequelize.STRING(50)
+  },
+
+  location: {
+    type: Sequelize.STRING(100)
+  },
+
+  profileId: {
+    type: Sequelize.STRING(100)
+  },
+  profileType: {
+    type: Sequelize.STRING(100)
+  },
+  website: {
+    type: Sequelize.STRING(255)
+  },
   passwordHash: Sequelize.STRING,
   password: {
     type: Sequelize.VIRTUAL,
