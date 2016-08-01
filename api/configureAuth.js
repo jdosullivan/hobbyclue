@@ -3,8 +3,6 @@ import {Strategy as FacebookStrategy} from 'passport-facebook';
 import {Strategy as LocalStrategy} from 'passport-local';
 import {User, UserClaim, comparePassword} from './database/models';
 import jwt from 'jsonwebtoken';
-import {CustomJSONStringify} from './utils';
-
 
 const configure = (app, config) => {
 
@@ -68,7 +66,7 @@ const configure = (app, config) => {
           }
 
           addJWT(user);
-          
+
           // Return the user
           done(null, user);
         }
@@ -111,9 +109,5 @@ const configure = (app, config) => {
     cb(null, obj);
   });
 };
-
-
-
-
 
 export default configure;
