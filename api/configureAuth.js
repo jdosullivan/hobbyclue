@@ -23,7 +23,7 @@ const configureAuth = (app, config) => {
   passport.use(new FacebookStrategy({
       clientID: config.auth.facebook.id,
       clientSecret: config.auth.facebook.secret,
-      callbackURL: 'http://localhost:3000/api/login/facebook/return',
+      callbackURL: '/api/login/facebook/return',
       passReqToCallback : true,
       profileFields: ['id', 'emails', 'name', 'displayName', 'gender']
     },
