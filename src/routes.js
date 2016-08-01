@@ -57,15 +57,15 @@ export default (store) => {
       </Route>
 
       <Route onEnter={requireAnonymous}>
+        <Route path="login" component={Login}/>
         <Route path="register" component={Register}/>
       </Route>
 
       { /* Routes */ }
       <Route path="about" component={About}/>
-      <Route path="login" component={Login}/>
+      <Route path="groups" component={Groups}/>
       <Route path="survey" component={Survey}/>
       <Route path="widgets" component={Widgets}/>
-      <Route path="groups" component={Groups}/>
 
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404}/>
