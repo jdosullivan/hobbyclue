@@ -14,7 +14,6 @@ const configure = (app, config) => {
   app.get('/login/facebook/return',
     passport.authenticate('facebook', {failureRedirect: '/login'}),
     function (req, res) {
-      console.log(`fb success with user ${JSON.stringify(req.user)}`);
       res.redirect('http://localhost:3000');
     }
   );
