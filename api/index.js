@@ -9,6 +9,7 @@ import http from 'http';
 import SocketIo from 'socket.io';
 import sequelizeTables from './database/models';
 import configureAuth from './configureAuth';
+import expressJWT from 'express-jwt';
 
 const pretty = new PrettyError();
 const app = express();
@@ -25,6 +26,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(expressJWT({ secret: config.auth.jwt.secret}).unless({path: [/\/auth/i, /\/facebook/i] }));
 app.use(session({
   secret: config.auth.jwt.secret,
   resave: false,
