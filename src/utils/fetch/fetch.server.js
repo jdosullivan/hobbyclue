@@ -14,7 +14,7 @@ function localUrl(url) {
     return url;
   }
 
-  return `http://${host}:${port}${url}`;
+  return `http://${host}:${port}/api${url}`;
 }
 
 function localFetch(url, options) {

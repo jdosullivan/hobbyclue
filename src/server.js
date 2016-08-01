@@ -18,8 +18,6 @@ import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import schema from './graphql/schema';
-import expressGraphQL from 'express-graphql';
 
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
@@ -44,13 +42,6 @@ app.use('/api', (req, res) => {
 app.use('/ws', (req, res) => {
   proxy.web(req, res, {target: targetUrl + '/ws'});
 });
-
-app.use('/graphql', expressGraphQL(req => ({
-  schema,
-  graphiql: true,
-  rootValue: {request: req},
-  pretty: true
-})));
 
 server.on('upgrade', (req, socket, head) => {
   proxy.ws(req, socket, head);

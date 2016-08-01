@@ -10,12 +10,13 @@ import SocketIo from 'socket.io';
 import sequelizeTables from './database/models';
 import configureAuth from './configureAuth';
 import expressJWT from 'express-jwt';
+import schema from './graphql/schema';
+import expressGraphQL from 'express-graphql';
 
 const pretty = new PrettyError();
 const app = express();
 const server = new http.Server(app);
 const io = new SocketIo(server);
-
 io.path('/ws');
 
 app.use(session({
@@ -26,7 +27,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressJWT({ secret: config.auth.jwt.secret}).unless({path: [/\/auth/i, /\/facebook/i] }));
+app.use(expressJWT({ secret: config.auth.jwt.secret}).unless({path: [/\/auth/i,  /\/facebook/i ] }));
 app.use(session({
   secret: config.auth.jwt.secret,
   resave: false,
@@ -35,6 +36,13 @@ app.use(session({
 }));
 
 configureAuth(app, config);
+
+app.use('/graphql', expressGraphQL(req => ({
+  schema,
+  graphiql: true,
+  rootValue: {request: req},
+  pretty: true
+})));
 
 app.use((req, res) => {
   const splittedUrlPath = req.url.split('?')[0].split('/').slice(1);
@@ -67,7 +75,10 @@ const bufferSize = 100;
 const messageBuffer = new Array(bufferSize);
 let messageIndex = 0;
 
-if (config.apiPort) {
+if (!config.apiPort)  {
+  console.error('==>     ERROR: No PORT environment variable has been specified');
+}
+else {
   sequelizeTables.sync({force: false}).catch(err => console.error(err.stack)).then(() => {
     const runnable = app.listen(config.apiPort, (err) => {
       if (err) {
@@ -99,7 +110,4 @@ if (config.apiPort) {
     });
     io.listen(runnable);
   });
-
-} else {
-  console.error('==>     ERROR: No PORT environment variable has been specified');
 }
