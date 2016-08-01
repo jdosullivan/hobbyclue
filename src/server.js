@@ -18,7 +18,8 @@ import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-
+import cookie from 'react-cookie';
+import cookieParser from 'cookie-parser';
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
@@ -31,8 +32,8 @@ const proxy = httpProxy.createProxyServer({
 
 app.use(compression());
 app.use(favicon(path.join(__dirname, '..', 'static', 'favicon.ico')));
-
 app.use(Express.static(path.join(__dirname, '..', 'static')));
+app.use(cookieParser());
 
 // Proxy to API server
 app.use('/api', (req, res) => {
@@ -62,12 +63,14 @@ proxy.on('error', (error, req, res) => {
 });
 
 app.use((req, res) => {
+  cookie.plugToRequest(req, res);
+
   if (__DEVELOPMENT__) {
     // Do not cache webpack stats: the script file would change since
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const apiClient = new ApiClient(req);
+  const apiClient = new ApiClient( req);
   const memoryHistory = createHistory(req.originalUrl);
   const store = createStore(memoryHistory, apiClient, GraphQLClient);
   const history = syncHistoryWithStore(memoryHistory, store);

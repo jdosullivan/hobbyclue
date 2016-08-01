@@ -10,6 +10,10 @@ const LOGOUT_FAIL = 'redux-example/auth/LOGOUT_FAIL';
 const REGISTER = 'redux-example/auth/REGISTER';
 const REGISTER_SUCCESS = 'redux-example/auth/REGISTER_SUCCESS';
 const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
+const userCookieName = 'loginResult';
+
+import {CustomJSONStringify} from  '../../../api/utils';
+import cookie from 'react-cookie';
 
 const initialState = {
   loaded: false
@@ -23,6 +27,13 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
+      if(!cookie.load(userCookieName) && action.result) {
+        cookie.save(userCookieName, CustomJSONStringify(action.result));
+      }
+      else {
+        action.result = cookie.load(userCookieName);
+      }
+
       return {
         ...state,
         loading: false,
@@ -42,6 +53,9 @@ export default function reducer(state = initialState, action = {}) {
         loggingIn: true
       };
     case LOGIN_SUCCESS:
+      // save the auth token user
+      cookie.save('loginResult', action.result);
+      
       return {
         ...state,
         loggingIn: false,
@@ -134,3 +148,4 @@ export function logout() {
     promise: (client) => client.get('/auth/logout')
   };
 }
+
