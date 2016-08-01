@@ -1,6 +1,4 @@
 import {User} from '../../database/models';
-/*import jwt from 'jsonwebtoken';
-import config from '../../../config';*/
 import passport from 'passport';
 
 export default function login( req, res, next ) {
@@ -12,10 +10,6 @@ export default function login( req, res, next ) {
       req.logIn(user, err => {
         if(err) { reject( err ); }
         else {
-          /*const token = jwt.sign({ id: user.id }, config.auth.jwt.secret, {
-            expiresIn: 60000
-          });
-          const userWithToken = Object.assign({}, user, {token});*/
           resolve(user);
         }
       })
