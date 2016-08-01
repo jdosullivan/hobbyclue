@@ -1,4 +1,4 @@
-import fetch from '../utils/fetch';
+import fetch from '../fetch';
 
 function getJson(query) {
   return new Promise((resolve, reject) => {

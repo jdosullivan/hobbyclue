@@ -12,7 +12,7 @@ const REGISTER_SUCCESS = 'redux-example/auth/REGISTER_SUCCESS';
 const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
 const userCookieName = 'loginResult';
 
-import {CustomJSONStringify} from  '../../../api/utils';
+import {CustomJSONStringify} from  '../../../utils';
 import cookie from 'react-cookie';
 
 const initialState = {
@@ -55,7 +55,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOGIN_SUCCESS:
       // save the auth token user
       cookie.save('loginResult', action.result);
-      
+
       return {
         ...state,
         loggingIn: false,
