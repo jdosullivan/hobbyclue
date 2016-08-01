@@ -119,6 +119,9 @@ export default class App extends Component {
         </Navbar>
 
         <div className={styles.appContent}>
+          {user &&
+          <div>Token is {user.token}</div>
+          }
           {this.props.children}
         </div>
         <InfoBar/>

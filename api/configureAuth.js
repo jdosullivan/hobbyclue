@@ -2,9 +2,19 @@ import passport from 'passport';
 import {Strategy as FacebookStrategy} from 'passport-facebook';
 import {Strategy as LocalStrategy} from 'passport-local';
 import {User, UserClaim, comparePassword} from './database/models';
+import jwt from 'jsonwebtoken';
+import {CustomJSONStringify} from './utils';
 
 
 const configure = (app, config) => {
+
+  function addJWT(user){
+    const token = jwt.sign({ email: user.email, password: user.password }, config.auth.jwt.secret, {
+      expiresIn: 60000
+    });
+    user.dataValues = Object.assign({}, user.dataValues, {token});
+    return user;
+  }
 
   app.use(passport.initialize());
   app.use(passport.session());
@@ -57,6 +67,8 @@ const configure = (app, config) => {
             });
           }
 
+          addJWT(user);
+          
           // Return the user
           done(null, user);
         }
@@ -79,9 +91,7 @@ const configure = (app, config) => {
         if (!user) return done(new Error('Authentication failed. User not found.'));
 
         if (comparePassword(password, user.passwordHash)) {
-          /*const token = jwt.sign({ email: user.email, password: user.password }, config.auth.jwt.secret, {
-           expiresIn: 60000
-           });*/
+          addJWT(user);
           done(null, user);
         }
         else {
@@ -101,5 +111,9 @@ const configure = (app, config) => {
     cb(null, obj);
   });
 };
+
+
+
+
 
 export default configure;
