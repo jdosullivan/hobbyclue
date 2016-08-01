@@ -1,7 +1,7 @@
 import passport from 'passport';
 import {Strategy as FacebookStrategy} from 'passport-facebook';
 import {Strategy as LocalStrategy} from 'passport-local';
-import {User, UserClaim, comparePassword} from '../../database/models';
+import {User, UserClaim, comparePassword} from './database/models';
 
 
 const configure = (app, config) => {
