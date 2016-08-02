@@ -12,7 +12,6 @@ const REGISTER_SUCCESS = 'redux-example/auth/REGISTER_SUCCESS';
 const REGISTER_FAIL = 'redux-example/auth/REGISTER_FAIL';
 const userCookieName = 'loginResult';
 
-import {CustomJSONStringify} from  '../../../utils';
 import cookie from 'react-cookie';
 
 const initialState = {
@@ -27,13 +26,10 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-      if(!cookie.load(userCookieName) && action.result) {
-        cookie.save(userCookieName, CustomJSONStringify(action.result));
+      console.log(`LOAD_SUCCESS`);
+      if (action.result) {
+        cookie.save( userCookieName, action.result );
       }
-      else {
-        action.result = cookie.load(userCookieName);
-      }
-
       return {
         ...state,
         loading: false,
@@ -41,6 +37,7 @@ export default function reducer(state = initialState, action = {}) {
         user: action.result
       };
     case LOAD_FAIL:
+      console.log(`LOAD_FAIL`);
       return {
         ...state,
         loading: false,
@@ -54,8 +51,9 @@ export default function reducer(state = initialState, action = {}) {
       };
     case LOGIN_SUCCESS:
       // save the auth token user
-      cookie.save('loginResult', action.result);
-
+      if (action.result) {
+        cookie.save( userCookieName, action.result );
+      }
       return {
         ...state,
         loggingIn: false,
@@ -74,6 +72,7 @@ export default function reducer(state = initialState, action = {}) {
         loggingOut: true
       };
     case LOGOUT_SUCCESS:
+      cookie.remove(userCookieName);
       return {
         ...state,
         loggingOut: false,
