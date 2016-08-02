@@ -10,7 +10,9 @@ global.__SERVER__ = true;
 global.__DISABLE_SSR__ = false;  // <----- DISABLES SERVER SIDE RENDERING FOR ERROR DEBUGGING
 global.__DEVELOPMENT__ = process.env.NODE_ENV !== 'production';
 
-if (__DEVELOPMENT__) {
+/*Rubymine debugging doesn't work when piping is enabled. We set an environment variables
+  in it the debug configuration to detect it and skip piping altogether*/
+if (__DEVELOPMENT__ && !process.env.ISRUBYMINE) {
   if (!require('piping')({
       hook: true,
       ignore: /(\/\.|~$|\.json|\.scss$)/i
