@@ -1,6 +1,5 @@
 import superagent from 'superagent';
 import config from '../../config';
-import cookie from 'react-cookie';
 
 const userCookieName = 'loginResult';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
@@ -15,28 +14,23 @@ function formatUrl(path) {
   return '/api' + adjustedPath;
 }
 
-function getCookieIsoMorphic(cookieName) {
-  return cookie ? cookie.load(cookieName)
-                : (reactCookie ? reactCookie.load(cookieName) : undefined);
-}
-
 export default class ApiClient {
-  constructor(req) {
+  constructor(req, cookieMgr) {
     methods.forEach( (method) =>
       this[method] = (path, {params, data} = {}) => new Promise( (resolve, reject) => {
         const request = superagent[method]( formatUrl( path ) );
 
-        const userCookie = getCookieIsoMorphic(userCookieName);
+        const userCookie = cookieMgr.get(userCookieName);
         if (userCookie) {
-          request.set( 'authorization', 'Bearer ' + userCookie.token );
+          request.set( 'authorization', 'Bearer ' + JSON.parse(userCookie).token );
         }
 
         if (params) {
           request.query( params );
         }
 
-        if (__SERVER__ && cookie.load( 'cookie' )) {
-          cookie.save( 'cookie', cookie.load( 'cookie' ) );
+        if (__SERVER__ && cookieMgr.get( 'cookie' )) {
+          cookieMgr.set( 'cookie', cookieMgr.get( 'cookie' ) );
         }
 
         if (data) {

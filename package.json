@@ -93,6 +93,7 @@
     "bluebird": "^3.4.1",
     "body-parser": "^1.14.1",
     "compression": "^1.6.0",
+    "cookie-dough": "^0.1.0",
     "cookie-parser": "^1.4.3",
     "express": "^4.13.3",
     "express-graphql": "^0.5.3",

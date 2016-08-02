@@ -13,9 +13,11 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import { ReduxAsyncConnect } from 'redux-async-connect';
 import useScroll from 'scroll-behavior/lib/useStandardScroll';
 import GraphQLClient from './helpers/GraphQLClient';
+var cookie = require('cookie-dough')();
+
 import getRoutes from './routes';
 
-const client = new ApiClient();
+const client = new ApiClient(undefined, cookie);
 const _browserHistory = useScroll(() => browserHistory)();
 const dest = document.getElementById('content');
 const store = createStore(_browserHistory, client, GraphQLClient, window.__data);
