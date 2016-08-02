@@ -18,9 +18,8 @@ import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import cookie from 'react-cookie';
 import cookieParser from 'cookie-parser';
-var CookieDough = require('cookie-dough')
+var CookieDough = require('cookie-dough');
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
