@@ -18,8 +18,8 @@ import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
 import createHistory from 'react-router/lib/createMemoryHistory';
 import {Provider} from 'react-redux';
 import getRoutes from './routes';
-import cookie from 'react-cookie';
 import cookieParser from 'cookie-parser';
+var CookieDough = require('cookie-dough');
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
@@ -70,7 +70,7 @@ app.use((req, res) => {
     // hot module replacement is enabled in the development env
     webpackIsomorphicTools.refresh();
   }
-  const apiClient = new ApiClient( req);
+  const apiClient = new ApiClient(req, new CookieDough(req));
   const memoryHistory = createHistory(req.originalUrl);
   const store = createStore(memoryHistory, apiClient, GraphQLClient);
   const history = syncHistoryWithStore(memoryHistory, store);

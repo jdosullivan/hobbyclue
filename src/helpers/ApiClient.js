@@ -1,6 +1,5 @@
 import superagent from 'superagent';
 import config from '../../config';
-import cookie from 'react-cookie';
 
 const userCookieName = 'loginResult';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
@@ -15,40 +14,23 @@ function formatUrl(path) {
   return '/api' + adjustedPath;
 }
 
-function getCookie(cname) {
-  var name = cname + "=";
-  var ca = document.cookie.split( ';' );
-  for (var i = 0; i < ca.length; i++) {
-    var c = ca[i];
-    while (c.charAt( 0 ) == ' ') {
-      c = c.substring( 1 );
-    }
-    if (c.indexOf( name ) == 0) {
-      return c.substring( name.length, c.length );
-    }
-  }
-  return "";
-}
-
 export default class ApiClient {
-  constructor(req) {
+  constructor(req, cookieMgr) {
     methods.forEach( (method) =>
       this[method] = (path, {params, data} = {}) => new Promise( (resolve, reject) => {
         const request = superagent[method]( formatUrl( path ) );
 
-        let token = ((__SERVER__ && cookie && cookie.load( userCookieName ))
-                              ? cookie.load( userCookieName )
-                              : JSON.parse( unescape( getCookie( userCookieName ) ) )).token;
-
-        request.set( 'authorization', 'Bearer ' + token );
-
+        const userCookie = cookieMgr.get(userCookieName);
+        if (userCookie) {
+          request.set( 'authorization', 'Bearer ' + JSON.parse(userCookie).token );
+        }
 
         if (params) {
           request.query( params );
         }
 
-        if (__SERVER__ && req.get( 'cookie' )) {
-          request.set( 'cookie', req.get( 'cookie' ) );
+        if (__SERVER__ && cookieMgr.get( 'cookie' )) {
+          cookieMgr.set( 'cookie', cookieMgr.get( 'cookie' ) );
         }
 
         if (data) {
