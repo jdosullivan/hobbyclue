@@ -26,7 +26,6 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-      console.log(`LOAD_SUCCESS`);
       if (action.result) {
         cookie.save( userCookieName, action.result );
       }
@@ -37,7 +36,6 @@ export default function reducer(state = initialState, action = {}) {
         user: action.result
       };
     case LOAD_FAIL:
-      console.log(`LOAD_FAIL`);
       return {
         ...state,
         loading: false,
