@@ -29,6 +29,9 @@ export default function reducer(state = initialState, action = {}) {
       if (action.result) {
         cookie.save( userCookieName, action.result );
       }
+      else if (cookie.load(userCookieName)) {
+        action.result = cookie.load(userCookieName);
+      }
       return {
         ...state,
         loading: false,
