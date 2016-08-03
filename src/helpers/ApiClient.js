@@ -21,9 +21,14 @@ export default class ApiClient {
       this[method] = (path, {params, data} = {}) => new Promise( (resolve, reject) => {
         const request = superagent[method]( formatUrl( path ) );
 
-        let cookieVal = ((__SERVER__)
-                              ? (cookie && cookie.load(userCookieName) ? cookie.load(userCookieName) : undefined)
-                              : reactCookie.load(userCookieName));
+        let cookieVal;
+        if (__SERVER__ && cookie) {
+          cookieVal = cookie.load( userCookieName );
+        }
+
+        if (!__SERVER__) {
+          cookieVal = window.reactCookie.load( userCookieName );
+        }
 
         if (cookieVal) {
           request.set( 'authorization', 'Bearer ' + cookieVal.token );
