@@ -2,7 +2,9 @@ import React, {Component, PropTypes} from 'react';
 
 class Events extends Component {
   render() {
-    return (<div>I am the events page</div>);
+    return (<div className="container">
+              I am the events page ok?
+            </div>);
   }
 }
 
