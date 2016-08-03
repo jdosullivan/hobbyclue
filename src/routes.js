@@ -13,6 +13,7 @@ import {
   LoginSuccess,
   Survey,
   NotFound,
+  Events
 } from './containers';
 
 export default (store) => {
@@ -21,13 +22,13 @@ export default (store) => {
       const {auth: {user}} = store.getState();
       if (!user) {
         // oops, not logged in, so can't be here!
-        replace('/');
+        replace( '/' );
       }
       cb();
     }
 
-    if (!isAuthLoaded(store.getState())) {
-      store.dispatch(loadAuth()).then(checkAuth);
+    if (!isAuthLoaded( store.getState() )) {
+      store.dispatch( loadAuth() ).then( checkAuth );
     } else {
       checkAuth();
     }
@@ -36,9 +37,9 @@ export default (store) => {
   const requireAnonymous = (nextState, replace) => {
     const {auth: {user}} = store.getState();
     if (user) {
-      console.log(`already logged in: redirect to home page`);
+      console.log( `already logged in: redirect to home page` );
       // oops, logged in, so can't be here!
-      replace('/');
+      replace( '/' );
     }
   };
 
@@ -63,6 +64,7 @@ export default (store) => {
 
       { /* Routes */ }
       <Route path="about" component={About}/>
+      <Route path="events" component={Events}/>
       <Route path="groups" component={Groups}/>
       <Route path="survey" component={Survey}/>
       <Route path="widgets" component={Widgets}/>
