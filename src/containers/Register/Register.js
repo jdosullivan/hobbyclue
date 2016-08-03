@@ -21,12 +21,10 @@ export default class Register extends Component {
   };
 
   render() {
-    const {user} = this.props;
     return (
       <div>
         <Helmet title="Register"/>
         <h1>New User Registration</h1>
-        {!user &&
         <div>
           <form className="login-form form-inline" onSubmit={this.handleSubmit}>
             <div className="form-group">
@@ -37,7 +35,6 @@ export default class Register extends Component {
             </button>
           </form>
         </div>
-        }
       </div>
     );
   }
