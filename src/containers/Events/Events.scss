@@ -98,9 +98,7 @@
 }
 
 .post {
-  background-color: #ffffff;
-  border-radius: 2px;
-  box-shadow: 0 1px 2px #c9cccd;
+  border-bottom: solid 1px #eee;
   margin-bottom: 20px;
 
   .wrapUT {
@@ -140,17 +138,14 @@
 
   .postinfo {
     width: 15%;
-    border-left: solid 1px #f1f1f1;
   }
 
   .comments {
-    border-bottom: solid 1px #f1f1f1;
     padding: 18px 0 25px 0;
     text-align: center;
 
     .commentbg {
       background-color: #bdc3c7;
-      border-radius: 2px;
       display: inline-block;
       padding: 12px 17px;
       color: #ffffff;
@@ -174,7 +169,6 @@
   }
 
   .views {
-    border-bottom: solid 1px #f1f1f1;
     color: #9da6aa;
     font-size: 12px;
     font-family: 'Open Sans Regular', sans-serif;
