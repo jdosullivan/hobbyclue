@@ -7,11 +7,10 @@ import jwt from 'jsonwebtoken';
 const configure = (app, config) => {
 
   function addJWT(user){
-    const token = jwt.sign({ email: user.email, password: user.password }, config.auth.jwt.secret, {
+    const token = jwt.sign({ email: user.email }, config.auth.jwt.secret, {
       expiresIn: 60000
     });
-    user.dataValues = Object.assign({}, user.dataValues, {token});
-    return user;
+    return Object.assign({}, user.toJSON(), {token});
   }
 
   app.use(passport.initialize());
@@ -65,10 +64,8 @@ const configure = (app, config) => {
             });
           }
 
-          addJWT(user);
-
           // Return the user
-          done(null, user);
+          done(null, addJWT(user));
         }
       };
 
@@ -89,8 +86,7 @@ const configure = (app, config) => {
         if (!user) return done(new Error('Authentication failed. User not found.'));
 
         if (comparePassword(password, user.passwordHash)) {
-          addJWT(user);
-          done(null, user);
+          done(null, addJWT(user));
         }
         else {
           done(new Error(`passwords do not match for user ${username}.`));

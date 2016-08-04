@@ -26,14 +26,12 @@ export default function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-      if (action.result) {
-        cookie.save( userCookieName, action.result );
-      }
+      saveAuthCookie( action.result );
       return {
         ...state,
         loading: false,
         loaded: true,
-        user: cookie.load(userCookieName) ? cookie.load(userCookieName) : action.result
+        user: cookie.load( userCookieName ) ? cookie.load( userCookieName ) : action.result
       };
     case LOAD_FAIL:
       return {
@@ -48,10 +46,7 @@ export default function reducer(state = initialState, action = {}) {
         loggingIn: true
       };
     case LOGIN_SUCCESS:
-      // save the auth token user
-      if (action.result) {
-        cookie.save( userCookieName, action.result );
-      }
+      saveAuthCookie(action.result);
       return {
         ...state,
         loggingIn: false,
@@ -70,7 +65,7 @@ export default function reducer(state = initialState, action = {}) {
         loggingOut: true
       };
     case LOGOUT_SUCCESS:
-      cookie.remove(userCookieName);
+      cookie.remove( userCookieName );
       return {
         ...state,
         loggingOut: false,
@@ -111,38 +106,44 @@ export function isLoaded(globalState) {
 export function load() {
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.get('/auth/loadAuth')
+    promise: (client) => client.get( '/auth/loadAuth' )
   };
 }
 
 export function register(email, password) {
   return {
     types: [REGISTER, REGISTER_SUCCESS, REGISTER_FAIL],
-    promise: (client) => client.post('/auth/register', {
+    promise: (client) => client.post( '/auth/register', {
       data: {
         email,
         password
       }
-    })
+    } )
   };
 }
 
 export function login(email, password) {
   return {
     types: [LOGIN, LOGIN_SUCCESS, LOGIN_FAIL],
-    promise: (client) => client.post('/auth/login', {
+    promise: (client) => client.post( '/auth/login', {
       data: {
         email,
         password
       }
-    })
+    } )
   };
 }
 
 export function logout() {
   return {
     types: [LOGOUT, LOGOUT_SUCCESS, LOGOUT_FAIL],
-    promise: (client) => client.get('/auth/logout')
+    promise: (client) => client.get( '/auth/logout' )
   };
+}
+
+function saveAuthCookie(user) {
+  if (user) {
+    cookie.save( userCookieName, JSON.stringify( user ) );
+  }
 }
 
