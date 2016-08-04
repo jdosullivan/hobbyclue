@@ -18,6 +18,12 @@ const initialState = {
   loaded: false
 };
 
+function saveAuthCookie(user) {
+  if (user) {
+    cookie.save( userCookieName, JSON.stringify( user ) );
+  }
+}
+
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
@@ -141,9 +147,5 @@ export function logout() {
   };
 }
 
-function saveAuthCookie(user) {
-  if (user) {
-    cookie.save( userCookieName, JSON.stringify( user ) );
-  }
-}
+
 
