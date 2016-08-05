@@ -1,6 +1,6 @@
 import React from 'react';
-import Avatar from './Avatar';
-import SearchBox from './SearchBox';
+import Avatar from '../Avatar';
+import SearchBox from '../SearchBox';
 
 function HeaderNav() {
   const logo = require( './images/logo.jpg' );

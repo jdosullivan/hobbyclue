@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react';
-import Avatar from './Avatar';
+import Avatar from '../Avatar';
 
 const Post = (props) => {
   const icon1 = require( './images/icon1.jpg' );
