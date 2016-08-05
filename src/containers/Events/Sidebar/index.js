@@ -7,7 +7,7 @@ const Sidebar = () => {
       <div className={styles.block}>
         <h3>Categories</h3>
         <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
+        <div className={styles.txt}>
           <ul className={styles.cats}>
             <li><a href="#">Trading for Money <span className="badge pull-right">20</span></a></li>
             <li><a href="#">Vault Keys Giveway <span className="badge pull-right">10</span></a></li>
@@ -19,26 +19,26 @@ const Sidebar = () => {
           </ul>
         </div>
       </div>
-      <div className={styles.sidebarblock}>
+      <div className={styles.block}>
         <h3>My Active Threads</h3>
         <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
+        <div className={styles.txt}>
           <a href="#">This Dock Turns Your iPhone Into a Bedside Lamp</a>
         </div>
         <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
+        <div className={styles.txt}>
           <a href="#">Who Wins in the Battle for Power on the Internet?</a>
         </div>
         <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
+        <div className={styles.txt}>
           <a href="#">Sony QX10: A Funky, Overpriced Lens Camera for Your Smartphone</a>
         </div>
         <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
+        <div className={styles.txt}>
           <a href="#">FedEx Simplifies Shipping for Small Businesses</a>
         </div>
         <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
+        <div className={styles.txt}>
           <a href="#">Loud and Brave: Saudi Women Set to Protest Driving Ban</a>
         </div>
       </div>
