@@ -1,13 +1,12 @@
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import createMiddleware from './middleware/clientMiddleware';
-import graphQLMiddleware from './middleware/graphQLMiddleware';
 import { routerMiddleware } from 'react-router-redux';
 
-export default function createStore(history, apiClient, graphQLClient, data) {
+export default function createStore(history, apiClient, data) {
   // Sync dispatched route actions to the history
   const reduxRouterMiddleware = routerMiddleware(history);
 
-  const middleware = [createMiddleware(apiClient), graphQLMiddleware(graphQLClient), reduxRouterMiddleware];
+  const middleware = [createMiddleware(apiClient), reduxRouterMiddleware];
 
   let finalCreateStore;
   if (__DEVELOPMENT__ && __CLIENT__ && __DEVTOOLS__) {

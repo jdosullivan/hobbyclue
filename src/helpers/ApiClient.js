@@ -1,6 +1,19 @@
 import superagent from 'superagent';
 import config from '../../config';
-import { getBearerAuthToken } from './authHelper';
+import cookie from 'react-cookie';
+
+const getBearerAuthToken = () => {
+  const userCookieName = 'loginResult';
+  let cookieVal;
+  if (__SERVER__ && cookie) {
+    cookieVal = cookie.load( userCookieName );
+  }
+
+  if (!__SERVER__) {
+    cookieVal = window.reactCookie.load( userCookieName );
+  }
+  return 'Bearer ' + cookieVal.token;
+};
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
@@ -18,9 +31,8 @@ export default class ApiClient {
   constructor(req) {
     methods.forEach( (method) =>
       this[method] = (path, {params, data} = {}) => new Promise( (resolve, reject) => {
-        console.log(`in api client with path ${path} and data: ${JSON.stringify(data)}`);
         const request = superagent[method]( formatUrl( path ) );
-        const jwBearerToken = getBearerAuthToken(request);
+        const jwBearerToken = getBearerAuthToken();
         if (jwBearerToken) {
           request.set( 'authorization', jwBearerToken );
         }

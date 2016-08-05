@@ -11,7 +11,6 @@ import ApiClient from './helpers/ApiClient';
 import Html from './helpers/Html';
 import PrettyError from 'pretty-error';
 import http from 'http';
-import GraphQLClient from './helpers/GraphQLClient';
 import {match} from 'react-router';
 import {syncHistoryWithStore} from 'react-router-redux';
 import {ReduxAsyncConnect, loadOnServer} from 'redux-async-connect';
@@ -72,7 +71,7 @@ app.use((req, res) => {
   }
   const apiClient = new ApiClient( req);
   const memoryHistory = createHistory(req.originalUrl);
-  const store = createStore(memoryHistory, apiClient, GraphQLClient);
+  const store = createStore(memoryHistory, apiClient);
   const history = syncHistoryWithStore(memoryHistory, store);
 
   function hydrateOnClient() {
