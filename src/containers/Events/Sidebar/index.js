@@ -6,4 +6,6 @@ const Sidebar = () => {
     <div >Sidebar</div>
   );
 };
+Sidebar.propTypes = {};
+
 export default Sidebar;
