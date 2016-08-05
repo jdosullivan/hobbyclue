@@ -92,7 +92,6 @@
     "babel-register": "^6.3.13",
     "babel-runtime": "^6.3.19",
     "bcryptjs": "^2.3.0",
-    "bluebird": "^3.4.1",
     "body-parser": "^1.14.1",
     "compression": "^1.6.0",
     "cookie-parser": "^1.4.3",
@@ -114,7 +113,6 @@
     "lru-memoize": "^1.0.0",
     "map-props": "^1.0.0",
     "multireducer": "^2.0.0",
-    "node-fetch": "^1.5.3",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
     "passport-local": "^1.0.0",
@@ -143,8 +141,7 @@
     "superagent": "^1.4.0",
     "url-loader": "^0.5.7",
     "warning": "^2.1.0",
-    "webpack-isomorphic-tools": "^2.2.18",
-    "whatwg-fetch": "^1.0.0"
+    "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
     "assets-webpack-plugin": "^3.4.0",
