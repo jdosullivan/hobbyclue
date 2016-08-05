@@ -1,4 +1,4 @@
-@import '../../../theme/variables';
+@import '../../../theme/mixins';
 
 .headerNav {
   height: 70px;
@@ -6,8 +6,6 @@
 
   .search {
     color: #363838;
-    font-size: 14px;
-    font-family: 'Open Sans Light', sans-serif;
     margin-top: 16px;
     height: 38px;
 
@@ -16,7 +14,6 @@
       box-shadow: none;
       background-color: #f3f5f9;
       color: #363838;
-      font-size: 14px;
       padding: 8px 19px;
       height: 38px;
     }
@@ -48,8 +45,6 @@
       border: none;
       box-shadow: none;
       color: #ffffff;
-      font-size: 14px;
-      font-family: 'Open Sans Bold', sans-serif;
       padding-left: 30px;
       padding-right: 30px;
       background-color: #1abc9c;

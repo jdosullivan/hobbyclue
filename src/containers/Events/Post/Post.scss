@@ -1,3 +1,21 @@
+@mixin subText() {
+  color: #9da6aa;
+  font-size: 12px;
+  text-align: center;
+  line-height: 29px;
+}
+
+@mixin lightFont() {
+  font-family: 'Open Sans Light', sans-serif;
+  color: #989c9e;
+}
+
+@mixin rotate($degree) {
+  transform: rotate($degree);
+  -ms-transform: rotate($degree);
+  -webkit-transform: rotate($degree);
+}
+
 .post {
   border-bottom: solid 1px #eee;
   margin-bottom: 20px;
@@ -23,16 +41,13 @@
     padding-right: 30px;
     padding-top: 20px;
     padding-bottom: 15px;
-    color: #989c9e;
-    font-size: 14px;
-    font-family: 'Open Sans Light', sans-serif;
     line-height: 25px;
+    @include lightFont()
   }
 
   h2 {
     color: #363838;
     font-size: 18px;
-    font-family: 'Open Sans', sans-serif;
     margin-top: 10px;
     margin-bottom: 10px;
   }
@@ -50,8 +65,6 @@
       display: inline-block;
       padding: 12px 17px;
       color: #ffffff;
-      font-size: 14px;
-      font-family: 'Open Sans Bold', sans-serif;
       position: relative;
 
       .mark {
@@ -62,30 +75,12 @@
         bottom: 0;
         left: 43%;
         margin-bottom: -5px;
-        transform: rotate(45deg);
-        -ms-transform: rotate(45deg);
-        -webkit-transform: rotate(45deg);
+        @include rotate(45deg);
       }
     }
   }
 
-  .views {
-    color: #9da6aa;
-    font-size: 12px;
-    font-family: 'Open Sans Regular', sans-serif;
-    text-align: center;
-    line-height: 29px;
-
-    i {
-      font-size: 14px;
-    }
-  }
-
-  .time {
-    color: #9da6aa;
-    font-size: 12px;
-    font-family: 'Open Sans Regular', sans-serif;
-    text-align: center;
-    line-height: 29px;
+  .views, .time {
+    @include subText()
   }
 }
