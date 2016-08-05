@@ -1,0 +1,66 @@
+@import '../../theme/variables';
+
+.headernav {
+  height: 70px;
+  border-bottom: 1px solid #c9cccd;
+
+  .search {
+    color: #363838;
+    font-size: 14px;
+    font-family: 'Open Sans Light', sans-serif;
+    margin-top: 16px;
+    height: 38px;
+
+    input {
+      border: none;
+      box-shadow: none;
+      background-color: #f3f5f9;
+      color: #363838;
+      font-size: 14px;
+      padding: 8px 19px;
+      height: 38px;
+    }
+
+    button {
+      border: solid 1px #697683;
+      box-shadow: none;
+      background-color: #697683;
+      color: #ffffff;
+      font-size: 18px;
+    }
+
+    .wrap {
+      background-color: #f3f5f9;
+      @include border-radius(3px);
+    }
+
+    .txt {
+      width: 85%;
+    }
+  }
+
+  .avt {
+    margin-top: 16px;
+    height: 38px;
+
+    button {
+      height: 38px;
+      border: none;
+      box-shadow: none;
+      color: #ffffff;
+      font-size: 14px;
+      font-family: 'Open Sans Bold', sans-serif;
+      padding-left: 30px;
+      padding-right: 30px;
+      background-color: #1abc9c;
+    }
+
+    .env {
+      font-size: 18px;
+      color: #cfd5d7;
+      line-height: 38px;
+      padding: 0 20px;
+    }
+
+  }
+}
