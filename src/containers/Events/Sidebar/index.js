@@ -1,8 +1,7 @@
 import React from 'react';
 
 const Sidebar = () => {
-  const styles = {}; //require( './Sidebar.scss' );
-
+  const styles = require( './styles.scss' );
   return (
     <div className={styles.sidebar}>
       <div className={styles.block}>
