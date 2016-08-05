@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Post from './Post';
+import Sidebar from './Sidebar';
 import HeaderNav from './HeaderNav';
 
 const styles = require( './Events.scss' );
@@ -217,6 +218,7 @@ export default class Events extends Component {
                 <PostsList />
               </div>
               <div className="col-lg-4 col-md-4">
+                <Sidebar />
               </div>
             </div>
           </div>

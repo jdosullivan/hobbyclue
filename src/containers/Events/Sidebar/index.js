@@ -5,7 +5,7 @@ const Sidebar = () => {
 
   return (
     <div className={styles.sidebar}>
-      <div className={styles.sidebarblock}>
+      <div className={styles.block}>
         <h3>Categories</h3>
         <div className={styles.divline}></div>
         <div className={styles.blocktxt}>
@@ -18,29 +18,6 @@ const Sidebar = () => {
             <li><a href="#">Video &amp; Audio Drivers <span className="badge pull-right">11</span></a></li>
             <li><a href="#">2K Official Forums <span className="badge pull-right">5</span></a></li>
           </ul>
-        </div>
-      </div>
-      <div className={styles.sidebarblock}>
-        <h3>My Active Threads</h3>
-        <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
-          <a href="#">This Dock Turns Your iPhone Into a Bedside Lamp</a>
-        </div>
-        <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
-          <a href="#">Who Wins in the Battle for Power on the Internet?</a>
-        </div>
-        <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
-          <a href="#">Sony QX10: A Funky, Overpriced Lens Camera for Your Smartphone</a>
-        </div>
-        <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
-          <a href="#">FedEx Simplifies Shipping for Small Businesses</a>
-        </div>
-        <div className={styles.divline}></div>
-        <div className={styles.blocktxt}>
-          <a href="#">Loud and Brave: Saudi Women Set to Protest Driving Ban</a>
         </div>
       </div>
     </div>
