@@ -1,0 +1,49 @@
+@import '../../theme/variables';
+
+.search {
+  color: #363838;
+  font-size: 14px;
+  font-family: 'Open Sans Light', sans-serif;
+  margin-top: 16px;
+  height: 38px;
+
+  input {
+    border: none;
+    box-shadow: none;
+    background-color: #f3f5f9;
+    color: #363838;
+    font-size: 14px;
+    padding: 8px 19px;
+    height: 38px;
+  }
+
+  button {
+    border: solid 1px #697683;
+    box-shadow: none;
+    background-color: #697683;
+    color: #ffffff;
+    font-size: 18px;
+  }
+
+  .wrap {
+    background-color: #f3f5f9;
+    @include border-radius(3px);
+  }
+
+  .txt {
+    width: 85%;
+  }
+}
+
+
+
+
+
+
+@media (max-width: 1200px) and (min-width: 992px) {
+  .search {
+    .txt {
+      width: 75%;
+    }
+  }
+}
