@@ -3,7 +3,11 @@ import React from 'react';
 const Sidebar = () => {
 
   return (
-    <div >Sidebar</div>
+    <div>
+      <div>
+        <h3>Categories</h3>
+      </div>
+    </div>
   );
 };
 Sidebar.propTypes = {};
