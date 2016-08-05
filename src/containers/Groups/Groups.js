@@ -1,27 +1,28 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isLoaded, load} from 'redux/modules/graphql';
+import {isLoaded, loadGroups as load} from 'redux/modules/groups';
 import {asyncConnect} from 'redux-async-connect';
-const graphQLGroupsQuery = `{groups{id,name,coverImage,created}}`;
 
 @asyncConnect([{
   deferred: true,
   promise: ({store}) => {
     if (!isLoaded(store.getState())) {
-      return store.dispatch(load(graphQLGroupsQuery));
+      return store.dispatch(load());
     }
   }
 }])
 @connect(
   state => ({
-    groups: state.graphql.data.groups
+    groups: state.groups.data,
+    loading: state.groups.loading
   }),
   {load})
 
 export default class Groups extends Component {
   static propTypes = {
-    groups: PropTypes.object,
-    loadGraphQL: PropTypes.func.isRequired
+    groups: PropTypes.array,
+    loading: PropTypes.bool,
+    load: PropTypes.func.isRequired
   };
 
   render() {

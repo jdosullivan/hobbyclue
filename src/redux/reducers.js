@@ -9,14 +9,14 @@ import filters from './modules/filters';
 import {reducer as form} from 'redux-form';
 import info from './modules/info';
 import widgets from './modules/widgets';
-import graphql from './modules/graphql';
+import groups from './modules/groups';
 
 export default combineReducers({
   routing: routerReducer,
   reduxAsyncConnect,
   auth,
   form,
-  graphql,
+  groups,
   filters,
   multireducer: multireducer({
     counter1: counter,
