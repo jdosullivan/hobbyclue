@@ -1,8 +1,8 @@
 import React from 'react';
+import Avatar from './Avatar';
 
 function HeaderNav() {
   const logo = require( './images/logo.jpg' );
-  const avatar = require( './images/avatar.jpg' );
   const styles = require( './HeaderNav.scss' );
 
   return (
@@ -38,11 +38,8 @@ function HeaderNav() {
             <div className={styles.env + ' pull-left'}>
               <i className="fa fa-envelope"/>
             </div>
-
-            <div className={styles.avatar + ' pull-left'}>
-              <a href="#">
-                <img src={avatar} alt=""/>
-              </a>
+            <div className="pull-left">
+              <Avatar />
             </div>
             <div className="clearfix"></div>
           </div>

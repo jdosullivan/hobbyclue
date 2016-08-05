@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
+import Avatar from './Avatar';
 
 const Post = (props) => {
-  const avatar = require( './images/avatar.jpg' );
   const icon1 = require( './images/icon1.jpg' );
   const icon4 = require( './images/icon4.jpg' );
   const styles = require( './Post.scss' );
@@ -10,10 +10,7 @@ const Post = (props) => {
     <div className={styles.post}>
       <div className={styles.wrapUT + ' pull-left'}>
         <div className={styles.userinfo + ' pull-left'}>
-          <div className={styles.avatar}>
-            <img src={avatar} alt=""/>
-            <div className={styles.status + ' ' + styles.green}>&nbsp;</div>
-          </div>
+          <Avatar />
 
           <div className={styles.icons}>
             <img src={icon1} alt=""/>

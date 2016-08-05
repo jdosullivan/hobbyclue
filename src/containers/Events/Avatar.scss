@@ -1,0 +1,31 @@
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+.avatar {
+  position: relative;
+  width: 37px;
+  margin-left: 5px;
+
+  .green {
+    background-color: #80d3ab;
+  }
+
+  .status {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    border-radius: 50%;
+    border: solid 2px #ffffff;
+  }
+
+  img {
+    @include border-radius(50%);
+  }
+}
