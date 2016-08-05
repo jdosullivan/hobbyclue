@@ -2,7 +2,6 @@ import superagent from 'superagent';
 import config from '../../config';
 import cookie from 'react-cookie';
 
-const userCookieName = 'loginResult';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
@@ -15,24 +14,30 @@ function formatUrl(path) {
   return '/api' + adjustedPath;
 }
 
+const addAuthCookie = (request) => {
+  const userCookieName = 'loginResult';
+  let cookieVal;
+  if (__SERVER__ && cookie) {
+    cookieVal = cookie.load( userCookieName );
+  }
+
+  if (!__SERVER__) {
+    cookieVal = window.reactCookie.load( userCookieName );
+  }
+
+  if (cookieVal) {
+    request.set( 'authorization', 'Bearer ' + cookieVal.token );
+  }
+  return request;
+};
+
 export default class ApiClient {
   constructor(req) {
     methods.forEach( (method) =>
       this[method] = (path, {params, data} = {}) => new Promise( (resolve, reject) => {
         const request = superagent[method]( formatUrl( path ) );
 
-        let cookieVal;
-        if (__SERVER__ && cookie) {
-          cookieVal = cookie.load( userCookieName );
-        }
-
-        if (!__SERVER__) {
-          cookieVal = window.reactCookie.load( userCookieName );
-        }
-
-        if (cookieVal) {
-          request.set( 'authorization', 'Bearer ' + cookieVal.token );
-        }
+        addAuthCookie(request);
 
         if (params) {
           request.query( params );
