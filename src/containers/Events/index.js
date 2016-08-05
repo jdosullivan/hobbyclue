@@ -206,7 +206,7 @@ export default class Events extends Component {
             <div className="row">
               <div className={styles.postsContainer + ' col-lg-8 col-md-8'}>
                 { posts.map((post) => {
-                  return (<Post {...post}>{post.content}</Post>);
+                  return (<Post {...post} key={post.id}>{post.content}</Post>);
                 }) }
               </div>
               <div className="col-lg-4 col-md-4">
