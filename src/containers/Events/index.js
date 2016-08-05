@@ -3,6 +3,7 @@ import Post from './Post';
 import Sidebar from './Sidebar';
 import HeaderNav from './HeaderNav';
 
+const styles = require( './Events.scss' );
 const posts = [
   {
     id: 1,
@@ -195,19 +196,26 @@ const posts = [
   }
 ];
 
+const PostsList = () => {
+  return (
+    <div className={styles.postsContainer}>
+      { posts.map( (post) => {
+        return (<Post {...post} key={post.id}>{post.content}</Post>);
+      } ) }
+    </div>
+  );
+};
+
 export default class Events extends Component {
   render() {
-    const styles = require( './Events.scss' );
     return (
       <div className="container-fluid">
         <HeaderNav />
-        <section className="content">
+        <section className="pageContent">
           <div className="container">
             <div className="row">
-              <div className={styles.postsContainer + ' col-lg-8 col-md-8'}>
-                { posts.map((post) => {
-                  return (<Post {...post} key={post.id}>{post.content}</Post>);
-                }) }
+              <div className="col-lg-8 col-md-8">
+                <PostsList />
               </div>
               <div className="col-lg-4 col-md-4">
                 <Sidebar />
