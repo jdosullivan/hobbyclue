@@ -1,6 +1,8 @@
 import superagent from 'superagent';
 import config from '../../config';
 import cookie from 'react-cookie';
+import util from 'util';
+
 
 const getBearerAuthToken = () => {
   const userCookieName = 'loginResult';
@@ -12,7 +14,11 @@ const getBearerAuthToken = () => {
   if (!__SERVER__) {
     cookieVal = window.reactCookie.load( userCookieName );
   }
-  return 'Bearer ' + cookieVal.token;
+
+  console.log(`loaded bearer cookie:  ${util.inspect(cookieVal)}`);
+
+  const authToken = cookieVal ? 'Bearer ' + cookieVal.token : '';
+  return authToken;
 };
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
