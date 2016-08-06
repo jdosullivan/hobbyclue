@@ -140,6 +140,7 @@
     "sqlite3": "^3.1.4",
     "superagent": "^1.4.0",
     "url-loader": "^0.5.7",
+    "util": "^0.10.3",
     "warning": "^2.1.0",
     "webpack-isomorphic-tools": "^2.2.18"
   },

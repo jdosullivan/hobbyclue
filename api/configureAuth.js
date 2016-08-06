@@ -3,6 +3,7 @@ import {Strategy as FacebookStrategy} from 'passport-facebook';
 import {Strategy as LocalStrategy} from 'passport-local';
 import {User, UserClaim, comparePassword} from './database/models';
 import jwt from 'jsonwebtoken';
+import util from 'util';
 
 const configure = (app, config) => {
 
@@ -34,30 +35,30 @@ const configure = (app, config) => {
       profileFields: ['id', 'emails', 'name', 'displayName', 'gender']
     },
     function (req, accessToken, refreshToken, profile, done) {
-      const loginName = 'facebook';
       const claimType = 'urn:facebook:access_token';
 
       const findOrCreateFBUser = async() => {
         if (profile) {
-
           // Look up user by profile id
           let user = await User.findOne({
-            where: {profileType: loginName, profileId: profile.id}
+            where: {profileType: profile.provider, profileId: profile.id}
           });
 
           // Create a new user in the user table if not found
           if (!user) {
-            user = await User.create({
+            var newUser = {
               name: profile.displayName,
-              email: profile._json.email,
+              email: profile.emails[0],
               profileId: profile.id,
-              profileType: loginName,
-              gender: profile._json.gender,
+              profileType: profile.provider,
+              gender: profile.gender,
               picture: `https://graph.facebook.com/${profile.id}/picture?type=large`,
               claims: [
                 {type: claimType, value: profile.id}
               ]
-            }, {
+            };
+            console.log(`New user based on FB profile is ${util.inspect(newUser)}`);
+            user = await User.create(newUser, {
               include: [
                 {model: UserClaim, as: 'claims'}
               ]
@@ -65,7 +66,8 @@ const configure = (app, config) => {
           }
 
           // Return the user
-          done(null, addJWT(user));
+          const userWithToken = addJWT(user);
+          done(null, userWithToken);
         }
       };
 
