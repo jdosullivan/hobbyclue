@@ -5,13 +5,18 @@ import {
 
 import groups from './queries/groups/all';
 import group from './queries/groups/single';
+import events from './queries/events/all';
+import event from './queries/events/single';
+
 
 const schema = new Schema({
   query: new ObjectType({
     name: 'Query',
     fields: {
       groups,
-      group
+      group,
+      events,
+      event
     }
   })
 });
