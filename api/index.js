@@ -27,7 +27,7 @@ app.use(session({
 }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(expressJWT({ secret: config.auth.jwt.secret}).unless({path: [/\/auth/i,  /\/facebook/i ] }));
+app.use(expressJWT({ secret: config.auth.jwt.secret}).unless({path: [/\/auth/i,  /\/graphql/i, /\/facebook/i ] }));
 app.use(session({
   secret: config.auth.jwt.secret,
   resave: false,
