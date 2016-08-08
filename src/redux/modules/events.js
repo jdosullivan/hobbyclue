@@ -1,6 +1,6 @@
-const LOAD = 'hobbyclue/events/LOAD';
-const LOAD_SUCCESS = 'hobbyclue/events/LOAD_SUCCESS';
-const LOAD_FAIL = 'hobbyclue/events/LOAD_FAIL';
+const LOAD = 'yoorcity/events/LOAD';
+const LOAD_SUCCESS = 'yoorcity/events/LOAD_SUCCESS';
+const LOAD_FAIL = 'yoorcity/events/LOAD_FAIL';
 
 const graphQlEventsQuery = `{events{id,title,content,views,time,coverImage,created,bigSecret}}`;
 const initialState = {

@@ -32,6 +32,7 @@ const auth = {
     secret: process.env.TWITTER_CONSUMER_SECRET || 'KTZ6cxoKnEakQCeSpZlaUCJWGAlTEBJj0y2EMkUBujA7zWSvaQ'
   }
 };
+const webSiteName = 'YoorCity';
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
@@ -41,17 +42,17 @@ module.exports = Object.assign({
   databaseUrl: process.env.DATABASE_URL || 'postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue',
   auth,
   app: {
-    title: 'HobbyClue',
+    title: webSiteName,
     description: '',
     head: {
-      titleTemplate: 'HobbyClue - %s',
+      titleTemplate: `${webSiteName} - %s`,
       meta: [
         {name: 'description', content: ''},
         {charset: 'utf-8'},
         {property: 'og:site_name', content: ''},
-        {property: 'og:image', content: 'https://hobbyclue.herokuapp.com/logo.jpg'},
+        {property: 'og:image', content: ''},
         {property: 'og:locale', content: 'en_US'},
-        {property: 'og:title', content: 'HobbyClue'},
+        {property: 'og:title', content: webSiteName},
         {property: 'og:description', content: ''},
         {property: 'og:card', content: 'summary'},
         {property: 'og:site', content: '@jahmaiosullivan'},
