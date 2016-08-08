@@ -64,7 +64,7 @@ export default class App extends Component {
     return (
       <div className={styles.app}>
         <Helmet {...config.app.head}/>
-        <Navbar fixedTop>
+        <Navbar fixedTop className={styles.headerBar}>
           <Navbar.Header>
             <Navbar.Brand>
               <IndexLink to="/" activeStyle={{color: '#33e0ff'}}>
@@ -74,8 +74,7 @@ export default class App extends Component {
             </Navbar.Brand>
             <Navbar.Toggle/>
           </Navbar.Header>
-
-          <Navbar.Collapse eventKey={0}>
+          <Navbar.Collapse>
             <Nav navbar>
               {user && <LinkContainer to="/chat">
                 <NavItem eventKey={1}>Chat</NavItem>
@@ -116,6 +115,12 @@ export default class App extends Component {
               </NavItem>
             </Nav>
           </Navbar.Collapse>
+          <div className={styles.cityHeader}>
+            <h1>Boston, MA</h1>
+            <div>
+              <a className="change" href="#">change city ...</a>
+            </div>
+          </div>
         </Navbar>
 
         <div className={styles.appContent}>

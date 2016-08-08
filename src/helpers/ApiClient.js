@@ -1,8 +1,6 @@
 import superagent from 'superagent';
 import config from '../../config';
 import cookie from 'react-cookie';
-import util from 'util';
-
 
 const getBearerAuthToken = () => {
   const userCookieName = 'loginResult';
