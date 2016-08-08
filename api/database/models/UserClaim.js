@@ -8,7 +8,7 @@ const UserClaim = Model.define('UserClaim', {
   },
 
   value: {
-    type: DataType.INTEGER
+    type: DataType.BIGINT
   }
 });
 export default UserClaim;

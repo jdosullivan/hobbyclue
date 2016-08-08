@@ -48,7 +48,7 @@ const configure = (app, config) => {
           if (!user) {
             var newUser = {
               name: profile.displayName,
-              email: profile.emails[0],
+              email: profile.emails[0].value,
               profileId: profile.id,
               profileType: profile.provider,
               gender: profile.gender,
