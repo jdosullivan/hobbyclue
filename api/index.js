@@ -40,7 +40,8 @@ configureAuth(app, config);
 app.use('/graphql', expressGraphQL(req => ({
   schema,
   graphiql: true,
-  rootValue: {request: req},
+  rootValue : {request: req},
+  context: req.session,
   pretty: true
 })));
 

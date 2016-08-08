@@ -21,6 +21,7 @@ const Post = (props) => {
           <h2>
             <a href="$"> {props.title}</a></h2>
           <p>{props.children}</p>
+          <p>{props.bigSecret}</p>
         </div>
         <div className="clearfix"></div>
       </div>
@@ -43,7 +44,8 @@ Post.propTypes = {
   children: PropTypes.string,
   title: PropTypes.string,
   views: PropTypes.string,
-  time: PropTypes.string
+  time: PropTypes.string,
+  bigSecret: PropTypes.string
 };
 
 export default Post;

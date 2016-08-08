@@ -2,7 +2,7 @@ const LOAD = 'hobbyclue/events/LOAD';
 const LOAD_SUCCESS = 'hobbyclue/events/LOAD_SUCCESS';
 const LOAD_FAIL = 'hobbyclue/events/LOAD_FAIL';
 
-const graphQlEventsQuery = `{events{id,title,content,views,time,coverImage,created}}`;
+const graphQlEventsQuery = `{events{id,title,content,views,time,coverImage,created,bigSecret}}`;
 const initialState = {
   loaded: false
 };
