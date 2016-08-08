@@ -9,4 +9,4 @@ export Register from './Register';
 export LoginSuccess from './LoginSuccess/LoginSuccess';
 export Survey from './Survey/Survey';
 export NotFound from './NotFound/NotFound';
-export Events from './Events';
+export Events from './Events/Events';

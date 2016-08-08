@@ -1,4 +1,4 @@
-$header-height: 140px;
+$header-height: 120px;
 $header-bg-color: #23222d;
 $header-text-color: #fff;
 
@@ -39,18 +39,15 @@ ul {
     min-height: $header-height;
     background-color: $header-bg-color;
     color: $header-text-color !important;
+    padding-bottom: 10px;
 
     .cityHeader {
       text-align: center;
 
       h1 {
         font-weight: bold;
-        margin-top: 10px;
-        margin-bottom: 0;
+        margin: 0;
       }
     }
   }
-}
-.appContent {
-  margin-top: $header-height; // for fixed navbar
 }

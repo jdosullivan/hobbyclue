@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import Post from './Post';
 import Sidebar from './Sidebar';
-import HeaderNav from './HeaderNav';
 import {connect} from 'react-redux';
 import {isLoaded, loadEvents as load} from 'redux/modules/events';
 import {asyncConnect} from 'redux-async-connect';
@@ -35,7 +34,6 @@ export default class Events extends Component {
 
     return (
       <div className="container-fluid">
-        <HeaderNav />
         <section className="pageContent">
           <div className="container">
             <div className="row">
