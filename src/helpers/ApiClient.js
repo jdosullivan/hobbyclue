@@ -15,8 +15,6 @@ const getBearerAuthToken = () => {
     cookieVal = window.reactCookie.load( userCookieName );
   }
 
-  console.log(`loaded bearer cookie:  ${util.inspect(cookieVal)}`);
-
   const authToken = cookieVal ? 'Bearer ' + cookieVal.token : '';
   return authToken;
 };
