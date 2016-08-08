@@ -108,12 +108,11 @@ export default class App extends Component {
               </LinkContainer>}
             </Nav>
             {user &&
-            <p className={styles.loggedInMessage + ' navbar-text'}>Logged in as <strong>{user.name}</strong>.</p>}
             <Nav navbar pullRight>
-              <NavItem eventKey={1} target="_blank" title="View on Github" href="https://github.com">
-                <i className="fa fa-github"/>
+              <NavItem title={`Logged in as ${user.name}`} href="/">
+                <p className={styles.loggedInMessage}>{user.name}</p>
               </NavItem>
-            </Nav>
+            </Nav>}
           </Navbar.Collapse>
           <div className={styles.cityHeader}>
             <h1>Boston, MA</h1>
