@@ -28,13 +28,11 @@ function saveAuthCookie(user) {
 export default function reducer(state = initialState, action = {}) {
   switch (action.type) {
     case LOAD:
-      console.log(`inside auth LOAD`);
       return {
         ...state,
         loading: true
       };
     case LOAD_SUCCESS:
-      console.log(`inside auth LOAD_SUCCESS`);
       saveAuthCookie( action.result );
       return {
         ...state,
@@ -43,7 +41,7 @@ export default function reducer(state = initialState, action = {}) {
         user: cookie.load( userCookieName ) ? cookie.load( userCookieName ) : action.result
       };
     case LOAD_FAIL:
-      console.log(`inside auth LOAD_FAIL with error ${util.inspect(action.error)}`);
+      console.log(`auth LOAD_FAIL with error ${util.inspect(action.error)}`);
       return {
         ...state,
         loading: false,
@@ -114,7 +112,6 @@ export function isLoaded(globalState) {
 }
 
 export function load() {
-  console.log(`inside auth load`);
   return {
     types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.get( '/auth/loadAuth' )
