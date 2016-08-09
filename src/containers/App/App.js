@@ -80,8 +80,8 @@ export default class App extends Component {
           </Navbar.Header>
           <Navbar.Collapse>
             <Nav navbar>
-              {user && <LinkContainer to="/chat">
-                <NavItem eventKey={1}>Chat</NavItem>
+              {user && <LinkContainer to="/events">
+                <NavItem eventKey={1}>Events</NavItem>
               </LinkContainer>}
 
               <LinkContainer to="/widgets">
