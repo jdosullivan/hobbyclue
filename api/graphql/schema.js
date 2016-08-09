@@ -10,7 +10,7 @@ import event from './queries/events/single';
 import city from './queries/cities/single';
 
 
-const schema = new Schema({
+export default  new Schema({
   query: new ObjectType({
     name: 'Query',
     fields: {
@@ -22,5 +22,3 @@ const schema = new Schema({
     }
   })
 });
-
-export default schema;
