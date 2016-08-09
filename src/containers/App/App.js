@@ -1,38 +1,48 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
-import { IndexLink } from 'react-router';
-import { LinkContainer } from 'react-router-bootstrap';
+import React, {Component, PropTypes} from 'react';
+import {connect} from 'react-redux';
+import {IndexLink} from 'react-router';
+import {LinkContainer} from 'react-router-bootstrap';
 import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
-import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/infoReducer';
-import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/authReducer';
-import { isLoaded as isCityLoaded, load as loadCity } from 'redux/modules/cityReducer';
-import { InfoBar } from 'components';
-import { push } from 'react-router-redux';
+import {isLoaded as isInfoLoaded, load as loadInfo} from 'redux/modules/infoReducer';
+import {isLoaded as isAuthLoaded, load as loadAuth, logout} from 'redux/modules/authReducer';
+import {isLoaded as isCityLoaded, load as loadCity} from 'redux/modules/cityReducer';
+import {InfoBar} from 'components';
+import {push} from 'react-router-redux';
 import config from '../../../config';
-import { asyncConnect } from 'redux-async-connect';
+import {asyncConnect} from 'redux-async-connect';
+import util from 'util';
 
-@asyncConnect([{
+@asyncConnect( [{
   promise: ({store: {dispatch, getState}}) => {
     const promises = [];
 
-    if (!isInfoLoaded(getState())) {
-      promises.push(dispatch(loadInfo()));
+    if (!isInfoLoaded( getState() )) {
+      promises.push( dispatch( loadInfo() ) );
     }
-    if (!isAuthLoaded(getState())) {
-      promises.push(dispatch(loadAuth()));
+    if (!isAuthLoaded( getState() )) {
+      promises.push( dispatch( loadAuth() ) );
     }
-    if (!isCityLoaded(getState())) {
+    console.log(`checking if city is loaded`);
+    if (!isCityLoaded( getState() )) {
+      console.log(`city is not loaded`);
       promises.push(dispatch(loadCity()));
     }
-    return Promise.all(promises);
+    return Promise.all( promises );
   }
-}])
+}] )
 @connect(
-  state => ({user: state.auth.user, city: state.city.data}),
-  {logout, pushState: push})
+  state => ({
+    user: state.auth.user,
+    city: state.city.data
+  }),
+  {
+    logout,
+    pushState: push
+  })
+
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
@@ -49,10 +59,10 @@ export default class App extends Component {
   componentWillReceiveProps(nextProps) {
     if (!this.props.user && nextProps.user) {
       // login
-      this.props.pushState('/');
+      this.props.pushState( '/' );
     } else if (this.props.user && !nextProps.user) {
       // logout
-      this.props.pushState('/');
+      this.props.pushState( '/' );
     }
   }
 
@@ -63,7 +73,7 @@ export default class App extends Component {
 
   render() {
     const {user, city} = this.props;
-    const styles = require('./App.scss');
+    const styles = require( './App.scss' );
 
     return (
       <div className={styles.app}>
@@ -118,12 +128,12 @@ export default class App extends Component {
               </NavItem>
             </Nav>}
           </Navbar.Collapse>
-          <div className={styles.cityHeader}>
+          {city && <div className={styles.cityHeader}>
             <h1>{city.name}, {city.state}</h1>
             <div>
               <a className="change" href="#">change city ...</a>
             </div>
-          </div>
+          </div>}
         </Navbar>
 
         <div className={styles.appContent}>

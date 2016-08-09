@@ -1,3 +1,5 @@
+import util from 'util';
+
 let LOAD;
 let LOAD_SUCCESS;
 let LOAD_FAIL;
@@ -25,6 +27,7 @@ export default class GraphQLReducer {
           loading: true
         };
       case LOAD_SUCCESS:
+        console.log(`LOAD_SUCCESS  ${util.inspect(action.result.data)}`);
         return {
           ...state,
           loading: false,
@@ -33,6 +36,7 @@ export default class GraphQLReducer {
           error: null
         };
       case LOAD_FAIL:
+        console.log(`LOAD_FAIL ${util.inspect(action.error)}`);
         return {
           ...state,
           loading: false,
