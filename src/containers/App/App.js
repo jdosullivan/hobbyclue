@@ -8,7 +8,7 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
-import { isLoaded as isCityLoaded, load as loadCity } from 'redux/modules/cities';
+import { isLoaded as isCityLoaded, load as loadCity } from 'redux/modules/city';
 import { InfoBar } from 'components';
 import { push } from 'react-router-redux';
 import config from '../../../config';
@@ -31,7 +31,7 @@ import { asyncConnect } from 'redux-async-connect';
   }
 }])
 @connect(
-  state => ({user: state.auth.user, city: state.cities.data}),
+  state => ({user: state.auth.user, city: state.city.data}),
   {logout, pushState: push})
 export default class App extends Component {
   static propTypes = {

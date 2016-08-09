@@ -3,20 +3,18 @@ let LOAD_SUCCESS;
 let LOAD_FAIL;
 let graphQlQuery;
 let dataField;
-let FileName;
 
 const initialState = {
   loaded: false
 };
 
 export default class GraphQLReducer {
-  constructor(dataFieldName, fileName, graphQLQuery) {
-    LOAD = `yoorcity/${fileName}/LOAD`;
-    LOAD_SUCCESS = `yoorcity/${fileName}/LOAD_SUCCESS`;
-    LOAD_FAIL = `yoorcity/${fileName}/LOAD_FAIL`;
+  constructor(dataFieldName, graphQLQuery) {
+    LOAD = `yoorcity/${dataFieldName}/LOAD`;
+    LOAD_SUCCESS = `yoorcity/${dataFieldName}/LOAD_SUCCESS`;
+    LOAD_FAIL = `yoorcity/${dataFieldName}/LOAD_FAIL`;
     graphQlQuery = graphQLQuery;
     dataField = dataFieldName;
-    FileName = fileName;
   }
 
   reduce(state = initialState, action = {}) {
@@ -48,7 +46,7 @@ export default class GraphQLReducer {
   }
 
   isLoaded(globalState) {
-    return globalState[FileName] && globalState[FileName].loaded;
+    return globalState[dataField] && globalState[dataField].loaded;
   }
 
   load() {
