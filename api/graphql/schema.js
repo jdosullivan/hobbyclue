@@ -9,7 +9,6 @@ import events from './queries/events/all';
 import event from './queries/events/single';
 import city from './queries/cities/single';
 
-
 export default  new Schema({
   query: new ObjectType({
     name: 'Query',

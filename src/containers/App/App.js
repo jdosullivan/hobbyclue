@@ -6,10 +6,9 @@ import Navbar from 'react-bootstrap/lib/Navbar';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
-import {isLoaded as isInfoLoaded, load as loadInfo} from 'redux/modules/infoReducer';
-import {isLoaded as isAuthLoaded, load as loadAuth, logout} from 'redux/modules/authReducer';
-import {isLoaded as isCityLoaded, load as loadCity} from 'redux/modules/cityReducer';
-import {InfoBar} from 'components';
+import {isLoaded as isInfoLoaded, load as loadInfo} from 'redux/reducers/infoReducer';
+import {isLoaded as isAuthLoaded, load as loadAuth, logout} from 'redux/reducers/authReducer';
+import {isLoaded as isCityLoaded, load as loadCity} from 'redux/reducers/cityReducer';
 import {push} from 'react-router-redux';
 import config from '../../../config';
 import {asyncConnect} from 'redux-async-connect';
@@ -137,14 +136,6 @@ export default class App extends Component {
 
         <div className={styles.appContent}>
           {this.props.children}
-        </div>
-        <InfoBar/>
-
-        <div className="well text-center">
-          Have questions? Ask for help <a
-          href="https://github.com"
-          target="_blank">on Github</a> or in the <a
-          href="/" target="_blank">#</a> Discord channel.
         </div>
       </div>
     );

@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {isLoaded, loadGroups as load} from 'redux/modules/groupsReducer';
+import {isLoaded, loadGroups as load} from 'redux/reducers/groupsReducer';
 import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect([{

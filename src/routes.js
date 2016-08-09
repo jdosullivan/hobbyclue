@@ -1,6 +1,6 @@
 import React from 'react';
 import {IndexRoute, Route} from 'react-router';
-import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/modules/authReducer';
+import {isLoaded as isAuthLoaded, load as loadAuth} from 'redux/reducers/authReducer';
 import {
   App,
   Chat,

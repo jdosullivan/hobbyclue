@@ -3,7 +3,7 @@ import Post from './Post';
 import Sidebar from './Sidebar';
 import NewPost from './NewPost';
 import {connect} from 'react-redux';
-import {isLoaded, loadEvents as load} from 'redux/modules/eventsReducer';
+import {isLoaded, loadEvents as load} from 'redux/reducers/eventsReducer';
 import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect( [{
