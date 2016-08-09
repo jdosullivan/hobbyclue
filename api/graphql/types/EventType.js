@@ -5,7 +5,6 @@ import {
   GraphQLNonNull as NonNull,
 } from 'graphql';
 import CustomGraphQLDateType from 'graphql-custom-datetype';
-import util from 'util';
 
 export default const EventType = new ObjectType({
   name: 'Event',
