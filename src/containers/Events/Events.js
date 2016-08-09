@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Post from './Post';
 import Sidebar from './Sidebar';
-import NewPost from './NewPost';
+import NewPost from '../../components/NewPost/NewPost';
 import {connect} from 'react-redux';
 import {isLoaded, loadEvents as load} from 'redux/reducers/eventsReducer';
 import {asyncConnect} from 'redux-async-connect';
