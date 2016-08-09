@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connectMultireducer} from 'multireducer';
-import {increment, decrement} from '../../redux/modules/counter';
+import {increment, decrement} from '../../redux/modules/counterReducer';
 
 @connectMultireducer(
   (key, state) => ({count: state.multireducer[key].count}),

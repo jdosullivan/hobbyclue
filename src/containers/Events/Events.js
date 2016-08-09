@@ -2,7 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import Post from './Post';
 import Sidebar from './Sidebar';
 import {connect} from 'react-redux';
-import {isLoaded, loadEvents as load} from 'redux/modules/events';
+import {isLoaded, loadEvents as load} from 'redux/modules/eventsReducer';
 import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect([{

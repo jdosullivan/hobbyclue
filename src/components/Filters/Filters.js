@@ -1,6 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import {toggleFilters} from '../../redux/modules/filters';
+import {toggleFilters} from '../../redux/modules/filtersReducer';
 
 @connect(
   (state) => ({

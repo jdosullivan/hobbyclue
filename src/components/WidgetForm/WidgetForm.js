@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 import {reduxForm} from 'redux-form';
 import widgetValidation, {colors} from './widgetValidation';
-import * as widgetActions from 'redux/modules/widgets';
+import * as widgetActions from 'redux/modules/widgetsReducer';
 
 @connect(
   state => ({
