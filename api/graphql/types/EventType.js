@@ -20,8 +20,6 @@ const EventType = new ObjectType({
     bigSecret: {
       type: StringType,
       resolve(parent, args, session) {
-        console.log(`I am session from graphql: ${util.inspect(session)}`);
-         // console.log(`I am req from graphql: ${util.inspect(req)}`);
         return 'Really big secret';
       }
     }
