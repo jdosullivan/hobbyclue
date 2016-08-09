@@ -5,7 +5,11 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 export default class NewPost extends Component {
   constructor() {
     super();
-    this.state = {showStatus: false};
+    this.state = {
+      showStatus: false,
+      title: '',
+      body: ''
+    };
   }
 
   render() {
@@ -19,16 +23,40 @@ export default class NewPost extends Component {
       }
     };
 
-    return (
+    const handleTitleChange = (event) => {
+      this.setState({title: event.target.value});
+    };
 
+    const handleBodyChange = (event) => {
+      this.setState({body: event.target.value});
+    };
+
+    const createNewPost = (event) => {
+      event.preventDefault();
+      const title = this.state.title.trim();
+      const body = this.state.body.trim();
+      if (!title || !body) {
+        return;
+      }
+      // TODO: send request to the server
+      this.setState({title: '', body: ''});
+    };
+
+    return (
       <div>
         <div>
           <Nav bsStyle="pills" activeKey={1} onSelect={toggle}>
-            <NavItem eventKey={1} href="/home">New Post</NavItem>
+            <NavItem eventKey={1} href="#">New Post</NavItem>
           </Nav>
         </div>
         {this.state.showStatus &&
-        <div>I am the reply form</div>
+        <div>
+          <form className="postForm" onSubmit={createNewPost}>
+            <input type="text" placeholder="Title" value={this.state.title} onChange={handleTitleChange} />
+            <input type="text" placeholder="Body" value={this.state.body} onChange={handleBodyChange} />
+            <input type="submit" value="Post" />
+          </form>
+        </div>
         }
       </div>
     );
