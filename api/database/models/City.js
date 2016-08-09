@@ -10,6 +10,6 @@ const Fields = {
   name: DataType.STRING,
   state: DataType.STRING
 };
-const City = Model.define('City', Fields);
+const City = Model.define('City', Fields, { tableName: 'cities' });
 
 export {City as default, Fields};

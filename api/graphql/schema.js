@@ -7,6 +7,7 @@ import groups from './queries/groups/all';
 import group from './queries/groups/single';
 import events from './queries/events/all';
 import event from './queries/events/single';
+import city from './queries/cities/single';
 
 
 const schema = new Schema({
@@ -16,7 +17,8 @@ const schema = new Schema({
       groups,
       group,
       events,
-      event
+      event,
+      city
     }
   })
 });

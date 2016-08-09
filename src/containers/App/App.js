@@ -8,6 +8,7 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
 import { isLoaded as isInfoLoaded, load as loadInfo } from 'redux/modules/info';
 import { isLoaded as isAuthLoaded, load as loadAuth, logout } from 'redux/modules/auth';
+import { isLoaded as isCityLoaded, load as loadCity } from 'redux/modules/cities';
 import { InfoBar } from 'components';
 import { push } from 'react-router-redux';
 import config from '../../../config';
@@ -23,17 +24,20 @@ import { asyncConnect } from 'redux-async-connect';
     if (!isAuthLoaded(getState())) {
       promises.push(dispatch(loadAuth()));
     }
-
+    if (!isCityLoaded(getState())) {
+      promises.push(dispatch(loadCity()));
+    }
     return Promise.all(promises);
   }
 }])
 @connect(
-  state => ({user: state.auth.user}),
+  state => ({user: state.auth.user, city: state.cities.data}),
   {logout, pushState: push})
 export default class App extends Component {
   static propTypes = {
     children: PropTypes.object.isRequired,
     user: PropTypes.object,
+    city: PropTypes.object,
     logout: PropTypes.func.isRequired,
     pushState: PropTypes.func.isRequired
   };
@@ -58,7 +62,7 @@ export default class App extends Component {
   };
 
   render() {
-    const {user} = this.props;
+    const {user, city} = this.props;
     const styles = require('./App.scss');
 
     return (
@@ -115,7 +119,7 @@ export default class App extends Component {
             </Nav>}
           </Navbar.Collapse>
           <div className={styles.cityHeader}>
-            <h1>Boston, MA</h1>
+            <h1>{city.name}, {city.state}</h1>
             <div>
               <a className="change" href="#">change city ...</a>
             </div>

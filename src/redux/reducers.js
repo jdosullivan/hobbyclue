@@ -11,6 +11,7 @@ import info from './modules/info';
 import widgets from './modules/widgets';
 import groups from './modules/groups';
 import events from './modules/events';
+import cities from './modules/cities';
 
 export default combineReducers({
   routing: routerReducer,
@@ -19,6 +20,7 @@ export default combineReducers({
   form,
   groups,
   events,
+  cities,
   filters,
   multireducer: multireducer({
     counter1: counter,
