@@ -7,7 +7,7 @@ import {
 import CustomGraphQLDateType from 'graphql-custom-datetype';
 import util from 'util';
 
-const EventType = new ObjectType({
+export default const EventType = new ObjectType({
   name: 'Event',
   fields: {
     id: { type: new NonNull(ID) },
@@ -25,4 +25,3 @@ const EventType = new ObjectType({
     }
   }
 });
-export default EventType;
