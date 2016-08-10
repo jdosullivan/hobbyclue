@@ -6,7 +6,8 @@ import PostType from '../../types/PostType';
 
 export default  {
   type: new List(PostType),
-  resolve: function () {
-    return Post.findAll();
+  async resolve() {
+    const allPosts = await Post.findAll();
+    return allPosts;
   }
 };
