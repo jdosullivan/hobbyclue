@@ -63,7 +63,10 @@ export default (state = initialState, action = {}) => {
         error: action.error
       };
     case actions.DELETE_POST:
-      return { ...state, deleting: true };
+      return {
+        ...state,
+        deleting: true
+      };
     case actions.DELETE_POST_SUCCESS:
       const newPostList = lodash.remove(state.data, (currentObj) => {
         return currentObj.id !== action.result.data.deletePost.id;
