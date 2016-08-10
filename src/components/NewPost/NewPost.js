@@ -1,15 +1,15 @@
 import React, {Component, PropTypes} from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import * as newPostActions from 'redux/reducers/newPostReducer';
+import * as newPostActions from 'redux/reducers/eventsReducer';
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
 
 @connect(
   (state) => ({
-    showStatus: state.newPost.showStatus,
-    title: state.newPost.title,
-    body: state.newPost.body
+    showStatus: state.events.showStatus,
+    title: state.events.title,
+    body: state.events.body
   }), {...newPostActions} )
 @reduxForm( {
   form: 'post',
