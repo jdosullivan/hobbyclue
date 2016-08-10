@@ -26,7 +26,6 @@ function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-      console.log( `LOAD_POSTS_SUCCESS successfully loaded data ${util.inspect( action.result.data )}` );
       return {
         ...state,
         loading: false,
@@ -55,7 +54,6 @@ function reducer(state = initialState, action = {}) {
         saving: true
       };
     case NEW_POST_SUCCESS:
-      console.log( `NEW_POST_SUCCESS with data ${util.inspect( action.result.data.createPost )}` );
       return {
         ...state,
         data: [...state.data, action.result.data.createPost],
