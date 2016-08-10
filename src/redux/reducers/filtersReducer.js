@@ -1,5 +1,4 @@
-import { TOGGLEFILTERS } from '../actions';
-
+const TOGGLEFILTERS = 'yoorcity/filters/SHOW';
 const initialState = {
   showFilters: true
 };
