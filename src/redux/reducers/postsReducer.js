@@ -56,7 +56,7 @@ function reducer(state = initialState, action = {}) {
     case NEW_POST_SUCCESS:
       return {
         ...state,
-        data: [...state.data, action.result.data.createPost],
+        data: [action.result.data.createPost, ...state.data],
         saving: false
       };
     case NEW_POST_FAIL:
