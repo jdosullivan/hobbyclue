@@ -2,7 +2,6 @@ import util from 'util';
 import lodash from 'lodash';
 import actions from '../actions';
 
-
 const initialState = {
   loaded: false,
   data: [],
