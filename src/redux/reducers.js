@@ -12,6 +12,7 @@ import widgets from './reducers/widgetsReducer';
 import groups from './reducers/groupsReducer';
 import events from './reducers/eventsReducer';
 import city from './reducers/cityReducer';
+import newPost from './reducers/newPostReducer';
 
 export default combineReducers({
   routing: routerReducer,
@@ -22,6 +23,7 @@ export default combineReducers({
   events,
   city,
   filters,
+  newPost,
   multireducer: multireducer({
     counter1: counter,
     counter2: counter,

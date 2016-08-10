@@ -1,47 +1,34 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
+import * as newPostActions from 'redux/reducers/newPostReducer';
+import {connect} from 'react-redux';
+import {reduxForm} from 'redux-form';
 
+@connect(
+  (state) => ({
+    showStatus: state.newPost.showStatus,
+    title: state.newPost.title,
+    body: state.newPost.body
+  }), {...newPostActions} )
+@reduxForm( {
+  form: 'post',
+  fields: ['title', 'body']
+} )
 export default class NewPost extends Component {
-  constructor() {
-    super();
-    this.state = {
-      showStatus: false,
-      title: '',
-      body: ''
-    };
-  }
+  static propTypes = {
+    showStatus: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    fields: PropTypes.object.isRequired,
+    body: PropTypes.string.isRequired,
+    toggle: PropTypes.func.isRequired,
+    createNewPost: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired
+  };
 
   render() {
-    const toggle = (selectedKey) => {
-      switch (selectedKey) {
-        case 1:
-          this.setState( {showStatus: !this.state.showStatus} );
-          break;
-        default:
-          break;
-      }
-    };
-
-    const handleTitleChange = (event) => {
-      this.setState({title: event.target.value});
-    };
-
-    const handleBodyChange = (event) => {
-      this.setState({body: event.target.value});
-    };
-
-    const createNewPost = (event) => {
-      event.preventDefault();
-      const title = this.state.title.trim();
-      const body = this.state.body.trim();
-      if (!title || !body) {
-        return;
-      }
-      // TODO: send request to the server
-      this.setState({title: '', body: ''});
-    };
-
+    const {fields: {title, body}, handleSubmit, createNewPost, showStatus, toggle, resetForm } = this.props;
     return (
       <div>
         <div>
@@ -49,12 +36,12 @@ export default class NewPost extends Component {
             <NavItem eventKey={1} href="#">New Post</NavItem>
           </Nav>
         </div>
-        {this.state.showStatus &&
+        {showStatus &&
         <div>
-          <form className="postForm" onSubmit={createNewPost}>
-            <input type="text" placeholder="Title" value={this.state.title} onChange={handleTitleChange} />
-            <input type="text" placeholder="Body" value={this.state.body} onChange={handleBodyChange} />
-            <input type="submit" value="Post" />
+          <form className="postForm" onSubmit={handleSubmit(() => { createNewPost(title.value, body.value); resetForm(); })}>
+            <input type="text" placeholder="Title of your post ..." {...title} />
+            <input type="text" placeholder="Body of your post ..." {...body} />
+            <input type="submit" value="Post"/>
           </form>
         </div>
         }
