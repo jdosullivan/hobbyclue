@@ -7,7 +7,10 @@ import PostType from '../../types/PostType';
 export default  {
   type: new List(PostType),
   async resolve() {
-    const allPosts = await Post.findAll();
+    const allPosts = await Post.findAll({
+      order: [
+        ['createdAt', 'DESC']
+    ]});
     return allPosts;
   }
 };
