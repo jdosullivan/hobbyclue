@@ -11,6 +11,7 @@ import event from './queries/events/single';
 import city from './queries/cities/single';
 
 import createPost from './mutations/posts/create';
+import deletePost from './mutations/posts/delete';
 
 export default  new Schema({
   query: new ObjectType({
@@ -28,7 +29,8 @@ export default  new Schema({
     name: 'Mutations',
     description: 'These are the things we can change',
     fields: () => ({
-      createPost
+      createPost,
+      deletePost
     })
   })
 });

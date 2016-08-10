@@ -9,6 +9,7 @@ const Post = (props) => {
   return (
     <div className={styles.post}>
       <div className={styles.wrapUT + ' pull-left'}>
+        <a href="#" onClick={(event) => { event.preventDefault(); props.deletePost(props.id); }}>Delete</a>
         <div className={styles.userinfo + ' pull-left'}>
           <Avatar />
 
@@ -32,8 +33,8 @@ const Post = (props) => {
           </div>
 
         </div>
-        <div className={styles.views}><i className="fa fa-eye"></i> {props.views}</div>
-        <div className={styles.time}><i className="fa fa-clock-o"></i> {props.time}</div>
+        <div className={styles.views}><i className="fa fa-eye"></i> 25</div>
+        <div className={styles.time}><i className="fa fa-clock-o"></i> {props.createdAt}</div>
       </div>
       <div className="clearfix"></div>
     </div>
@@ -41,10 +42,11 @@ const Post = (props) => {
 };
 Post.propTypes = {
   children: PropTypes.string,
+  id: PropTypes.string,
   title: PropTypes.string,
-  views: PropTypes.string,
-  time: PropTypes.string,
-  bigSecret: PropTypes.string
+  body: PropTypes.string,
+  createdAt: PropTypes.string,
+  deletePost: PropTypes.func.isRequired
 };
 
 export default Post;

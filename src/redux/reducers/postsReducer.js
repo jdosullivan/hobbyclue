@@ -1,4 +1,5 @@
 import util from 'util';
+import lodash from 'lodash';
 
 const LOAD_SUCCESS = 'yoorcity/posts/LOAD_SUCCESS';
 const LOAD_FAIL = 'yoorcity/posts/LOAD_FAIL';
@@ -7,15 +8,20 @@ const TOGGLE = 'yoorcity/posts/TOGGLE';
 const NEW_POST = 'yoorcity/posts/NEW_POST';
 const NEW_POST_SUCCESS = 'yoorcity/posts/NEW_POST_SUCCESS';
 const NEW_POST_FAIL = 'yoorcity/posts/NEW_POST_FAIL';
+const DELETE_POST = 'yoorcity/posts/DELETE_POST';
+const DELETE_POST_SUCCESS = 'yoorcity/posts/DELETE_POST_SUCCESS';
+const DELETE_POST_FAIL = 'yoorcity/posts/DELETE_POST_FAIL';
 
 const initialState = {
   loaded: false,
+  data: [],
   showStatus: false,
   newPost: {
     title: '',
     body: ''
   },
-  saving: false
+  saving: false,
+  deleting: false
 };
 
 function reducer(state = initialState, action = {}) {
@@ -34,7 +40,7 @@ function reducer(state = initialState, action = {}) {
         error: null
       };
     case LOAD_FAIL:
-      console.log( `failed loaded data ${util.inspect( action.error )}` );
+      console.log( `LOAD_FAIL with error ${util.inspect( action.error )}` );
       return {
         ...state,
         loading: false,
@@ -48,7 +54,6 @@ function reducer(state = initialState, action = {}) {
         showStatus: !state.showStatus
       };
     case NEW_POST:
-      console.log( `NEW_POST` );
       return {
         ...state,
         saving: true
@@ -64,6 +69,24 @@ function reducer(state = initialState, action = {}) {
       return {
         ...state,
         saving: false,
+        error: action.error
+      };
+    case DELETE_POST:
+      return { ...state, deleting: true };
+    case DELETE_POST_SUCCESS:
+      const newPostList = lodash.remove(state.data, (currentObj) => {
+        return currentObj.id !== action.result.data.deletePost.id;
+      });
+      return {
+        ...state,
+        data: newPostList,
+        deleting: false
+      };
+    case DELETE_POST_FAIL:
+      console.log( `DELETE_POST_FAIL with error ${util.inspect( action.error )}` );
+      return {
+        ...state,
+        deleting: false,
         error: action.error
       };
     default:
@@ -100,4 +123,11 @@ function createNewPost(title, body) {
   };
 }
 
-export {reducer as default, isLoaded, loadPosts, toggle, createNewPost};
+function deletePost(id) {
+  return {
+    types: [DELETE_POST, DELETE_POST_SUCCESS, DELETE_POST_FAIL],
+    promise: (client) => client.post( '/graphql', {data: {query: `mutation DeletePost { deletePost(id: ${id}){ id }}`}} )
+  };
+}
+
+export {reducer as default, isLoaded, loadPosts, toggle, createNewPost, deletePost};

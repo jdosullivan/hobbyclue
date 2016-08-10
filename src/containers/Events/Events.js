@@ -4,7 +4,10 @@ import Sidebar from './Sidebar';
 import NewPost from '../../components/NewPost/NewPost';
 import {connect} from 'react-redux';
 import {isLoaded, loadPosts as load} from 'redux/reducers/postsReducer';
+import * as postsActionCreators from 'redux/reducers/postsReducer';
 import {asyncConnect} from 'redux-async-connect';
+import { bindActionCreators } from 'redux';
+// import util from 'util';
 
 @asyncConnect( [{
   deferred: true,
@@ -27,12 +30,14 @@ export default class Events extends Component {
     posts: PropTypes.array,
     user: PropTypes.object,
     loading: PropTypes.bool,
+    dispatch: PropTypes.func.isRequired,
     load: PropTypes.func.isRequired
   };
 
   render() {
-    const {posts, user} = this.props;
+    const {posts, user, dispatch} = this.props;
     const styles = require( './Events.scss' );
+    const boundActionCreators = bindActionCreators(postsActionCreators, dispatch);
 
     return (
       <div className="container-fluid">
@@ -47,7 +52,7 @@ export default class Events extends Component {
                 }
                 <div className={styles.postsContainer}>
                   { posts && posts.map( (post) => {
-                    return (<Post {...post} key={post.id}>{post.body}</Post>);
+                    return (<Post {...post} key={post.id} {...boundActionCreators}>{post.body}</Post>);
                   } ) }
                 </div>
               </div>
