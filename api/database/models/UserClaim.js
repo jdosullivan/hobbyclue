@@ -10,5 +10,5 @@ const UserClaim = Model.define('UserClaim', {
   value: {
     type: DataType.BIGINT
   }
-});
+}, {tableName: 'userClaims'});
 export default UserClaim;
