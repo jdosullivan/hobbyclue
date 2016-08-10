@@ -46,7 +46,7 @@ export default class Events extends Component {
                 </div>
                 }
                 <div className={styles.postsContainer}>
-                  { posts.map( (post) => {
+                  { posts && posts.map( (post) => {
                     return (<Post {...post} key={post.id}>{post.body}</Post>);
                   } ) }
                 </div>
