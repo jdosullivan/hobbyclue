@@ -21,12 +21,11 @@ const Post = (props) => {
           <h2>
             <a href="$"> {props.title}</a></h2>
           <p>{props.children}</p>
-          <p>{props.bigSecret}</p>
         </div>
         <div className="clearfix"></div>
       </div>
-      <div className={styles.postinfo + ' pull-left'}>
-        <div className={styles.comments}>
+      <div className={styles.postminfo + ' pull-left'}>
+          <div className={styles.coments}>
           <div className={styles.commentbg}>
             560
             <div className={styles.mark}></div>

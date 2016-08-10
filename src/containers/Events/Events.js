@@ -3,7 +3,7 @@ import Post from './Post';
 import Sidebar from './Sidebar';
 import NewPost from '../../components/NewPost/NewPost';
 import {connect} from 'react-redux';
-import {isLoaded, loadEvents as load} from 'redux/reducers/eventsReducer';
+import {isLoaded, loadPosts as load} from 'redux/reducers/eventsReducer';
 import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect( [{
@@ -17,21 +17,21 @@ import {asyncConnect} from 'redux-async-connect';
 @connect(
   state => ({
     user: state.auth.user,
-    events: state.events.data,
+    posts: state.events.data,
     loading: state.events.loading
   }),
   {load} )
 
 export default class Events extends Component {
   static propTypes = {
-    events: PropTypes.array,
+    posts: PropTypes.array,
     user: PropTypes.object,
     loading: PropTypes.bool,
     load: PropTypes.func.isRequired
   };
 
   render() {
-    const {events, user} = this.props;
+    const {posts, user} = this.props;
     const styles = require( './Events.scss' );
 
 
@@ -47,8 +47,8 @@ export default class Events extends Component {
                 </div>
                 }
                 <div className={styles.postsContainer}>
-                  { events.map( (event) => {
-                    return (<Post {...event} key={event.id}>{event.content}</Post>);
+                  { posts.map( (post) => {
+                    return (<Post {...post} key={post.id}>{post.body}</Post>);
                   } ) }
                 </div>
               </div>
