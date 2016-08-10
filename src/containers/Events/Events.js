@@ -34,7 +34,6 @@ export default class Events extends Component {
     const {posts, user} = this.props;
     const styles = require( './Events.scss' );
 
-
     return (
       <div className="container-fluid">
         <section className="pageContent">
