@@ -16,7 +16,7 @@
     "start-prod": "better-npm-run start-prod",
     "start-prod-api": "better-npm-run start-prod-api",
     "build": "better-npm-run build",
-    "postinstall": "npm run build",
+    "postinstall": "npm run build && npm run migrations",
     "lint": "eslint -c .eslintrc src api",
     "start-dev": "better-npm-run start-dev",
     "start-dev-api": "better-npm-run start-dev-api",
