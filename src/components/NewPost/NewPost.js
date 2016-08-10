@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Nav from 'react-bootstrap/lib/Nav';
 import NavItem from 'react-bootstrap/lib/NavItem';
-import * as newPostActions from 'redux/reducers/postsReducer';
+import * as newPostActions from 'redux/actions/postsActionCreators';
 import {connect} from 'react-redux';
 import {reduxForm} from 'redux-form';
 

@@ -1,16 +1,7 @@
 import util from 'util';
 import lodash from 'lodash';
+import actions from '../actions';
 
-const LOAD_SUCCESS = 'yoorcity/posts/LOAD_SUCCESS';
-const LOAD_FAIL = 'yoorcity/posts/LOAD_FAIL';
-const LOAD = 'yoorcity/posts/LOAD';
-const TOGGLE = 'yoorcity/posts/TOGGLE';
-const NEW_POST = 'yoorcity/posts/NEW_POST';
-const NEW_POST_SUCCESS = 'yoorcity/posts/NEW_POST_SUCCESS';
-const NEW_POST_FAIL = 'yoorcity/posts/NEW_POST_FAIL';
-const DELETE_POST = 'yoorcity/posts/DELETE_POST';
-const DELETE_POST_SUCCESS = 'yoorcity/posts/DELETE_POST_SUCCESS';
-const DELETE_POST_FAIL = 'yoorcity/posts/DELETE_POST_FAIL';
 
 const initialState = {
   loaded: false,
@@ -24,14 +15,14 @@ const initialState = {
   deleting: false
 };
 
-function reducer(state = initialState, action = {}) {
+export default (state = initialState, action = {}) => {
   switch (action.type) {
-    case LOAD:
+    case actions.LOAD:
       return {
         ...state,
         loading: true
       };
-    case LOAD_SUCCESS:
+    case actions.LOAD_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -39,7 +30,7 @@ function reducer(state = initialState, action = {}) {
         data: action.result.data.posts,
         error: null
       };
-    case LOAD_FAIL:
+    case actions.LOAD_FAIL:
       console.log( `LOAD_FAIL with error ${util.inspect( action.error )}` );
       return {
         ...state,
@@ -48,32 +39,32 @@ function reducer(state = initialState, action = {}) {
         data: null,
         error: action.error
       };
-    case TOGGLE:
+    case actions.TOGGLE:
       return {
         ...state,
         showStatus: !state.showStatus
       };
-    case NEW_POST:
+    case actions.NEW_POST:
       return {
         ...state,
         saving: true
       };
-    case NEW_POST_SUCCESS:
+    case actions.NEW_POST_SUCCESS:
       return {
         ...state,
         data: [action.result.data.createPost, ...state.data],
         saving: false
       };
-    case NEW_POST_FAIL:
+    case actions.NEW_POST_FAIL:
       console.log( `NEW_POST_FAIL with error ${util.inspect( action.error )}` );
       return {
         ...state,
         saving: false,
         error: action.error
       };
-    case DELETE_POST:
+    case actions.DELETE_POST:
       return { ...state, deleting: true };
-    case DELETE_POST_SUCCESS:
+    case actions.DELETE_POST_SUCCESS:
       const newPostList = lodash.remove(state.data, (currentObj) => {
         return currentObj.id !== action.result.data.deletePost.id;
       });
@@ -82,7 +73,7 @@ function reducer(state = initialState, action = {}) {
         data: newPostList,
         deleting: false
       };
-    case DELETE_POST_FAIL:
+    case actions.DELETE_POST_FAIL:
       console.log( `DELETE_POST_FAIL with error ${util.inspect( action.error )}` );
       return {
         ...state,
@@ -92,42 +83,4 @@ function reducer(state = initialState, action = {}) {
     default:
       return state;
   }
-}
-
-function isLoaded(globalState) {
-  return globalState.posts && globalState.posts.loaded;
-}
-
-function loadPosts() {
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.post( '/graphql', {data: {query: `{posts{id, title,body, createdAt,updatedAt }}`}} )
-  };
-}
-
-function toggle() {
-  return {type: TOGGLE};
-}
-
-function createNewPost(title, body) {
-  const newTitle = title.trim();
-  const newBody = body.trim();
-  if (!newTitle || !newBody) {
-    return {type: ''};
-  }
-  const graphQlMutationQuery = `mutation CreatePost { createPost(title: \"${newTitle}\",body: \"${newBody}\") {id, title,body, createdAt,updatedAt }}`;
-
-  return {
-    types: [NEW_POST, NEW_POST_SUCCESS, NEW_POST_FAIL],
-    promise: (client) => client.post( '/graphql', {data: {query: graphQlMutationQuery}} )
-  };
-}
-
-function deletePost(id) {
-  return {
-    types: [DELETE_POST, DELETE_POST_SUCCESS, DELETE_POST_FAIL],
-    promise: (client) => client.post( '/graphql', {data: {query: `mutation DeletePost { deletePost(id: ${id}){ id }}`}} )
-  };
-}
-
-export {reducer as default, isLoaded, loadPosts, toggle, createNewPost, deletePost};
+};

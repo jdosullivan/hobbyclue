@@ -3,11 +3,10 @@ import Post from './Post';
 import Sidebar from './Sidebar';
 import NewPost from '../../components/NewPost/NewPost';
 import {connect} from 'react-redux';
-import {isLoaded, loadPosts as load} from 'redux/reducers/postsReducer';
-import * as postsActionCreators from 'redux/reducers/postsReducer';
+import {isLoaded, loadPosts as load} from 'redux/actions/postsActionCreators';
+import * as postsActionCreators from 'redux/actions/postsActionCreators';
 import {asyncConnect} from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
-// import util from 'util';
 
 @asyncConnect( [{
   deferred: true,
