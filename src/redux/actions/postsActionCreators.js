@@ -6,13 +6,13 @@ function isLoaded(globalState) {
 
 function loadPosts() {
   return {
-    types: [actions.LOAD, actions.LOAD_SUCCESS, actions.LOAD_FAIL],
+    types: [actions.POST_LOAD, actions.POST_LOAD_SUCCESS, actions.POST_LOAD_FAIL],
     promise: (client) => client.post( '/graphql', {data: {query: `{posts{id, title,body, createdAt,updatedAt }}`}} )
   };
 }
 
 function toggle() {
-  return {type: actions.TOGGLE};
+  return {type: actions.POST_NEW_TOGGLE};
 }
 
 function createNewPost(title, body) {
@@ -24,14 +24,14 @@ function createNewPost(title, body) {
   const graphQlMutationQuery = `mutation CreatePost { createPost(title: \"${newTitle}\",body: \"${newBody}\") {id, title,body, createdAt,updatedAt }}`;
 
   return {
-    types: [actions.NEW_POST, actions.NEW_POST_SUCCESS, actions.NEW_POST_FAIL],
+    types: [actions.POST_NEW, actions.POST_NEW_SUCCESS, actions.POST_NEW_FAIL],
     promise: (client) => client.post( '/graphql', {data: {query: graphQlMutationQuery}} )
   };
 }
 
 function deletePost(id) {
   return {
-    types: [actions.DELETE_POST, actions.DELETE_POST_SUCCESS, actions.DELETE_POST_FAIL],
+    types: [actions.POST_DELETE, actions.POST_DELETE_SUCCESS, actions.POST_DELETE_FAIL],
     promise: (client) => client.post( '/graphql', {data: {query: `mutation DeletePost { deletePost(id: ${id}){ id }}`}} )
   };
 }

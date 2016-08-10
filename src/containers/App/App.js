@@ -8,7 +8,7 @@ import NavItem from 'react-bootstrap/lib/NavItem';
 import Helmet from 'react-helmet';
 import {isLoaded as isInfoLoaded, load as loadInfo} from 'redux/reducers/infoReducer';
 import {isLoaded as isAuthLoaded, load as loadAuth, logout} from 'redux/reducers/authReducer';
-import {isLoaded as isCityLoaded, load as loadCity} from 'redux/reducers/cityReducer';
+import {isLoaded as isCityLoaded, load as loadCity} from 'redux/actions/cityActionCreators';
 import {push} from 'react-router-redux';
 import config from '../../../config';
 import {asyncConnect} from 'redux-async-connect';
@@ -23,9 +23,7 @@ import {asyncConnect} from 'redux-async-connect';
     if (!isAuthLoaded( getState() )) {
       promises.push( dispatch( loadAuth() ) );
     }
-    console.log(`checking if city is loaded`);
     if (!isCityLoaded( getState() )) {
-      console.log(`city is not loaded`);
       promises.push(dispatch(loadCity()));
     }
     return Promise.all( promises );
