@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import Avatar from '../Avatar';
+import PostForm from '../../../components/PostForm/PostForm';
 
 const Post = (props) => {
   const icon1 = require( './images/icon1.jpg' );
@@ -9,7 +10,7 @@ const Post = (props) => {
     <li className={styles.post}>
         { props.editing &&
         <div>
-          I am editing {props.id}
+          <PostForm formKey={String(props.id)} key={String(props.id)} initialValues={props} submitHandler={props.editPost} />
           <a href="#" onClick={(event) => { event.preventDefault(); props.editPostStop(props.id); }}>Cancel</a>
         </div>
         }
@@ -59,6 +60,7 @@ Post.propTypes = {
   editing: PropTypes.bool,
   deletePost: PropTypes.func.isRequired,
   editPostStart: PropTypes.func.isRequired,
+  editPost: PropTypes.func.isRequired,
   editPostStop: PropTypes.func.isRequired
 };
 

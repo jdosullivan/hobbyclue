@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import Post from './Post';
 import Sidebar from './Sidebar';
-import NewPost from '../../components/NewPost/NewPost';
+import NewPostForm from '../../components/PostForm/NewPostForm';
 import {connect} from 'react-redux';
 import {isLoaded, loadPosts as load} from 'redux/actions/postsActionCreators';
 import * as postsActionCreators from 'redux/actions/postsActionCreators';
@@ -48,7 +48,7 @@ export default class Events extends Component {
               <div className="col-lg-8 col-md-8">
                 {user &&
                 <div className="row">
-                  <NewPost />
+                  <NewPostForm />
                 </div>
                 }
                 <ul className={styles.postsContainer}>

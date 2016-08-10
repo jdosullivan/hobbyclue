@@ -12,6 +12,7 @@ import city from './queries/cities/single';
 
 import createPost from './mutations/posts/create';
 import deletePost from './mutations/posts/delete';
+import updatePost from './mutations/posts/update';
 
 export default  new Schema({
   query: new ObjectType({
@@ -30,6 +31,7 @@ export default  new Schema({
     description: 'These are the things we can change',
     fields: () => ({
       createPost,
+      updatePost,
       deletePost
     })
   })

@@ -100,6 +100,30 @@ export default (state = initialState, action = {}) => {
           [action.id]: false
         }
       };
+    case actions.POST_UPDATE:
+      return {
+        ...state,
+        saving: true
+      };
+    case actions.POST_UPDATE_SUCCESS:
+      const itemIndex = lodash.indexOf(state.data, lodash.find(state.data, {id: action.result.data.updatePost.id}));
+      state.data.splice(itemIndex, 1, action.result.data.updatePost);
+      return {
+        ...state,
+        editing: {
+          ...state.editing,
+          [action.result.data.updatePost.id]: false
+        },
+        data: state.data,
+        saving: false
+      };
+    case actions.POST_UPDATE_FAIL:
+      console.log( `POST_UPDATE_FAIL with error ${util.inspect( action.error )}` );
+      return {
+        ...state,
+        saving: false,
+        error: action.error
+      };
     default:
       return state;
   }

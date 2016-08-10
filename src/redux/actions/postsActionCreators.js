@@ -1,4 +1,5 @@
 import actions from './';
+import util from 'util';
 
 function isLoaded(globalState) {
   return globalState.posts && globalState.posts.loaded;
@@ -15,9 +16,9 @@ function toggle() {
   return {type: actions.POST_NEW_TOGGLE};
 }
 
-function createNewPost(title, body) {
-  const newTitle = title.trim();
-  const newBody = body.trim();
+function createNewPost(post) {
+  const newTitle = post.title.trim();
+  const newBody = post.body.trim();
   if (!newTitle || !newBody) {
     return {type: ''};
   }
@@ -44,5 +45,13 @@ function editPostStop(id) {
   return { type: actions.POST_EDIT_STOP, id };
 }
 
-export {isLoaded, loadPosts, toggle, createNewPost, deletePost, editPostStart, editPostStop};
+function editPost(post) {
+  console.log(`post is ${util.inspect(post)}`);
+  return {
+    types: [actions.POST_UPDATE, actions.POST_UPDATE_SUCCESS, actions.POST_UPDATE_FAIL],
+    promise: (client) => client.post( '/graphql', {data: {query: `mutation UpdatePost { updatePost(id: ${post.id}, title: \"${post.title}\", body: \"${post.body}\" ){ id, title, body, createdAt, updatedAt }}`}} )
+  };
+}
+
+export {isLoaded, loadPosts, toggle, createNewPost, deletePost, editPost, editPostStart, editPostStop};
 
