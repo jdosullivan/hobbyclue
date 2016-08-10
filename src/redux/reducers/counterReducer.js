@@ -1,4 +1,5 @@
-import { INCREMENT, DECREMENT} from '../actions';
+const INCREMENT = 'redux-example/counter/INCREMENT';
+const DECREMENT = 'redux-example/counter/DECREMENT';
 
 const initialState = {
   count: 0
