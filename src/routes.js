@@ -49,7 +49,7 @@ export default (store) => {
   return (
     <Route path="/" component={App}>
       { /* Home (main) route */ }
-      <IndexRoute component={Home}/>
+      <IndexRoute component={Events}/>
 
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>
@@ -64,6 +64,7 @@ export default (store) => {
 
       { /* Routes */ }
       <Route path="about" component={About}/>
+      <Route path="home" component={Home}/>
       <Route path="events" component={Events}/>
       <Route path="groups" component={Groups}/>
       <Route path="survey" component={Survey}/>
