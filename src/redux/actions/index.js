@@ -14,7 +14,9 @@ const postActions = {
   POST_NEW_FAIL: createActionName( 'posts', 'NEW_POST_FAIL' ),
   POST_DELETE: createActionName( 'posts', 'DELETE_POST' ),
   POST_DELETE_SUCCESS: createActionName( 'posts', 'DELETE_POST_SUCCESS' ),
-  POST_DELETE_FAIL: createActionName( 'posts', 'DELETE_POST_FAIL' )
+  POST_DELETE_FAIL: createActionName( 'posts', 'DELETE_POST_FAIL' ),
+  POST_EDIT_START: createActionName( 'posts', 'EDIT_START' ),
+  POST_EDIT_STOP: createActionName( 'posts', 'EDIT_STOP' )
 };
 
 const cityActions = {

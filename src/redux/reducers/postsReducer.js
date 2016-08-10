@@ -12,7 +12,8 @@ const initialState = {
     body: ''
   },
   saving: false,
-  deleting: false
+  deleting: false,
+  editing: {}
 };
 
 export default (state = initialState, action = {}) => {
@@ -68,9 +69,9 @@ export default (state = initialState, action = {}) => {
         deleting: true
       };
     case actions.POST_DELETE_SUCCESS:
-      const newPostList = lodash.remove(state.data, (currentObj) => {
+      const newPostList = lodash.remove( state.data, (currentObj) => {
         return currentObj.id !== action.result.data.deletePost.id;
-      });
+      } );
       return {
         ...state,
         data: newPostList,
@@ -82,6 +83,22 @@ export default (state = initialState, action = {}) => {
         ...state,
         deleting: false,
         error: action.error
+      };
+    case actions.POST_EDIT_START:
+      return {
+        ...state,
+        editing: {
+          ...state.editing,
+          [action.id]: true
+        }
+      };
+    case actions.POST_EDIT_STOP:
+      return {
+        ...state,
+        editing: {
+          ...state.editing,
+          [action.id]: false
+        }
       };
     default:
       return state;

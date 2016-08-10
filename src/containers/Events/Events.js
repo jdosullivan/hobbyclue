@@ -20,6 +20,7 @@ import { bindActionCreators } from 'redux';
   state => ({
     user: state.auth.user,
     posts: state.posts.data,
+    editing: state.posts.editing,
     loading: state.posts.loading
   }),
   {load} )
@@ -30,11 +31,12 @@ export default class Events extends Component {
     user: PropTypes.object,
     loading: PropTypes.bool,
     dispatch: PropTypes.func.isRequired,
+    editing: PropTypes.object.isRequired,
     load: PropTypes.func.isRequired
   };
 
   render() {
-    const {posts, user, dispatch} = this.props;
+    const {posts, user, editing, dispatch} = this.props;
     const styles = require( './Events.scss' );
     const boundActionCreators = bindActionCreators(postsActionCreators, dispatch);
 
@@ -49,11 +51,11 @@ export default class Events extends Component {
                   <NewPost />
                 </div>
                 }
-                <div className={styles.postsContainer}>
+                <ul className={styles.postsContainer}>
                   { posts && posts.map( (post) => {
-                    return (<Post {...post} key={post.id} {...boundActionCreators}>{post.body}</Post>);
-                  } ) }
-                </div>
+                    return (<Post {...post} editing={editing[post.id]} key={post.id} {...boundActionCreators}>{post.body}</Post>);
+                  })}
+                </ul>
               </div>
               <div className="col-lg-4 col-md-4">
                 <Sidebar />

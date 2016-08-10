@@ -36,5 +36,13 @@ function deletePost(id) {
   };
 }
 
-export {isLoaded, loadPosts, toggle, createNewPost, deletePost};
+function editPostStart(id) {
+  return { type: actions.POST_EDIT_START, id };
+}
+
+function editPostStop(id) {
+  return { type: actions.POST_EDIT_STOP, id };
+}
+
+export {isLoaded, loadPosts, toggle, createNewPost, deletePost, editPostStart, editPostStop};
 
