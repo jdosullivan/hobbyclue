@@ -38,7 +38,11 @@ export default class NewPost extends Component {
         </div>
         {showStatus &&
         <div>
-          <form className="postForm" onSubmit={handleSubmit(() => { createNewPost(title.value, body.value); resetForm(); })}>
+          <form className="postForm" onSubmit={handleSubmit(() => createNewPost(title.value, body.value)
+              .then(() => {
+                resetForm();
+              })
+          )}>
             <input type="text" placeholder="Title of your post ..." {...title} />
             <input type="text" placeholder="Body of your post ..." {...body} />
             <input type="submit" value="Post"/>

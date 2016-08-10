@@ -2,11 +2,15 @@ import util from 'util';
 
 const TOGGLE = 'yoorcity/posts/TOGGLE';
 const NEW_POST = 'yoorcity/posts/NEW_POST';
+const NEW_POST_SUCCESS = 'yoorcity/events/NEW_POST_SUCCESS';
+const NEW_POST_FAIL = 'yoorcity/events/NEW_POST_FAIL';
+
 
 const initialState = {
   showStatus: false,
   title: '',
-  body: ''
+  body: '',
+  saving: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -17,20 +21,32 @@ export default function reducer(state = initialState, action = {}) {
         showStatus: !state.showStatus
       };
     case NEW_POST:
-      const newState = {
+      console.log(`NEW_POST`);
+      return {
         ...state,
-        title: '',
-        body: ''
+        saving: true
       };
-      console.log( `current state of things ${util.inspect( newState )}` );
-      return newState;
+    case NEW_POST_SUCCESS:
+      console.log(`NEW_POST_SUCCESS with data ${util.inspect(action.result.data)}`);
+      return {
+        ...state,
+        data: action.result.data,
+        saving: false
+      };
+    case NEW_POST_FAIL:
+      console.log(`NEW_POST_FAIL with error ${util.inspect(action.error)}`);
+      return {
+        ...state,
+        data: null,
+        saving: false,
+        error: action.error
+      };
     default:
       return state;
   }
 }
 
 export function toggle() {
-  console.log( `new post toggle triggered` );
   return {type: TOGGLE};
 }
 
@@ -40,5 +56,10 @@ export function createNewPost(title, body) {
   if (!newTitle || !newBody) {
     return {type: ''};
   }
-  return {type: NEW_POST, newTitle, newBody};
+  const graphQlMutationQuery = `mutation CreatePost { createPost(title: \"${newTitle}\",body: \"${newBody}\") {id, title,body, createdAt,updateAt }}`;
+
+  return {
+    types: [NEW_POST, NEW_POST_SUCCESS, NEW_POST_FAIL],
+    promise: (client) => client.post('/graphql', {data: { query: graphQlMutationQuery }})
+  };
 }
