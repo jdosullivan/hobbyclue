@@ -26,6 +26,7 @@ function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
+      console.log(`successfully loaded data ${util.inspect(action.result.data)}`);
       return {
         ...state,
         loading: false,
@@ -34,6 +35,7 @@ function reducer(state = initialState, action = {}) {
         error: null
       };
     case LOAD_FAIL:
+      console.log(`faile loaded data ${util.inspect(action.error)}`);
       return {
         ...state,
         loading: false,
@@ -42,6 +44,7 @@ function reducer(state = initialState, action = {}) {
         error: action.error
       };
     case LOAD_POSTS_SUCCESS:
+      console.log(`LOAD_POSTS_SUCCESS successfully loaded data ${util.inspect(action.result.data)}`);
       return {
         ...state,
         loading: false,
@@ -93,7 +96,7 @@ function loadEvents() {
 function loadPosts() {
   return {
     types: [LOAD, LOAD_POSTS_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.post( '/graphql', {data: {query: `{posts{id, title,body, createdAt,updateAt }}`}} )
+    promise: (client) => client.post( '/graphql', {data: {query: `{posts{id, title,body, createdAt,updatedAt }}`}} )
   };
 }
 
@@ -107,7 +110,7 @@ function createNewPost(title, body) {
   if (!newTitle || !newBody) {
     return {type: ''};
   }
-  const graphQlMutationQuery = `mutation CreatePost { createPost(title: \"${newTitle}\",body: \"${newBody}\") {id, title,body, createdAt,updateAt }}`;
+  const graphQlMutationQuery = `mutation CreatePost { createPost(title: \"${newTitle}\",body: \"${newBody}\") {id, title,body, createdAt,updatedAt }}`;
 
   return {
     types: [NEW_POST, NEW_POST_SUCCESS, NEW_POST_FAIL],

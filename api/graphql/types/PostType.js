@@ -12,7 +12,7 @@ export default new ObjectType({
     title: { type: StringType },
     body: { type: StringType },
     createdAt: { type: StringType },
-    updateAt: { type: StringType }
+    updatedAt: { type: StringType }
   }
 });
 
