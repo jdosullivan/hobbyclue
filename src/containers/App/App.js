@@ -24,7 +24,7 @@ import {asyncConnect} from 'redux-async-connect';
       promises.push( dispatch( loadAuth() ) );
     }
     if (!isCityLoaded( getState() )) {
-      promises.push(dispatch(loadCity()));
+      promises.push( dispatch( loadCity() ) );
     }
     return Promise.all( promises );
   }
@@ -37,7 +37,7 @@ import {asyncConnect} from 'redux-async-connect';
   {
     logout,
     pushState: push
-  })
+  } )
 
 export default class App extends Component {
   static propTypes = {
@@ -85,43 +85,18 @@ export default class App extends Component {
             <Navbar.Toggle/>
           </Navbar.Header>
           <Navbar.Collapse>
-            <Nav navbar>
-              {user && <LinkContainer to="/events">
-                <NavItem eventKey={1}>Events</NavItem>
-              </LinkContainer>}
-
-              <LinkContainer to="/widgets">
-                <NavItem eventKey={2}>Widgets</NavItem>
+            {user &&
+            <Nav navbar pullRight>
+              <LinkContainer to="/">
+                <NavItem title={`Logged in as ${user.name}`} href="/">
+                  <p className={styles.loggedInMessage}>{user.name}</p>
+                </NavItem>
               </LinkContainer>
-              <LinkContainer to="/survey">
-                <NavItem eventKey={3}>Survey</NavItem>
-              </LinkContainer>
-              <LinkContainer to="/about">
-                <NavItem eventKey={4}>About Us</NavItem>
-              </LinkContainer>
-
-              {!user &&
-              <LinkContainer to="/login">
-                <NavItem eventKey={5}>Login</NavItem>
-              </LinkContainer>
-              }
-              {!user &&
-              <LinkContainer to="/register">
-                <NavItem eventKey={7}>Register</NavItem>
-              </LinkContainer>
-              }
-              {user &&
               <LinkContainer to="/logout">
                 <NavItem eventKey={6} className="logout-link" onClick={this.handleLogout}>
                   Logout
                 </NavItem>
-              </LinkContainer>}
-            </Nav>
-            {user &&
-            <Nav navbar pullRight>
-              <NavItem title={`Logged in as ${user.name}`} href="/">
-                <p className={styles.loggedInMessage}>{user.name}</p>
-              </NavItem>
+              </LinkContainer>
             </Nav>}
           </Navbar.Collapse>
           {city && <div className={styles.cityHeader}>
