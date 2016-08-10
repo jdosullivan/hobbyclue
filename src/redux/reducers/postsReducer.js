@@ -1,20 +1,20 @@
 import util from 'util';
 
-const LOAD = 'yoorcity/events/LOAD';
-const LOAD_SUCCESS = 'yoorcity/events/LOAD_SUCCESS';
-const LOAD_FAIL = 'yoorcity/events/LOAD_FAIL';
-const LOAD_POSTS_SUCCESS = 'yoorcity/events/LOAD_POSTS_SUCCESS';
+const LOAD_SUCCESS = 'yoorcity/posts/LOAD_SUCCESS';
+const LOAD_FAIL = 'yoorcity/posts/LOAD_FAIL';
+const LOAD = 'yoorcity/posts/LOAD';
 const TOGGLE = 'yoorcity/posts/TOGGLE';
 const NEW_POST = 'yoorcity/posts/NEW_POST';
-const NEW_POST_SUCCESS = 'yoorcity/events/NEW_POST_SUCCESS';
-const NEW_POST_FAIL = 'yoorcity/events/NEW_POST_FAIL';
+const NEW_POST_SUCCESS = 'yoorcity/posts/NEW_POST_SUCCESS';
+const NEW_POST_FAIL = 'yoorcity/posts/NEW_POST_FAIL';
 
-const graphQlEventsQuery = `{events{id,title,content,views,time,coverImage,created,bigSecret}}`;
 const initialState = {
   loaded: false,
   showStatus: false,
-  title: '',
-  body: '',
+  newPost: {
+    title: '',
+    body: ''
+  },
   saving: false
 };
 
@@ -26,25 +26,7 @@ function reducer(state = initialState, action = {}) {
         loading: true
       };
     case LOAD_SUCCESS:
-      console.log(`successfully loaded data ${util.inspect(action.result.data)}`);
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        data: action.result.data.events,
-        error: null
-      };
-    case LOAD_FAIL:
-      console.log(`faile loaded data ${util.inspect(action.error)}`);
-      return {
-        ...state,
-        loading: false,
-        loaded: false,
-        data: null,
-        error: action.error
-      };
-    case LOAD_POSTS_SUCCESS:
-      console.log(`LOAD_POSTS_SUCCESS successfully loaded data ${util.inspect(action.result.data)}`);
+      console.log( `LOAD_POSTS_SUCCESS successfully loaded data ${util.inspect( action.result.data )}` );
       return {
         ...state,
         loading: false,
@@ -52,26 +34,35 @@ function reducer(state = initialState, action = {}) {
         data: action.result.data.posts,
         error: null
       };
+    case LOAD_FAIL:
+      console.log( `failed loaded data ${util.inspect( action.error )}` );
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        data: null,
+        error: action.error
+      };
     case TOGGLE:
       return {
         ...state,
         showStatus: !state.showStatus
       };
     case NEW_POST:
-      console.log(`NEW_POST`);
+      console.log( `NEW_POST` );
       return {
         ...state,
         saving: true
       };
     case NEW_POST_SUCCESS:
-      console.log(`NEW_POST_SUCCESS with data ${util.inspect(action.result.data.createPost)}`);
+      console.log( `NEW_POST_SUCCESS with data ${util.inspect( action.result.data.createPost )}` );
       return {
         ...state,
         data: [...state.data, action.result.data.createPost],
         saving: false
       };
     case NEW_POST_FAIL:
-      console.log(`NEW_POST_FAIL with error ${util.inspect(action.error)}`);
+      console.log( `NEW_POST_FAIL with error ${util.inspect( action.error )}` );
       return {
         ...state,
         saving: false,
@@ -83,19 +74,12 @@ function reducer(state = initialState, action = {}) {
 }
 
 function isLoaded(globalState) {
-  return globalState.events && globalState.events.loaded;
-}
-
-function loadEvents() {
-  return {
-    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-    promise: (client) => client.post( '/graphql', {data: {query: graphQlEventsQuery}} )
-  };
+  return globalState.posts && globalState.posts.loaded;
 }
 
 function loadPosts() {
   return {
-    types: [LOAD, LOAD_POSTS_SUCCESS, LOAD_FAIL],
+    types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
     promise: (client) => client.post( '/graphql', {data: {query: `{posts{id, title,body, createdAt,updatedAt }}`}} )
   };
 }
@@ -114,8 +98,8 @@ function createNewPost(title, body) {
 
   return {
     types: [NEW_POST, NEW_POST_SUCCESS, NEW_POST_FAIL],
-    promise: (client) => client.post('/graphql', {data: { query: graphQlMutationQuery }})
+    promise: (client) => client.post( '/graphql', {data: {query: graphQlMutationQuery}} )
   };
 }
 
-export {reducer as default, isLoaded, loadEvents, loadPosts, toggle, createNewPost};
+export {reducer as default, isLoaded, loadPosts, toggle, createNewPost};

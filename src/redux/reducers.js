@@ -10,7 +10,7 @@ import {reducer as form} from 'redux-form';
 import info from './reducers/infoReducer';
 import widgets from './reducers/widgetsReducer';
 import groups from './reducers/groupsReducer';
-import events from './reducers/eventsReducer';
+import posts from './reducers/postsReducer';
 import city from './reducers/cityReducer';
 
 export default combineReducers({
@@ -19,7 +19,7 @@ export default combineReducers({
   auth,
   form,
   groups,
-  events,
+  posts,
   city,
   filters,
   multireducer: multireducer({

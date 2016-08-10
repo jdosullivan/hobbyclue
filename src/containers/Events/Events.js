@@ -3,7 +3,7 @@ import Post from './Post';
 import Sidebar from './Sidebar';
 import NewPost from '../../components/NewPost/NewPost';
 import {connect} from 'react-redux';
-import {isLoaded, loadPosts as load} from 'redux/reducers/eventsReducer';
+import {isLoaded, loadPosts as load} from 'redux/reducers/postsReducer';
 import {asyncConnect} from 'redux-async-connect';
 
 @asyncConnect( [{
@@ -17,8 +17,8 @@ import {asyncConnect} from 'redux-async-connect';
 @connect(
   state => ({
     user: state.auth.user,
-    posts: state.events.data,
-    loading: state.events.loading
+    posts: state.posts.data,
+    loading: state.posts.loading
   }),
   {load} )
 
