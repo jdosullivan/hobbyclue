@@ -15,7 +15,7 @@ function comparePassword(password, hash) {
   return bcrypt.compareSync(password, hash); // true
 }
 
-const User = Model.define('user', {
+const User = Model.define('users', {
   id: {
     type: Sequelize.UUID,
     defaultValue: Sequelize.UUIDV1,
