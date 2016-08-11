@@ -40,6 +40,7 @@ module.exports = Object.assign({
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   databaseUrl: process.env.DATABASE_URL || 'postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue',
+  tagLine: 'The home of the movers and shakers in your city',
   auth,
   app: {
     title: webSiteName,

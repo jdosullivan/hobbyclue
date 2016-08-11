@@ -19,6 +19,7 @@ import {Provider} from 'react-redux';
 import getRoutes from './routes';
 import cookie from 'react-cookie';
 import cookieParser from 'cookie-parser';
+import landingPg from './landing';
 
 const targetUrl = 'http://' + config.apiHost + ':' + config.apiPort;
 const pretty = new PrettyError();
@@ -92,8 +93,7 @@ app.use((req, res) => {
       res.status(500);
       hydrateOnClient();
     } else if (req.originalUrl === '/') {
-      res.status(200);
-      res.sendFile(path.join(__dirname, '..', 'static', 'landing.html'));
+      return landingPg(res);
     } else if (renderProps) {
       loadOnServer({...renderProps, store, helpers: {apiClient}}).then(() => {
         const component = (

@@ -1,0 +1,23 @@
+<style>
+  .responsive-nav {
+    top: -54px;
+    opacity: 0;
+  }
+</style>
+
+<div class="responsive-nav">
+  <div class="container">
+    <div class="logo-nav localScroll">
+      <img src="/landing/images/logo-dark.png" alt="logo">
+    </div>
+    <nav role="navigation" id="scroll">
+      <ul id="menu">
+        <% for(var i=0; i < topMenuItems.length; i++) { %>
+          <li>
+            <a href='#<%= topMenuItems[i].name %>' class='<%= topMenuItems[i].class %>'><%= topMenuItems[i].name %></a>
+          </li>
+        <% } %>
+      </ul>
+    </nav>
+  </div>
+</div>
