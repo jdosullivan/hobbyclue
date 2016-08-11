@@ -91,6 +91,9 @@ app.use((req, res) => {
       console.error('ROUTER ERROR:', pretty.render(error));
       res.status(500);
       hydrateOnClient();
+    } else if (req.originalUrl === '/') {
+      res.status(200);
+      res.sendFile(path.join(__dirname, '..', 'static', 'landing.html'));
     } else if (renderProps) {
       loadOnServer({...renderProps, store, helpers: {apiClient}}).then(() => {
         const component = (
