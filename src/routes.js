@@ -48,30 +48,31 @@ export default (store) => {
    * Please keep routes in alphabetical order
    */
   return (
-    <Route path="/" component={App}>
+    <Route path="/">
       { /* Home (main) route */ }
       <IndexRoute component={Landing}/>
 
-      { /* Routes requiring login */ }
-      <Route onEnter={requireLogin}>
-        <Route path="chat" component={Chat}/>
-        <Route path="loginSuccess" component={LoginSuccess}/>
+      <Route path="/" component={App}>
+        { /* Routes requiring login */ }
+        <Route onEnter={requireLogin}>
+          <Route path="chat" component={Chat}/>
+          <Route path="loginSuccess" component={LoginSuccess}/>
+        </Route>
+
+        <Route onEnter={requireAnonymous}>
+          <Route path="login" component={Login}/>
+          <Route path="register" component={Register}/>
+        </Route>
+
+        { /* Routes */ }
+        <Route path="about" component={About}/>
+        <Route path="events" component={Events}/>
+        <Route path="home" component={Home}/>
+        <Route path="events" component={Events}/>
+        <Route path="groups" component={Groups}/>
+        <Route path="survey" component={Survey}/>
+        <Route path="widgets" component={Widgets}/>
       </Route>
-
-      <Route onEnter={requireAnonymous}>
-        <Route path="login" component={Login}/>
-        <Route path="register" component={Register}/>
-      </Route>
-
-      { /* Routes */ }
-      <Route path="about" component={About}/>
-      <Route path="events" component={Events}/>
-      <Route path="home" component={Home}/>
-      <Route path="events" component={Events}/>
-      <Route path="groups" component={Groups}/>
-      <Route path="survey" component={Survey}/>
-      <Route path="widgets" component={Widgets}/>
-
       { /* Catch all route */ }
       <Route path="*" component={NotFound} status={404}/>
     </Route>
