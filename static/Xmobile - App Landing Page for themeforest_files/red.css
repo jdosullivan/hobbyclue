@@ -1,0 +1,113 @@
+hr,
+a.btn-line,
+a.btn-line:hover,
+button.btn-line,
+.preloader p,
+header ul li:hover,
+#menu .active a,
+.responsive-nav ul li a:hover,
+.responsive-nav .icon,
+.contact-modal-icon,
+.modal-title,
+.icon,
+.iconCircle,
+.owl-prev,
+.owl-next,
+#features h3,
+#news .info,
+.social li a,
+#news .author a,
+.responsive-button a:hover {
+	color: #EF3D4A;
+}
+
+.iconCircle,
+.btn-line,
+.owl-prev,
+.owl-next {
+	border-color: #EF3D4A;
+}
+
+.btn-theme,
+.iconCircle:hover,
+.text-icon-left:hover .iconCircle,
+.text-icon-right:hover .iconCircle,
+.popular,
+.buttons-tab a {
+	background-color: #EF3D4A;
+}
+
+.color-overlay {
+	background-color: rgba(239,61,74,0.6);
+}
+
+.contact-box #submit:hover {
+	color: #EF3D4A !important;
+}
+
+/* v1.2 */
+
+#testimonials cite,
+#facts .text-icon-left i {
+	color: #EF3D4A;
+}
+
+/* v1.3 */
+
+.loader-one {
+	border-color: rgba(239,61,74,0.6);
+	border-left-color: #EF3D4A;
+}
+
+.loader-two,
+.loader-two:before,
+.loader-two:after {
+	background: #EF3D4A;
+}
+
+@-webkit-keyframes load1 {
+	0%, 80%, 100% {
+		box-shadow: 0 0 #EF3D4A;
+		height: 4em;
+	}
+	40% {
+		box-shadow: 0 -2em #EF3D4A;
+		height: 5em;
+	}
+}
+
+@keyframes load1 {
+	0%, 80%, 100% {
+		box-shadow: 0 0 #EF3D4A;
+		height: 4em;
+	}
+	40% {
+		box-shadow: 0 -2em #EF3D4A;
+		height: 5em;
+	}
+}
+
+#about .intro p,
+#benefits .intro p,
+.normal .price {
+	border-color: #EF3D4A !important;
+}
+
+.responsive-accordion-default.responsive-accordion li .responsive-accordion-head,
+.info-bg {
+	color: #EF3D4A;
+}
+
+.popular .price {
+	background-image: -webkit-repeating-radial-gradient(center center, #EF3D4A, #EF3D4A 1px, transparent 1px, transparent 100%);
+	background-image: -moz-repeating-radial-gradient(center center, #EF3D4A, #EF3D4A 1px, transparent 1px, transparent 100%);
+	background-image: -ms-repeating-radial-gradient(center center, #EF3D4A, #EF3D4A 1px, transparent 1px, transparent 100%);
+	background-image: repeating-radial-gradient(center center, #EF3D4A, #EF3D4A 1px, transparent 1px, transparent 100%);
+}
+
+/* BLOG */
+
+.data-post a,
+.data-post span,
+.data-comment-name,
+.sidebar-blog h2 {color: #EF3D4A !important;}

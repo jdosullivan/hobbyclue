@@ -1,0 +1,116 @@
+body,
+.color-a {
+	background: #f1f4f5;
+}
+
+.color-b {
+	background-color: #fff;
+}
+
+.preloader {
+    background-color: #fefefe;
+}
+
+.text-icon-left:hover .iconCircle,
+.text-icon-right:hover .iconCircle {
+	color: #fff;
+}
+
+.responsive-nav {
+	background-color: #fff;
+	border-bottom: 1px solid rgba(229,234,235,1);
+}
+
+/* TAB */
+
+.buttons-tab a,
+.buttons-tab a .icon {
+	color: #f1f4f5;
+}
+
+/* PRICING */
+
+.normal {
+	background-color: #F1F4F5;
+}
+
+.normal .price {
+	background-color: rgba(255,255,255, 1) !important;
+}
+
+/* NEWS */
+
+
+#news li {
+	position: relative;
+	margin: 0 auto;
+	border-color: rgba(229,234,235,1);
+	padding: 50px 0;
+}
+
+#news li:first-child  {
+	border-color: rgba(229,234,235,1);
+}
+
+/* HOVER FOR CHANGE OF COLOR */
+
+#news li h3:hover ~ .info,
+#news li h3:hover ~ .info span {
+	color: #5a646e !important;
+}
+
+/* v1.2: testimonials */
+
+.owl-theme .owl-dots .owl-dot span {
+	background: #F1F4F5;
+}
+
+#testimonial .icon-quote-left,
+#testimonial .icon-quote-right {
+	color: #F1F4F5;
+}
+
+/* v1.3 */
+
+.responsive-accordion-default.responsive-accordion li .responsive-accordion-panel {
+	border-color: #F1F4F5;
+}
+.responsive-accordion-default.responsive-accordion li .responsive-accordion-head,
+.responsive-accordion-default.responsive-accordion li .responsive-accordion-panel {
+	background: #F1F4F5;
+}
+
+#about .intro p,
+#benefits .intro p,
+.normal .price {
+	border-color: #F1F4F5;
+}
+
+.responsive-accordion-default.responsive-accordion li .responsive-accordion-head,
+.info-bg {
+	color: #F1F4F5;
+}
+
+.normal .price {
+	border-left: 2px solid;
+	border-right: 2px solid;
+	background-image: -webkit-repeating-radial-gradient(center center, #F1F4F5, #F1F4F5 1px, transparent 1px, transparent 100%);
+	background-image: -moz-repeating-radial-gradient(center center, #F1F4F5, #F1F4F5 1px, transparent 1px, transparent 100%);
+	background-image: -ms-repeating-radial-gradient(center center, #F1F4F5, #F1F4F5 1px, transparent 1px, transparent 100%);
+	background-image: repeating-radial-gradient(center center, #F1F4F5, #F1F4F5 1px, transparent 1px, transparent 100%);
+}
+
+/* blog */
+
+#posts article {border-bottom: 1px solid #E5EAEB;}
+#posts article h1 {color: #F1F4F5;}
+.withSidebar article:last-child {border: none !important;}
+.withSidebar article {border-bottom: 1px dashed #5A646E !important;}
+.comment {border-color: #E6EAEB;}
+#reply input, #reply textarea { border: 1px solid #E6EAEB;}
+.withSidebar article {border-color: #D9DEDF !important;}
+.sidebar-recent-posts, .sidebar-categories {border-color: #D9DEDF;}
+.sidebar-tags li a, .post-tags li a {
+	background: #5A646E;
+	color: #FFF;
+}

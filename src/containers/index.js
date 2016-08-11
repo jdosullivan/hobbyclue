@@ -6,6 +6,7 @@ export Groups from './Groups/Groups';
 export About from './About/About';
 export Login from './Login/Login';
 export Register from './Register';
+export Landing from './Landing/Landing';
 export LoginSuccess from './LoginSuccess/LoginSuccess';
 export Survey from './Survey/Survey';
 export NotFound from './NotFound/NotFound';

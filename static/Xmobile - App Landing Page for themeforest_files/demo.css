@@ -1,0 +1,69 @@
+#demo {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	left: -30px;
+	z-index: 999;
+	height: 380px;
+}
+
+#demo ul li a {
+	margin-bottom: 5px;
+	-webkit-border-radius: 0 5px 5px 0;
+			border-radius: 0 5px 5px 0;
+}
+
+#demo ul li a {
+	height: 50px;
+	width: 50px;
+	display: block;
+	-webkit-transition: all 0.2s;
+			transition: all 0.2s;
+}
+
+#demo ul li a:hover {
+	margin-left: 10px;
+}
+
+#demo ul li .first {
+	text-align: right;
+	padding-right: 15px;
+	line-height: 50px;
+	margin-left: 25px;
+	background-color: #000;
+	color: #fff;
+}
+
+#demo ul li .first:hover {
+	margin-left: 25px;
+	padding-right: 15px;
+}
+
+#demo ul li .first + .tooltip > .tooltip-inner {
+	background-color: #f00 !important;
+	font-weight: 600 !important;
+}
+
+
+#demo .tooltip {
+	width: 100px;
+	font-weight: 600;
+}
+
+#demo ul li a[rel~="red"]    {background-color:  #E8314C;}
+#demo ul li a[rel~="blue"]   {background-color:  #596BDC;}
+#demo ul li a[rel~="aqua"]   {background-color:  #46CEDC;}
+#demo ul li a[rel~="green"]  {background-color:  #33C961;}
+#demo ul li a[rel~="yellow"] {background-color:  #FBC515;}
+#demo ul li a[rel~="orange"] {background-color:  #E98819;}
+#demo ul li a[rel~="gray"]   {background-color:  #5A646E;}
+#demo ul li a[rel~="purple"] {background-color:  #8848f6;}
+
+@media only screen and (max-width: 1024px) {
+
+	#demo {
+		display: none;
+	}
+
+}

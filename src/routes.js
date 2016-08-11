@@ -10,6 +10,7 @@ import {
   About,
   Login,
   Register,
+  Landing,
   LoginSuccess,
   Survey,
   NotFound,
@@ -49,7 +50,7 @@ export default (store) => {
   return (
     <Route path="/" component={App}>
       { /* Home (main) route */ }
-      <IndexRoute component={Events}/>
+      <IndexRoute component={Landing}/>
 
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>
@@ -64,6 +65,7 @@ export default (store) => {
 
       { /* Routes */ }
       <Route path="about" component={About}/>
+      <Route path="events" component={Events}/>
       <Route path="home" component={Home}/>
       <Route path="events" component={Events}/>
       <Route path="groups" component={Groups}/>
