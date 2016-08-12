@@ -151,6 +151,7 @@
     "url-loader": "^0.5.7",
     "util": "^0.10.3",
     "warning": "^2.1.0",
+    "webpack": "^1.12.9",
     "webpack-isomorphic-tools": "^2.2.18"
   },
   "devDependencies": {
@@ -198,7 +199,6 @@
     "strip-loader": "^0.1.0",
     "style-loader": "^0.13.0",
     "timekeeper": "0.0.5",
-    "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.5.0"
   },
