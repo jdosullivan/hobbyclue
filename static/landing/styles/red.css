@@ -28,6 +28,10 @@ header ul li:hover,
 	border-color: #EF3D4A;
 }
 
+#subscription button {
+  background-color: #EF3D4A;
+}
+
 .btn-theme,
 .iconCircle:hover,
 .text-icon-left:hover .iconCircle,
