@@ -32,7 +32,8 @@ const auth = {
     secret: process.env.TWITTER_CONSUMER_SECRET || 'KTZ6cxoKnEakQCeSpZlaUCJWGAlTEBJj0y2EMkUBujA7zWSvaQ'
   }
 };
-const webSiteName = 'YoorCity';
+const webSiteName = 'BrickAndCyber';
+const tagLine = 'Connect with local businesses in your neighborhood';
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
@@ -40,7 +41,7 @@ module.exports = Object.assign({
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT,
   databaseUrl: process.env.DATABASE_URL || 'postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue',
-  tagLine: 'Share ideas with other professionals in your city',
+  tagLine,
   auth,
   app: {
     title: webSiteName,
