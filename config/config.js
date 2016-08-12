@@ -1,7 +1,7 @@
 module.exports = {
   development: {
     url: "postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue",
-    dialect: "pg",
+    dialect: "postgres",
     migrationStorageTableName: "migrations"
   },
   test: {
@@ -13,7 +13,7 @@ module.exports = {
   },
   production: {
     url: process.env.DATABASE_URL,
-    dialect: "pg",
+    dialect: "postgres",
     migrationStorageTableName: "migrations"
   }
 };
