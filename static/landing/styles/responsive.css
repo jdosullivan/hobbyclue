@@ -144,6 +144,7 @@
 		top: 20%;
 	}
 
+
 	.hand-phone {
 		position: absolute;
 		top: 100px;
@@ -536,12 +537,11 @@
 	}
 
 	#subscription input {
-		width: 85%;
 		padding-left: 12%;
 	}
 
 	#subscription button {
-		width: 15%;
+    font-size: 18px;
 	}
 
 	/* PRICING */
