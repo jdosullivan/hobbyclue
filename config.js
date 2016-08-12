@@ -40,7 +40,7 @@ module.exports = Object.assign({
   port: process.env.PORT || 3000,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT || 3030,
-  databaseUrl: process.env.DATABASE_URL,
+  databaseUrl: process.env.DATABASE_URL || 'postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue',
   tagLine,
   auth,
   app: {
