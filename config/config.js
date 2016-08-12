@@ -1,7 +1,5 @@
-import config from '../config';
-
 const defaultSettings = {
-  url: config.databaseUrl,
+  url: process.env.DATABASE_URL || 'postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue',
   dialect: "postgres",
   migrationStorageTableName: "migrations"
 };
