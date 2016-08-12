@@ -53,6 +53,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
+        "DATABASE_URL": "postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue",
         "PORT": 3000,
         "APIPORT": 3030
       }
