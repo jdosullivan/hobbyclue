@@ -109,6 +109,8 @@ For e.g. 'http://blahblah.us1.list-manage.com/subscribe/post-json?u=5afsdhfuhdsi
                     if (settings.callback) {
                         settings.callback(resp);
                     }
+
+                    email.val('');
                 }
 
                 var data = {};
