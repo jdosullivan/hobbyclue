@@ -1161,12 +1161,10 @@ header .btn-theme {
 		(min-resolution: 1.3dppx) {
 
 		.nivo-lightbox-theme-default .nivo-lightbox-close {
-			background-image: url(../images/nivo/crossLight@2x.png) !important;
 			background-size: 48px 48px !important;
 		}
 
 		.cd-primary-nav .overlay-close, button.close {
-			background: url(../images/nivo/crossLight@2x.png) no-repeat center center !important;
 			background-size: 48px 48px !important;
 		}
 
