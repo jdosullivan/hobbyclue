@@ -514,7 +514,7 @@ a.btn-theme {
 /* HEADER STYLE */
 
 header {
-  color: #fff;
+  color: #ffffff;
 	background: url(../images/backgrounds/bg1.jpg) no-repeat center top fixed;
   background-size: cover !important;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/backgrounds/bg5.jpg', sizingMethod='scale');
