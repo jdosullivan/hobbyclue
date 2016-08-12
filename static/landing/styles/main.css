@@ -516,11 +516,6 @@ a.btn-theme {
 header {
   color: #fff;
 	background: url(../images/backgrounds/bg1.jpg) no-repeat center top fixed;
-	-webkit-background-size: cover !important;
-	   -moz-background-size: cover !important;
-		-ms-background-size: cover !important;
-		 -o-background-size: cover !important;
-			background-size: cover !important;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/backgrounds/bg5.jpg', sizingMethod='scale');
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/backgrounds/bg5.jpg', sizingMethod='scale')";
 	position: relative;
@@ -1179,6 +1174,7 @@ header .btn-theme {
 #features {
 	text-align: center;
 	overflow: hidden;
+  padding-top: 50px;
 }
 
 #features .block:first-child {
@@ -1249,11 +1245,6 @@ header .btn-theme {
 	z-index:0;
 	overflow: hidden;
 	padding: 0;
-	-webkit-background-size: cover !important;
-	   -moz-background-size: cover !important;
-		-ms-background-size: cover !important;
-		 -o-background-size: cover !important;
-			background-size: cover !important;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/backgrounds/bg9.jpg', sizingMethod='scale');
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/backgrounds/bg9.jpg', sizingMethod='scale')";
 }
@@ -1302,7 +1293,7 @@ header .btn-theme {
 	border-radius: 50px 0 0 50px;
 	width: 90%;
 	display: inline-block;
-	background: rgba(255,255,255,0.3);
+	background: rgba(255,255,255,0.6);
 	border: none;
 	height: 60px;
 	float: left;
@@ -1311,19 +1302,19 @@ header .btn-theme {
 }
 
 #subscription input::-webkit-input-placeholder {
-	color: rgba(255,255,255,0.6) !important;
+	color: rgba(255,255,255,1) !important;
 }
 
 #subscription input:-moz-placeholder {
-	color: rgba(255,255,255,0.6) !important;
+	color: rgba(255,255,255,1) !important;
 }
 
 #subscription input::-moz-placeholder {
-	color: rgba(255,255,255,0.6) !important;
+	color: rgba(255,255,255,1) !important;
 }
 
 #subscription input:-ms-input-placeholder {
-	color: rgba(255,255,255,0.6) !important;
+	color: rgba(255,255,255,1) !important;
 }
 
 #subscription input:focus {
@@ -1686,7 +1677,7 @@ header .btn-theme {
 /*---------------------------------------------------------*/
 
 footer {
-	padding: 120px 0 80px;
+	padding: 60px 0 60px;
 	text-align: center;
 }
 
