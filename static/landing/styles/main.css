@@ -516,6 +516,7 @@ a.btn-theme {
 header {
   color: #fff;
 	background: url(../images/backgrounds/bg1.jpg) no-repeat center top fixed;
+  background-size: cover !important;
 	filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/backgrounds/bg5.jpg', sizingMethod='scale');
 	-ms-filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(src='../images/backgrounds/bg5.jpg', sizingMethod='scale')";
 	position: relative;
@@ -1350,6 +1351,7 @@ header .btn-theme {
 	font-size: 25px;
 	line-height: 60px;
 	font-weight: 400;
+  outline: none;
 	float: left;
 	background: rgba(255,255,255,0.3);
 	border: none;
