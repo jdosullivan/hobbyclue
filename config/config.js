@@ -5,11 +5,9 @@ module.exports = {
     migrationStorageTableName: "migrations"
   },
   test: {
-    username: "root",
-    password: null,
-    database: "database_test",
-    host: "127.0.0.1",
-    dialect: "mysql"
+    url: process.env.DATABASE_URL,
+    dialect: "postgres",
+    migrationStorageTableName: "migrations"
   },
   production: {
     url: process.env.DATABASE_URL,
