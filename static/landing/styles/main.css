@@ -218,7 +218,7 @@ a.btn-theme {
 
 .intro {
 	display: block;
-	margin-bottom: 60px;
+	margin-bottom: 20px;
 }
 
 .intro h2 {
@@ -797,11 +797,11 @@ header .btn-theme {
 /*---------------------------------------------------------*/
 
 #services {
-	padding: 150px 0;
+	padding: 40px 0;
 }
 
 #services .intro {
-	margin-bottom: 90px;
+	margin-bottom: 60px;
 }
 
 #services h3 {
@@ -962,10 +962,6 @@ header .btn-theme {
 }
 
 /* INSIDE TAB */
-
-#tab .item {
-	margin-top: 40px;
-}
 
 /* EFFECT */
 
