@@ -33,7 +33,7 @@ const auth = {
   }
 };
 const webSiteName = 'BrickAndCyber';
-const tagLine = 'Turning every small business into a technology company';
+const tagLine = 'Helping small businesses compete in a technology-driven world';
 
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',

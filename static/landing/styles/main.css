@@ -1174,7 +1174,8 @@ header .btn-theme {
 #features {
 	text-align: center;
 	overflow: hidden;
-  padding-top: 50px;
+  padding-top: 0px;
+  padding-bottom: 0px;
 }
 
 #features .block:first-child {
