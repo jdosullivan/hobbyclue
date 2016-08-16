@@ -7,22 +7,16 @@ export default class ImageUpload extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {
-      file: '',
-      imageUrl: ''
-    };
+    this.state = { file: '', imageUrl: '' };
     this._handleImageChange = (event) => { this.handleImageChange(event); };
     this._handleSubmit = (event) => { this.handleSubmit(event); };
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit() {
     // TODO: do something with -> this.state.file
   }
 
   handleImageChange(event) {
-    event.preventDefault();
-
     const reader = new FileReader();
     const file = event.target.files[0];
 
