@@ -13,7 +13,7 @@ import {
   LoginSuccess,
   Survey,
   NotFound,
-  Events
+  TimeLine
 } from './containers';
 
 export default (store) => {
@@ -49,7 +49,7 @@ export default (store) => {
   return (
     <Route path="/" component={App}>
       { /* Home (main) route */ }
-      /*<IndexRoute component={Events}/>*/
+      /*<IndexRoute component={TimeLine}/>*/
 
       { /* Routes requiring login */ }
       <Route onEnter={requireLogin}>
@@ -64,7 +64,7 @@ export default (store) => {
 
       { /* Routes */ }
       <Route path="about" component={About}/>
-      <Route path="events" component={Events}/>
+      <Route path="timeline" component={TimeLine}/>
       <Route path="home" component={Home}/>
       <Route path="groups" component={Groups}/>
       <Route path="survey" component={Survey}/>
