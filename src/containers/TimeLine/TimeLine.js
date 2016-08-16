@@ -7,6 +7,7 @@ import {isLoaded, loadPosts as load} from 'redux/actions/postsActionCreators';
 import * as postsActionCreators from 'redux/actions/postsActionCreators';
 import {asyncConnect} from 'redux-async-connect';
 import { bindActionCreators } from 'redux';
+import ImageUpload from '../../components/ImageUpload/ImageUpload';
 
 @asyncConnect( [{
   deferred: true,
@@ -46,6 +47,7 @@ export default class Events extends Component {
           <div className="container">
             <div className="row">
               <div className="col-lg-8 col-md-8">
+                <ImageUpload />
                 {user &&
                 <div className="row">
                   <NewPostForm />
