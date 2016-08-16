@@ -4,6 +4,7 @@ import {Strategy as LocalStrategy} from 'passport-local';
 import {User, UserClaim, comparePassword} from './database/models';
 import jwt from 'jsonwebtoken';
 import util from 'util';
+import config from '../config';
 
 const configure = (app, config) => {
 
@@ -22,7 +23,7 @@ const configure = (app, config) => {
   app.get('/login/facebook/return',
     passport.authenticate('facebook', {failureRedirect: '/login'}),
     function (req, res) {
-      res.redirect('http://localhost:3000');
+      res.redirect(`http://${config.host}:${config.port}`);
     }
   );
 
