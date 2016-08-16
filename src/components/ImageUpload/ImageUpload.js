@@ -1,42 +1,46 @@
 import React, {Component, PropTypes} from 'react';
 
 export default class ImageUpload extends Component {
+  static propTypes = {
+    imageUrl: PropTypes.string
+  };
+
   constructor(props) {
     super(props);
     this.state = {
       file: '',
-      imagePreviewUrl: ''
+      imageUrl: ''
     };
-    this._handleImageChange = this._handleImageChange.bind(this);
-    this._handleSubmit = this._handleSubmit.bind(this);
+    this._handleImageChange = (event) => { this.handleImageChange(event); };
+    this._handleSubmit = (event) => { this.handleSubmit(event); };
   }
 
-  _handleSubmit(e) {
-    e.preventDefault();
+  handleSubmit(event) {
+    event.preventDefault();
     // TODO: do something with -> this.state.file
   }
 
-  _handleImageChange(e) {
-    e.preventDefault();
+  handleImageChange(event) {
+    event.preventDefault();
 
-    let reader = new FileReader();
-    let file = e.target.files[0];
+    const reader = new FileReader();
+    const file = event.target.files[0];
 
     reader.onloadend = () => {
       this.setState({
         file: file,
-        imagePreviewUrl: reader.result
+        imageUrl: reader.result
       });
     };
 
-    reader.readAsDataURL(file)
+    reader.readAsDataURL(file);
   }
 
   render() {
-    let {imagePreviewUrl} = this.state;
+    const {imageUrl} = this.state;
     let $imagePreview = null;
-    if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} />);
+    if (imageUrl) {
+      $imagePreview = (<img src={imageUrl} />);
     }
 
     return (
@@ -47,7 +51,7 @@ export default class ImageUpload extends Component {
         </form>
         {$imagePreview}
       </div>
-    )
+    );
   }
 
 }
