@@ -2,10 +2,18 @@ import React, {Component} from 'react';
 import Dropzone from 'react-dropzone';
 import underscore from 'lodash';
 
+const thumbwidthHeight = '100px';
+const dropZoneStyle = {
+  width: thumbwidthHeight,
+  height: thumbwidthHeight,
+  border: '2px dashed rgb(102, 102, 102)',
+  borderRadius: '5px'
+};
+
 export default class DropZone extends Component {
   constructor(props) {
     super( props );
-    this.state = {files: []};
+    this.state = {files: [], showOpenButton: false};
     this._onOpenClick = () => {
       this.onOpenClick();
     };
@@ -15,10 +23,20 @@ export default class DropZone extends Component {
   }
 
   onDrop(files) {
-    this.setState( {
-      files: [...this.state.files, ...files]
+    let appendedFiles = [...this.state.files];
+    files.forEach( function (file) {
+      const indexOfFile = underscore.findIndex(appendedFiles, function(f) {
+        return f.name === file.name && f.lastModified === file.lastModified ;
+      });
+
+      if (indexOfFile === -1) {
+        appendedFiles.push( file );
+      }
     } );
-    console.log( 'Received files: ', files );
+
+    this.setState( {
+      files: appendedFiles
+    } );
   }
 
   onOpenClick() {
@@ -35,26 +53,29 @@ export default class DropZone extends Component {
   }
 
   render() {
-    const {files} = this.state;
+    const {files, showOpenButton} = this.state;
     return (
       <div>
-        {files &&
         <div className="container-fluid">
           <div className="row">
-            <div>{files.map( (file) => {
-              return (<div className="col-md-4" key={`img.${file.preview}`}>
-                <img src={file.preview}/>
+            {files &&
+            files.map( (file) => {
+              return (<div className="col-md-2" key={`img.${file.preview}`}>
+                <img height={thumbwidthHeight} width={thumbwidthHeight} src={file.preview}/>
                 <a onClick={() => { this.onRemove(file); }}>Remove</a>
               </div>);
-            } )}</div>
+            } )}
+            <div className="col-md-2">
+              <Dropzone ref="dropzone" onDrop={this._onDrop} style={dropZoneStyle}>
+                <div>
+                  <div>Add photo</div>
+                  <i className="fa fa-plus"/>
+                </div>
+              </Dropzone>
+            </div>
           </div>
-        </div>}
-        <Dropzone ref="dropzone" onDrop={this._onDrop}>
-          <div>Try dropping some files here, or click to select files to upload.</div>
-        </Dropzone>
-        <button type="button" onClick={this._onOpenClick}>
-          Open Dropzone
-        </button>
+        </div>
+        {showOpenButton && <button type="button" onClick={this._onOpenClick}>Open Dropzone</button>}
       </div>
     );
   }

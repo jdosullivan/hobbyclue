@@ -21,8 +21,9 @@ export default class NewPost extends Component {
         resetForm();
       } );
     };
+    const styles = require('./PostForm.scss');
     return (
-      <form key={id} className="postForm" onSubmit={handleSubmit(formSubmit)}>
+      <form key={id} className={styles.postForm} onSubmit={handleSubmit(formSubmit)}>
         <div>
           <input type="text" placeholder="Title of your post ..." {...title} />
         </div>
