@@ -1,5 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {reduxForm} from 'redux-form';
+import DropZone from '../../components/ImageUpload/DropZone';
 
 @reduxForm( {
   form: 'post',
@@ -14,16 +15,21 @@ export default class NewPost extends Component {
   };
 
   render() {
-    const {fields: {id, title, body}, handleSubmit, resetForm, submitHandler } = this.props;
+    const {fields: {id, title, body}, handleSubmit, resetForm, submitHandler} = this.props;
     const formSubmit = (formValues) => {
-      submitHandler(formValues).then(() => {
+      submitHandler( formValues ).then( () => {
         resetForm();
-      });
+      } );
     };
     return (
       <form key={id} className="postForm" onSubmit={handleSubmit(formSubmit)}>
-        <input type="text" placeholder="Title of your post ..." {...title} />
-        <input type="text" placeholder="Body of your post ..." {...body} />
+        <div>
+          <input type="text" placeholder="Title of your post ..." {...title} />
+        </div>
+        <div>
+          <input type="text" placeholder="Body of your post ..." {...body} />
+          <DropZone />
+        </div>
         <input type="submit" value="Post"/>
       </form>
     );
