@@ -14,11 +14,12 @@ export default class NewPost extends Component {
   static propTypes = {
     showStatus: PropTypes.bool.isRequired,
     toggle: PropTypes.func.isRequired,
-    createNewPost: PropTypes.func.isRequired
+    createNewPost: PropTypes.func.isRequired,
+    saveFile: PropTypes.func.isRequired
   };
 
   render() {
-    const {createNewPost, showStatus, toggle } = this.props;
+    const {createNewPost, saveFile, showStatus, toggle } = this.props;
     return (
       <div>
         <div>
@@ -28,7 +29,7 @@ export default class NewPost extends Component {
         </div>
         {showStatus &&
         <div>
-          <PostForm formKey="newPost" submitHandler={createNewPost} />
+          <PostForm formKey="newPost" submitHandler={createNewPost} saveFileHandler={saveFile} />
         </div>
         }
       </div>

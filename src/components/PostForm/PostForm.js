@@ -4,18 +4,22 @@ import DropZone from '../../components/ImageUpload/DropZone';
 
 @reduxForm( {
   form: 'post',
-  fields: ['id', 'title', 'body']
+  fields: ['id', 'title', 'body', 'images'],
+  initialValues: {
+    images: []
+  }
 } )
 export default class NewPost extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,
     handleSubmit: PropTypes.func.isRequired,
-    submitHandler: PropTypes.func.isRequired
+    submitHandler: PropTypes.func.isRequired,
+    saveFileHandler: PropTypes.func.isRequired
   };
 
   render() {
-    const {fields: {id, title, body}, handleSubmit, resetForm, submitHandler} = this.props;
+    const {fields: {id, title, body, images}, handleSubmit, resetForm, submitHandler, saveFileHandler } = this.props;
     const formSubmit = (formValues) => {
       submitHandler( formValues ).then( () => {
         resetForm();
@@ -29,7 +33,7 @@ export default class NewPost extends Component {
         </div>
         <div>
           <input type="text" placeholder="Body of your post ..." {...body} />
-          <DropZone />
+          <DropZone {...images} saveFileHandler={saveFileHandler} />
         </div>
         <input type="submit" value="Post"/>
       </form>

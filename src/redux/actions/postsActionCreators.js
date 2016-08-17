@@ -53,5 +53,10 @@ function editPost(post) {
   };
 }
 
-export {isLoaded, loadPosts, toggle, createNewPost, deletePost, editPost, editPostStart, editPostStop};
+
+function saveFile(file) {
+  console.log(`saving file with name ${file.name}`);
+}
+
+export {isLoaded, loadPosts, toggle, createNewPost, deletePost, editPost, editPostStart, editPostStop, saveFile};
 
