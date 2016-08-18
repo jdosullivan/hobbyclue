@@ -64,15 +64,9 @@ export default class ApiClient {
           request.send( formData );
         }
 
-        request.end( (err, {body} = {}) => {
-          err ? reject( body || err )
-            : resolve( body )
-        } );
-      } ) );
+        request.end( (err, {body} = {}) => err ? reject( body || err ) : resolve( body ) );
+      }));
   }
-
-
-
   /*
    * There's a V8 bug where, when using Babel, exporting classes with only
    * constructors sometimes fails. Until it's patched, this is a solution to
