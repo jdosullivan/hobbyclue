@@ -7,7 +7,7 @@ export default function save(req) {
 
   return new Promise((resolve, reject) => {
     if (req.busboy) {
-      req.busboy.on( 'file', function (fieldname, file, filename) {
+      req.busboy.on( 'file', function (fieldname, file) {
         const savedFileName = path.basename( fieldname );
         var tmpFilePath = path.join( __dirname, '../../..', 'static', 'uploads', savedFileName );
         var ws = fs.createWriteStream( tmpFilePath );
@@ -34,9 +34,7 @@ export default function save(req) {
           });
         });
       });
-      req.busboy.on( 'field', function (key, value, keyTruncated, valueTruncated) {
-        // ...
-      } );
+
       req.pipe( req.busboy );
     }
   });
