@@ -56,6 +56,10 @@ function editPost(post) {
 
 function saveFile(file) {
   console.log(`saving file with name ${file.name}`);
+  return {
+    types: [actions.SAVE_FILE, actions.SAVE_FILE_SUCCESS, actions.SAVE_FILE_FAIL],
+    promise: (client) => client.post( '/file/save', {attach: [file]})
+  };
 }
 
 export {isLoaded, loadPosts, toggle, createNewPost, deletePost, editPost, editPostStart, editPostStop, saveFile};

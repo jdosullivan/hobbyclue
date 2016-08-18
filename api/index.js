@@ -12,6 +12,8 @@ import configureAuth from './configureAuth';
 import expressJWT from 'express-jwt';
 import schema from './graphql/schema';
 import expressGraphQL from 'express-graphql';
+import busboy from 'connect-busboy';
+
 
 const pretty = new PrettyError();
 const app = express();
@@ -25,8 +27,10 @@ app.use(session({
   saveUninitialized: false,
   cookie: {maxAge: 60000}
 }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser({limit: '50mb'}));
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+app.use(busboy());
 app.use(expressJWT({ secret: config.auth.jwt.secret}).unless({path: [/\/auth/i,  /\/graphql/i, /\/facebook/i ] }));
 app.use(session({
   secret: config.auth.jwt.secret,

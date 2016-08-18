@@ -19,7 +19,11 @@ const postActions = {
   POST_UPDATE_SUCCESS: createActionName( 'posts', 'UPDATE_SUCCESS' ),
   POST_UPDATE_FAIL: createActionName( 'posts', 'UPDATE_FAIL' ),
   POST_EDIT_START: createActionName( 'posts', 'EDIT_START' ),
-  POST_EDIT_STOP: createActionName( 'posts', 'EDIT_STOP' )
+  POST_EDIT_STOP: createActionName( 'posts', 'EDIT_STOP' ),
+  SAVE_FILE: createActionName( 'files', 'SAVE_FILE' ),
+  SAVE_FILE_SUCCESS: createActionName( 'files', 'SAVE_FILE_SUCCESS' ),
+  SAVE_FILE_FAIL: createActionName( 'files', 'SAVE_FILE_FAIL' )
+
 };
 
 const cityActions = {

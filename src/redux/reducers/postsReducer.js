@@ -123,6 +123,26 @@ export default (state = initialState, action = {}) => {
         saving: false,
         error: action.error
       };
+    case actions.SAVE_FILE:
+      return {
+        ...state,
+        loading: true
+      };
+    case actions.SAVE_FILE_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        error: null
+      };
+    case actions.SAVE_FILE_FAIL:
+      console.log( `SAVE_FILE_FAIL with error ${util.inspect( action.error )}` );
+      return {
+        ...state,
+        loading: false,
+        loaded: false,
+        error: action.error
+      };
     default:
       return state;
   }

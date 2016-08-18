@@ -52,6 +52,11 @@ module.exports = {
     ],
     extensions: ['', '.json', '.js', '.jsx']
   },
+  node: {
+    fs: 'empty',
+    net: 'empty',
+    tls: 'empty'
+  },
   plugins: [
     new CleanPlugin([assetsPath], { root: projectRootPath }),
 

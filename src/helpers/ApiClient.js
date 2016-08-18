@@ -32,7 +32,7 @@ function formatUrl(path) {
 export default class ApiClient {
   constructor(req) {
     methods.forEach( (method) =>
-      this[method] = (path, {params, data} = {}) => new Promise( (resolve, reject) => {
+      this[method] = (path, {params, data, attach, field} = {}) => new Promise( (resolve, reject) => {
         const request = superagent[method]( formatUrl( path ) );
         const jwBearerToken = getBearerAuthToken();
         if (jwBearerToken) {
@@ -51,9 +51,27 @@ export default class ApiClient {
           request.send( data );
         }
 
-        request.end( (err, {body} = {}) => err ? reject( body || err ) : resolve( body ) );
+        let formData;
+        if (attach) {
+          formData = new FormData();
+          attach.forEach( item => { formData.append( item.name, item ); } );
+          request.send( formData );
+        }
+
+        if (field) {
+          formData = new FormData();
+          field.forEach( item => { formData.append( item.name, item ); } );
+          request.send( formData );
+        }
+
+        request.end( (err, {body} = {}) => {
+          err ? reject( body || err )
+            : resolve( body )
+        } );
       } ) );
   }
+
+
 
   /*
    * There's a V8 bug where, when using Babel, exporting classes with only
