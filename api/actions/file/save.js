@@ -14,6 +14,7 @@ export default function save(req) {
 
         ws.on( 'finish', function () {
           const containerName = 'postimages';
+          const hostName = 'https://hobbyclueprod1.blob.core.windows.net';
           blobService.createContainerIfNotExists( containerName, {publicAccessLevel: 'blob'}, function (error) {
             if (error) {
               reject( error );
@@ -24,7 +25,7 @@ export default function save(req) {
                   reject( error );
                 }
                 else {
-                  resolve( response );
+                  resolve( { response, result, url: blobService.getUrl(containerName, filename, null, hostName) });
                 }
               });
             }
