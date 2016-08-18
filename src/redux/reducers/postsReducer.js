@@ -8,7 +8,8 @@ const initialState = {
   showStatus: false,
   newPost: {
     title: '',
-    body: ''
+    body: '',
+    images: []
   },
   saving: false,
   deleting: false,
@@ -105,8 +106,8 @@ export default (state = initialState, action = {}) => {
         saving: true
       };
     case actions.POST_UPDATE_SUCCESS:
-      const itemIndex = lodash.indexOf(state.data, lodash.find(state.data, {id: action.result.data.updatePost.id}));
-      state.data.splice(itemIndex, 1, action.result.data.updatePost);
+      const itemIndex = lodash.indexOf( state.data, lodash.find( state.data, {id: action.result.data.updatePost.id} ) );
+      state.data.splice( itemIndex, 1, action.result.data.updatePost );
       return {
         ...state,
         editing: {
@@ -129,11 +130,21 @@ export default (state = initialState, action = {}) => {
         loading: true
       };
     case actions.SAVE_FILE_SUCCESS:
+      console.log( `SAVE_FILE: ${action.result.url}` ); // action.result.result and action.result.response
+      const appendedImages = [...state.newPost.images];
+      const indexOfFile = lodash.findIndex( appendedImages, (imageUrl) => {
+        return imageUrl === action.result.url;
+      });
+      if (indexOfFile === -1) {
+        appendedImages.push( action.result.url );
+      }
+
       return {
         ...state,
         loading: false,
         loaded: true,
-        error: null
+        error: null,
+        newPost: {...state.newPost, images: appendedImages}
       };
     case actions.SAVE_FILE_FAIL:
       console.log( `SAVE_FILE_FAIL with error ${util.inspect( action.error )}` );
