@@ -1,21 +1,20 @@
 import azure from 'azure-storage';
-import util from 'util';
 import path from 'path';
 import fs from 'fs';
 
-export default function save(req, res, nxt) {
+export default function save(req) {
   const blobService = azure.createBlobService();
 
   return new Promise((resolve, reject) => {
     if (req.busboy) {
-      req.busboy.on( 'file', function (fieldname, file, filename, encoding, mimetype) {
+      req.busboy.on( 'file', function (fieldname, file, filename) {
         var tmpFilePath = path.join( __dirname, '../../..', 'static', 'uploads', path.basename( fieldname ) );
         var ws = fs.createWriteStream( tmpFilePath );
         file.pipe( ws );
 
         ws.on( 'finish', function () {
           const containerName = 'postimages';
-          blobService.createContainerIfNotExists( containerName, {publicAccessLevel: 'blob'}, function (error, result, response) {
+          blobService.createContainerIfNotExists( containerName, {publicAccessLevel: 'blob'}, function (error) {
             if (error) {
               reject( error );
             }
