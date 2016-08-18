@@ -22,7 +22,6 @@ const saveTempFile = (file, tmpFilePath) => {
   return ws;
 };
 
-
 export default function save(req) {
   return new Promise( (resolve, reject) => {
     if (req.busboy) {
@@ -34,11 +33,16 @@ export default function save(req) {
           uploadToAzureBlob( savedFileName, tmpFilePath, uploadedCallback);
         });
       });
+
+      req.busboy.on( 'field', function (key, value) {
+        console.log(`field ${key}:${value}`);
+      });
+
       req.pipe( req.busboy );
     }
 
     const uploadedCallback = (error, response, result, savedFileName) => {
-      const uploadedUrl = blobService.getUrl( config.azure.postImagesContainer, savedFileName, null, config.azure.hostName );
+      const uploadedUrl = blobService.getUrl( config.azure.postImagesContainer, savedFileName, null, blobService["host"]["primaryHost"] );
       return error ? reject( error ) : resolve( {response, result, url: uploadedUrl} );
     };
   });

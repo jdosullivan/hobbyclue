@@ -1,6 +1,6 @@
 require('babel-polyfill');
-import path from 'path';
 
+const path = require('path');
 const environment = {
   development: {
     isProduction: false
@@ -9,8 +9,6 @@ const environment = {
     isProduction: true
   }
 }[process.env.NODE_ENV || 'development'];
-
-
 const auth = {
 
   jwt: { secret: process.env.JWT_SECRET || 'Hobby Clue rocks!!!' },
@@ -35,10 +33,8 @@ const auth = {
 };
 const webSiteName = 'BrickAndCyber';
 const tagLine = 'Resources for local business owners';
-
 const azure = {
-  postImagesContainer: 'postimages',
-  hostName: 'https://hobbyclueprod1.blob.core.windows.net'
+  postImagesContainer: 'postimages'
 };
 
 module.exports = Object.assign({
