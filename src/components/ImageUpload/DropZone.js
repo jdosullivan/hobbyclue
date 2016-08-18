@@ -10,6 +10,15 @@ const dropZoneStyle = {
   borderRadius: '5px'
 };
 
+const ThumbnailBox = ({file, onRemoveHandler}) => {
+  return (
+    <div key={`img.${file.preview}`}>
+      <img height={thumbwidthHeight} width={thumbwidthHeight} src={file.preview}/>
+      <a onClick={onRemoveHandler}>Remove</a>
+    </div>
+  );
+};
+
 export default class DropZone extends Component {
   static propTypes = {
     saveFileHandler: PropTypes.func.isRequired,
@@ -67,10 +76,9 @@ export default class DropZone extends Component {
         <div className="container-fluid">
           <div className="row">
             {files && files.map( (file) => {
-              return (<div className="col-md-2" key={`img.${file.preview}`}>
-                <img height={thumbwidthHeight} width={thumbwidthHeight} src={file.preview} />
-                <a onClick={() => { this.onRemove( file ); }}>Remove</a>
-              </div>);
+              return (<div className="col-md-2">
+                        <ThumbnailBox file={file} onRemoveHandler={() => { this.onRemove( file ); }} />
+                      </div>);
             })}
             <div className="col-md-2">
               <Dropzone ref="dropzone" onDrop={this._onDrop} style={dropZoneStyle}>
