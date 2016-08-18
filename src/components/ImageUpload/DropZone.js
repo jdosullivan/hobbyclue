@@ -55,7 +55,7 @@ export default class DropZone extends Component {
         appendedFiles.push( {...file, loading: true} );
 
         const that = this;
-        saveFileHandler( file ).then(function(result) {
+        saveFileHandler( file ).then((result) => {
           if (result.response.isSuccessful && result.response.statusCode === 201) {
             const index = underscore.indexOf( appendedFiles, underscore.find( appendedFiles, file ) );
             appendedFiles.splice( index, 1, {...file, uploadedUrl: result.url, loading: false} );

@@ -1,6 +1,6 @@
 import actions from './';
 import util from 'util';
-import {DateString} from '../../../utils';
+import {dateString} from '../../../utils';
 
 function isLoaded(globalState) {
   return globalState.posts && globalState.posts.loaded;
@@ -57,7 +57,7 @@ function editPost(post) {
 
 
 function saveFile(file) {
-   const filenameWithDatePrefix = `${DateString()}_${file.name}`;
+  const filenameWithDatePrefix = `${dateString()}_${file.name}`;
   return {
     types: [actions.SAVE_FILE, actions.SAVE_FILE_SUCCESS, actions.SAVE_FILE_FAIL],
     promise: (client) => client.post( '/file/save', {attach: [{name: filenameWithDatePrefix, value: file}]})

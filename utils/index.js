@@ -1,7 +1,14 @@
-function DateString() {
+const dateString = () => {
   const rDate = new Date();
-  rDate.setDate(rDate.getDate() + 1);
-  return `${rDate.getFullYear()}_${('0'+(rDate.getMonth()+1)).slice(-2)}_${('0'+(rDate.getDate())).slice(-2)}_${('0'+(rDate.getHours())).slice(-2)}_${('0'+(rDate.getMinutes())).slice(-2)}_${('0'+(rDate.getSeconds())).slice(-2)}`;
-}
+  const currentMonth = rDate.getMonth() + 1;
+  const year = rDate.getFullYear();
+  const month = `0${(currentMonth).slice(-2)}`;
+  const day = `0${(rDate.getDate()).slice(-2)}`;
+  const hours = `0${(rDate.getHours()).slice(-2)}`;
+  const minutes = `0${(rDate.getMinutes()).slice(-2)}`;
+  const seconds = `0${(rDate.getSeconds()).slice(-2)}`;
 
-export { DateString };
+  return `${year}_${month}_${day}_${hours}_${minutes}_${seconds}`;
+};
+
+export { dateString };
