@@ -47,7 +47,7 @@ const Post = (props) => {
           </div>
           <div>
             { props.images && props.images.split(',').map( (imgSrc) => {
-              return (<img src={imgSrc} height="100px" width="100px" />);
+              return (<img key={imgSrc} src={imgSrc} height="100px" width="100px" />);
             })}
           </div>
         </div>
