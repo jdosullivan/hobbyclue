@@ -1,4 +1,5 @@
 require('babel-polyfill');
+import path from 'path';
 
 const environment = {
   development: {
@@ -16,8 +17,8 @@ const auth = {
 
   // https://developers.facebook.com/
   facebook: {
-    id: process.env.FACEBOOK_APP_ID,
-    secret: process.env.FACEBOOK_APP_SECRET
+    id: process.env.FACEBOOK_APP_ID || '559702427573365',
+    secret: process.env.FACEBOOK_APP_SECRET || '4afb33f446983cd71899681d75d1f120'
   },
 
   // https://cloud.google.com/console/project
@@ -35,14 +36,21 @@ const auth = {
 const webSiteName = 'BrickAndCyber';
 const tagLine = 'Resources for local business owners';
 
+const azure = {
+  postImagesContainer: 'postimages',
+  hostName: 'https://hobbyclueprod1.blob.core.windows.net'
+};
+
 module.exports = Object.assign({
   host: process.env.HOST || 'localhost',
   port: process.env.PORT || 3000,
   apiHost: process.env.APIHOST || 'localhost',
   apiPort: process.env.APIPORT || 3030,
   databaseUrl: process.env.DATABASE_URL || 'postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue',
+  uploadsDir: path.join( __dirname, 'static', 'uploads' ),
   tagLine,
   auth,
+  azure,
   app: {
     title: webSiteName,
     description: '',
