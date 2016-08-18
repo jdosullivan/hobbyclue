@@ -21,7 +21,6 @@ export default class DropZone extends Component {
     this.state = {files: props.images, showOpenButton: false};
     this._onOpenClick = () => { this.onOpenClick(); };
     this._onDrop = (files) => { this.onDrop( files ); };
-    this._onRemove = (file) => { this.onRemove( file ); };
   }
 
   onDrop(files) {
@@ -70,7 +69,7 @@ export default class DropZone extends Component {
             {files && files.map( (file) => {
               return (<div className="col-md-2" key={`img.${file.preview}`}>
                 <img height={thumbwidthHeight} width={thumbwidthHeight} src={file.preview} />
-                <a onClick={this._onRemove}>Remove</a>
+                <a onClick={() => { this.onRemove( file ); }}>Remove</a>
               </div>);
             })}
             <div className="col-md-2">
