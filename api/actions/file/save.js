@@ -35,7 +35,7 @@ const saveTempFile = (file, tmpFilePath) => {
 export default function save(req) {
   return new Promise( (resolve, reject) => {
     if (req.busboy) {
-      req.busboy.on( 'file', function (fieldname, file) {
+      req.busboy.on( 'file', (fieldname, file) => {
         const savedFileName = path.basename( fieldname );
         const tmpFilePath = path.join( uploadsDir, savedFileName );
 
