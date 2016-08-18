@@ -54,14 +54,11 @@ export default class DropZone extends Component {
       if (indexOfFile === -1) {
         appendedFiles.push( {...file, loading: true} );
 
-        const that = this;
-        saveFileHandler( file ).then((result) => {
+        saveFileHandler(file).then((result) => {
           if (result.response.isSuccessful && result.response.statusCode === 201) {
             const index = underscore.indexOf( appendedFiles, underscore.find( appendedFiles, file ) );
             appendedFiles.splice( index, 1, {...file, uploadedUrl: result.url, loading: false} );
-            that.setState( {
-              files: appendedFiles
-            } );
+            this.setState({ files: appendedFiles });
           }
         });
         filesChanged = true;
@@ -69,9 +66,7 @@ export default class DropZone extends Component {
     });
 
     if (filesChanged) {
-      this.setState({
-        files: appendedFiles
-      });
+      this.setState({ files: appendedFiles });
     }
   }
 
