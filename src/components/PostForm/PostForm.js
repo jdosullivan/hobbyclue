@@ -8,7 +8,7 @@ import DropZone from '../../components/ImageUpload/DropZone';
   initialValues: {
     images: []
   }
-} )
+})
 export default class PostForm extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
@@ -19,7 +19,7 @@ export default class PostForm extends Component {
   };
 
   render() {
-    const {fields: {id, title, body, images}, handleSubmit, resetForm, submitHandler, saveFileHandler } = this.props;
+    const {fields: {id, title, body}, handleSubmit, resetForm, submitHandler, saveFileHandler } = this.props;
     const formSubmit = (formValues) => {
       submitHandler( formValues ).then( () => {
         resetForm();
@@ -33,7 +33,7 @@ export default class PostForm extends Component {
         </div>
         <div>
           <input type="text" placeholder="Body of your post ..." {...body} />
-          <DropZone {...images} saveFileHandler={saveFileHandler} />
+          <DropZone images={[]} saveFileHandler={saveFileHandler} />
         </div>
         <input type="submit" value="Post"/>
       </form>
