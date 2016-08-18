@@ -13,7 +13,7 @@ import expressJWT from 'express-jwt';
 import schema from './graphql/schema';
 import expressGraphQL from 'express-graphql';
 import busboy from 'connect-busboy';
-
+import fs from 'fs';
 
 const pretty = new PrettyError();
 const app = express();
@@ -75,6 +75,11 @@ app.use((req, res) => {
   }
 });
 
+
+/***** Create a uploads directory if none exists. This is for uploading files to Azure and other services. ****/
+if (!fs.existsSync(config.uploadsDir)){
+  fs.mkdirSync(config.uploadsDir);
+}
 
 const bufferSize = 100;
 const messageBuffer = new Array(bufferSize);
