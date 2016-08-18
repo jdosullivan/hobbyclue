@@ -3,23 +3,15 @@ import path from 'path';
 import fs from 'fs';
 import config from '../../../config';
 
-const uploadToAzureBlob = (savedFileName, tmpFilePath, reject, resolve, cb) => {
-  const blobService = azure.createBlobService();
-
+const blobService = azure.createBlobService();
+const uploadToAzureBlob = (savedFileName, tmpFilePath, cb) => {
   blobService.createContainerIfNotExists( config.azure.postImagesContainer, {publicAccessLevel: 'blob'}, (error) => {
     if (error) {
       reject( error );
     }
     else {
       blobService.createBlockBlobFromLocalFile( config.azure.postImagesContainer, savedFileName, tmpFilePath, (error, result, response) => {
-        if (error) {
-          reject( error );
-        }
-        else {
-          const uploadedUrl = blobService.getUrl( config.azure.postImagesContainer, savedFileName, null, config.azure.hostName );
-          cb();
-          resolve( {response, result, url: uploadedUrl} );
-        }
+        cb( error, response, result, savedFileName );
       });
     }
   });
@@ -39,14 +31,15 @@ export default function save(req) {
         const tmpFilePath = path.join( config.uploadsDir, savedFileName );
 
         saveTempFile(file, tmpFilePath, savedFileName).on( 'finish', () => {
-          uploadToAzureBlob( savedFileName, tmpFilePath, reject, resolve, uploadedCallback);
+          uploadToAzureBlob( savedFileName, tmpFilePath, uploadedCallback);
         });
       });
       req.pipe( req.busboy );
     }
 
-    const uploadedCallback = () => {
-      console.log(`file save callback called`);
+    const uploadedCallback = (error, response, result, savedFileName) => {
+      const uploadedUrl = blobService.getUrl( config.azure.postImagesContainer, savedFileName, null, config.azure.hostName );
+      return error ? reject( error ) : resolve( {response, result, url: uploadedUrl} );
     };
   });
 }
