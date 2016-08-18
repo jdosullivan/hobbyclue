@@ -1,18 +1,7 @@
-function CustomJSONStringify(value) {
-  var cache = [];
-  const result = JSON.stringify(value, function(key, value) {
-    if (typeof value === 'object' && value !== null) {
-      if (cache.indexOf(value) !== -1) {
-        // Circular reference found, discard key
-        return;
-      }
-      // Store value in our collection
-      cache.push(value);
-    }
-    return value;
-  });
-  cache = null;
-  return result;
+function DateString() {
+  const rDate = new Date();
+  rDate.setDate(rDate.getDate() + 1);
+  return `${rDate.getFullYear()}_${('0'+(rDate.getMonth()+1)).slice(-2)}_${('0'+(rDate.getDate())).slice(-2)}_${('0'+(rDate.getHours())).slice(-2)}_${('0'+(rDate.getMinutes())).slice(-2)}_${('0'+(rDate.getSeconds())).slice(-2)}`;
 }
 
-export { CustomJSONStringify };
+export { DateString };

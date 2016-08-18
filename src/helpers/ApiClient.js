@@ -51,16 +51,10 @@ export default class ApiClient {
           request.send( data );
         }
 
-        let formData;
-        if (attach) {
-          formData = new FormData();
-          attach.forEach( item => { formData.append( item.name, item ); } );
-          request.send( formData );
-        }
-
-        if (field) {
-          formData = new FormData();
-          field.forEach( item => { formData.append( item.name, item ); } );
+        if (attach || field) {
+          const formData = new FormData();
+          if (attach) attach.forEach( (item) => { formData.append( item.name, item.value ); } );
+          if (field) field.forEach( item => { formData.append( item.name, item.value ); } );
           request.send( formData );
         }
 

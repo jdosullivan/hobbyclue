@@ -8,7 +8,8 @@ export default function save(req) {
   return new Promise((resolve, reject) => {
     if (req.busboy) {
       req.busboy.on( 'file', function (fieldname, file, filename) {
-        var tmpFilePath = path.join( __dirname, '../../..', 'static', 'uploads', path.basename( fieldname ) );
+        const savedFileName = path.basename( fieldname );
+        var tmpFilePath = path.join( __dirname, '../../..', 'static', 'uploads', savedFileName );
         var ws = fs.createWriteStream( tmpFilePath );
         file.pipe( ws );
 
@@ -20,12 +21,13 @@ export default function save(req) {
               reject( error );
             }
             else {
-              blobService.createBlockBlobFromLocalFile( containerName, filename, tmpFilePath, function (error, result, response) {
+              blobService.createBlockBlobFromLocalFile( containerName, savedFileName, tmpFilePath, function (error, result, response) {
                 if (error) {
                   reject( error );
                 }
                 else {
-                  resolve( { response, result, url: blobService.getUrl(containerName, filename, null, hostName) });
+                  const uploadedUrl = blobService.getUrl(containerName, savedFileName, null, hostName);
+                  resolve( { response, result, url: uploadedUrl });
                 }
               });
             }
