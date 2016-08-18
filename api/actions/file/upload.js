@@ -38,6 +38,10 @@ export default function save(req) {
         console.log(`field ${key}:${value}`);
       });
 
+      req.busboy.on('finish', function() {
+
+      });
+
       req.pipe( req.busboy );
     }
 

@@ -47,20 +47,29 @@ export default class ApiClient {
           request.set( 'cookie', req.get( 'cookie' ) );
         }
 
-        if (data) {
+        if ((attach || field) && data) {
+          console.warn(`cannot use both attach/field and data params. Use either but not both.`);
+        } else if (data) {
           request.send( data );
-        }
-
-        if (attach || field) {
+        } else if (attach || field) {
           const formData = new FormData();
-          if (attach) attach.forEach( (item) => { formData.append( item.name, item.value ); } );
-          if (field) field.forEach( item => { formData.append( item.name, item.value ); } );
+          if (attach) {
+            attach.forEach( (item) => {
+              formData.append( item.name, item.value );
+            } );
+          }
+          if (field) {
+            field.forEach( item => {
+              formData.append( item.name, item.value );
+            } );
+          }
           request.send( formData );
         }
 
         request.end( (err, {body} = {}) => err ? reject( body || err ) : resolve( body ) );
       }));
   }
+
   /*
    * There's a V8 bug where, when using Babel, exporting classes with only
    * constructors sometimes fails. Until it's patched, this is a solution to
