@@ -9,12 +9,22 @@ const dropZoneStyle = {
   border: '2px dashed rgb(102, 102, 102)',
   borderRadius: '5px'
 };
+const spinner = require( './images/ajax_loader_blue_48.gif' );
+const spinnerOverlay = {
+  position: 'absolute',
+  top: 0,
+  width: thumbwidthHeight,
+  height: thumbwidthHeight,
+  background: `rgba(255,255,255, 0.3) url(${spinner}) center center no-repeat`
+};
+
 
 const ThumbnailBox = ({file, onRemoveHandler}) => {
   return (
-    <div key={`img.${file.preview}`}>
+    <div key={`img.${file.preview}`} style={{ position: 'relative' }}>
       <img height={thumbwidthHeight} width={thumbwidthHeight} src={file.preview}/>
       <a onClick={onRemoveHandler}>Remove</a>
+      {file.loading && <div style={spinnerOverlay} />}
     </div>
   );
 };
@@ -40,9 +50,20 @@ export default class DropZone extends Component {
       const indexOfFile = underscore.findIndex( appendedFiles, (filename) => {
         return filename.name === file.name && filename.lastModified === file.lastModified;
       });
+
       if (indexOfFile === -1) {
-        appendedFiles.push( file );
-        saveFileHandler( file );
+        appendedFiles.push( {...file, loading: true} );
+
+        const that = this;
+        saveFileHandler( file ).then(function(result) {
+          if (result.response.isSuccessful && result.response.statusCode === 201) {
+            const index = underscore.indexOf( appendedFiles, underscore.find( appendedFiles, file ) );
+            appendedFiles.splice( index, 1, {...file, uploadedUrl: result.url, loading: false} );
+            that.setState( {
+              files: appendedFiles
+            } );
+          }
+        });
         filesChanged = true;
       }
     });
