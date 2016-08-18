@@ -8,7 +8,8 @@ const Post = Model.define( 'Post', {
     autoIncrement: true
   },
   title: DataType.STRING,
-  body: DataType.STRING
+  body: DataType.STRING,
+  images: DataType.STRING
 }, {tableName: 'posts'} );
 
 export {Post as default};

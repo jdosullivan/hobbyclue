@@ -8,7 +8,7 @@ function isLoaded(globalState) {
 function loadPosts() {
   return {
     types: [actions.POST_LOAD, actions.POST_LOAD_SUCCESS, actions.POST_LOAD_FAIL],
-    promise: (client) => client.post( '/graphql', {data: {query: `{posts{id, title,body, createdAt,updatedAt }}`}} )
+    promise: (client) => client.post( '/graphql', {data: {query: `{posts{id, title, body, images, createdAt,updatedAt }}`}} )
   };
 }
 
@@ -16,13 +16,14 @@ function toggle() {
   return {type: actions.POST_NEW_TOGGLE};
 }
 
-function createNewPost(post) {
+function createNewPost(post, {images}) {
   const newTitle = post.title.trim();
   const newBody = post.body.trim();
   if (!newTitle || !newBody) {
     return {type: ''};
   }
-  const graphQlMutationQuery = `mutation CreatePost { createPost(title: \"${newTitle}\",body: \"${newBody}\") {id, title,body, createdAt,updatedAt }}`;
+  const newPostImages = images.join(', ');
+  const graphQlMutationQuery = `mutation CreatePost { createPost(title: \"${newTitle}\",body: \"${newBody}\",images: \"${newPostImages}\") {id, title,body, images, createdAt,updatedAt }}`;
 
   return {
     types: [actions.POST_NEW, actions.POST_NEW_SUCCESS, actions.POST_NEW_FAIL],

@@ -9,7 +9,7 @@ import DropZone from '../../components/ImageUpload/DropZone';
     images: []
   }
 } )
-export default class NewPost extends Component {
+export default class PostForm extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     resetForm: PropTypes.func.isRequired,

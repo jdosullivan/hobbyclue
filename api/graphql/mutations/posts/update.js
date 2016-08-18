@@ -12,7 +12,8 @@ export default {
   args: {
     id: {type: new NonNull( IntType )},
     title: {type: new NonNull( StringType )},
-    body: {type: new NonNull( StringType )}
+    body: {type: new NonNull( StringType )},
+    images: {type: StringType }
   },
   async resolve(value, {id, title, body}) {
     console.log(`update a post: ${util.inspect({id, title, body})}`);

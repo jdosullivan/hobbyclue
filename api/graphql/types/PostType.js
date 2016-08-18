@@ -11,6 +11,7 @@ export default new ObjectType({
     id: { type: new NonNull(ID) },
     title: { type: StringType },
     body: { type: StringType },
+    images: { type: StringType },
     createdAt: { type: StringType },
     updatedAt: { type: StringType }
   }

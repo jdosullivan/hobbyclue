@@ -45,6 +45,11 @@ const Post = (props) => {
             <div className={styles.views}><i className="fa fa-eye"></i> 25</div>
             <div className={styles.time}><i className="fa fa-clock-o"></i> {props.createdAt}</div>
           </div>
+          <div>
+            { props.images && props.images.split(',').map( (imgSrc) => {
+              return (<img src={imgSrc} />);
+            })}
+          </div>
         </div>
         }
         <div className="clearfix"></div>
@@ -56,6 +61,7 @@ Post.propTypes = {
   id: PropTypes.string,
   title: PropTypes.string,
   body: PropTypes.string,
+  images: PropTypes.string,
   createdAt: PropTypes.string,
   editing: PropTypes.bool,
   deletePost: PropTypes.func.isRequired,
