@@ -1,14 +1,14 @@
 {
   "name": "hobbyc-clue",
   "description": "Find hobbies to partake in",
-  "author": "jahmai OSullivan <jahmai.osullivan@gmail.com> (http://github.com/jahmaiosullivan)",
+  "author": "",
   "license": "MIT",
   "version": "0.0.1",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jahmaiosullivan/hobbyclue"
+    "url": ""
   },
-  "homepage": "https://github.com/jahmaiosullivan/hobbyclue",
+  "homepage": "",
   "keywords": [],
   "main": "bin/server.js",
   "scripts": {
@@ -53,7 +53,7 @@
       "env": {
         "NODE_PATH": "./src",
         "NODE_ENV": "development",
-        "DATABASE_URL": "postgres://jahmaiosullivan:Star2016@localhost:5432/HobbyClue",
+        "DATABASE_URL": "postgres://<username>:<password>@localhost:5432/HobbyClue",
         "PORT": 3000,
         "APIPORT": 3030
       }
