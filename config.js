@@ -15,8 +15,8 @@ const auth = {
 
   // https://developers.facebook.com/
   facebook: {
-    id: process.env.FACEBOOK_APP_ID || '559702427573365',
-    secret: process.env.FACEBOOK_APP_SECRET || '4afb33f446983cd71899681d75d1f120'
+    id: process.env.FACEBOOK_APP_ID,
+    secret: process.env.FACEBOOK_APP_SECRET
   },
 
   // https://cloud.google.com/console/project
